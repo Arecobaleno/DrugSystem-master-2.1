@@ -1,0 +1,21 @@
+[{
+        "path": "/home",
+        "icon": "icon-shouye",
+        "text": "首页"
+    },
+    {
+        "path": "/goods",
+        "icon": "icon-zhinanzhen",
+        "text": "临床指南"
+    },
+    {
+        "path": "/find",
+        "icon": "icon-wenjian",
+        "text": "相关文献"
+    },
+    {
+        "path": "/my",
+        "icon": "icon-wode",
+        "text": "我的"
+    }
+]
