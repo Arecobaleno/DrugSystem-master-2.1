@@ -1,4 +1,5 @@
 <template>
+<div>
 	<div class="page-full component-home fx-column">
 		<app-header :title="appHeader.title"></app-header>
 		<section class="firstaid-search-box ac" >
@@ -7,7 +8,7 @@
 					v-model="inputMsg"
 					show-action
 					shape="round"
-					placeholder="请输入搜索关键词"
+					placeholder="请输入索关键词"
 					@search="search"
 					@cancel="onCancel"
 					@clear="onClear"
@@ -38,6 +39,7 @@
 		</div>
 		<app-nav></app-nav>
 	</div>
+</div>
 </template>
 
 <script>

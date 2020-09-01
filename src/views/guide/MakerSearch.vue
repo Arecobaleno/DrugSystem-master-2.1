@@ -1,238 +1,190 @@
+<! -- template>
+  <div>
+    <city-header></city-header>
+    <city-search :cities="cities"></city-search>
+    <city-list
+    :cities="cities"
+    :hot="hotCities"
+    :letter="letter"></city-list>
+    <city-alphabet
+    :cities="cities"
+    @change="handleLetterChange"></city-alphabet>
+  </div>
+</template> -->
+
 <template>
+<div>
 	<div class="page-full component-home fx-column">
-
-     <div class="druglist-header">
-        <app-header :title="appHeader.title"></app-header>
-   </div>
-
-
- <div class="page-content fx-1" >
-	  <div class="list">
-      <ul v-for="(item,index) in newArr" v-bind:key="index" class="list-ul">
-          <h6 ref="listsix">{{item.title}}</h6>
-          <li class="div"  v-for="(user,index) in item.items" v-bind:key="index"  @click="getGuideItems(user.name)">
-			  {{user.name}}
-			   <!-- <div class="fx-1">{{user.name}}</div> -->
-			</li>
-      </ul>
-    </div>
-</div>
-
+		<app-header :title="appHeader.title"></app-header>
+		<section class="firstaid-search-box ac" >
+			<city-search :cities="cities"></city-search>
+		</section>
+		<city-list
+    		:cities="cities"
+    	:hot="hotCities"
+    	:letter="letter"></city-list>
+    	<city-alphabet
+    	:cities="cities"
+    	@change="handleLetterChange"></city-alphabet>
 	</div>
-
-	
+</div>
 </template>
 
-<script>
-	import Utils from '../../utils'
-	import appNav from '../../components/app-nav.vue'
-	import appHeader from "../../components/app-header.vue";
-	import axios from 'axios';
-	import router from '../../router';
-	// import pinyin from 'js-pinyin' 
-	import {
-		mapGetters,
-		mapActions
-	} from 'vuex'
-	import vPinyin from './vue-py.js'
-// import func from '../../../vue-temp/vue-editor-bridge';
-	export default {
-		components: {
-			appNav,
-			appHeader
-		},
-		data() {
-			return {
-				appHeader: {
-				title: "按定制者查询"
-      },
-				searchData: "",
-				guideClass:null,
-				example:[],
-				// array:[],
-				newArr:[],
-				// map_array : {},
-			}
-		},
-		watch: {
-    '$route'(to, from) {
-      this.$router.go(0)
-     
+<script type="text/ecmascript-6">
+import axios from "axios"
+
+import vPinyin from "../../assets/js/vue-py.js"
+import CityHeader from "./components/Header"
+import CitySearch from "./components/Search"
+import CityList from "./components/List"
+import CityAlphabet from "./components/Alphabet"
+import appHeader from "../../components/app-header.vue";
+export default {
+  name: 'City',
+  data () {
+    return {
+      appHeader: {title: "按制定者查询"},
+      cities: {},
+      hotCities: [],
+      letter: '',
+      // 字符串数组
+      cityList: [],
+      addTrafficHub: {
+        spell: '',
+        city: '',
+        suoXie: ''
+      }
     }
   },
-  watch: {
-	  '$route' (to, from) { //监听路由是否变化
-      this.getGuideData();
-	  }
+  components: {
+    CityHeader,
+    CitySearch,
+    CityList,
+    CityAlphabet,
+    appHeader
   },
-		// computed: mapGetters({
-		// 	ifrmeHwUced: 'ifrmeHwUced',
-		// }),
-		// computed:{
-			
-		// 	reorder:function(){
-		// 		return this.example.sort(function(x,y){
-		// 			return x["name".localeCompare(y["name"])];
-		// 		})
-		// 	}
-		// },
-		created(){
-		    //获取localstorage
-			this.getGuideData();
-		},
-		methods: {
-			
-			mounted(){
-				if(this.historySearch.length==0){
-					this.history="历史搜索：暂无";}
-				else{
-					this.history="历史搜索";
-				}
-			},
-			  getGuideData(){
-        		let url = 'http://localhost:10088/guide/maker'
-        		axios.get(url)
-            	.then((response)=>{
-						// console.log("000000000000")
-                		// console.log(response.data);
-						// this.guideClass = response.data;
-						this.example = [];
-						//获取数据
-						for(var i=0;i<response.data.length;i++){
-							// console.log(response.data[i]);
-							// console.log(response.data[i].name);
-							this.example.push({name: response.data[i].name,pinyin:null,index:null});
-						};
-						//转成拼音
-						for(var i=0;i<this.example.length;i++){
-							this.example[i].pinyin = vPinyin.chineseToPinYin(this.example[i].name)
-							// console.log("1111111111")
-							// console.log(this.example[i].pinyin)
-							this.example[i].index = this.example[i].pinyin.charAt(0) 
-						}
-						// console.log(this.example);
-						//进行字典排序
-						this.example.sort(function(a,b){
-							return (a.pinyin+'').localeCompare(b.pinyin+'')
-						})
-						//赋值给一个新数组
-						// for(var i=0;i<this.example.length;i++){
-						// 	this.array.push(this.example[i].pinyin)
-						// }
-						//分组
-						let map = {};
-						for(let i = 0; i < 26; i++)
-						{
-    						const key = String.fromCharCode(65 + i) //A-Z赋给key当作键
-							map[key] = 
-							{
-        						title: key,
-        						items: []
-    						}
-    						this.example.map((v,k)=>{      //遍历数组
-        					let firstIndex = v.pinyin.charAt(0).toUpperCase();//首字母
-							if(firstIndex.toUpperCase() == String.fromCharCode(65+i))
-							{//统一转成大写进行逐个判断
-            					map[key].items.push({name:v.name})//push进相对应的数组里头
-        					}
-    						})
-    						// //如果当前的数组里头为空，则跳过。
-						if(map[key].items === undefined || map[key].items.length == 0)
-						{
-        						continue;
-    					}else{
-        						this.newArr.push(map[key])//将分类好的每个对象 合并在一个数组里面
-   						}
-						}
-
-					
-						console.log("newArr "+this.newArr[0])
-						console.log("newArr "+this.newArr[0].title)
-						console.log("newArr "+this.newArr[0].items)
-
-						
-            			})
-            	.catch((error) => {
-                console.log(error);
-            		})
+  methods: {
+    getCityInfo () {
+      // 获取远端信息 数据接收详见方法handleGetCityInfoSucc
+      axios.get('http://localhost:10088/guide/maker')
+        .then((response) => {
+          console.log(response.data)
+          let makers = []
+          for (let maker in response.data) {
+            makers.push(response.data[maker].name)
+          }
+          this.cityList = makers
+          this.cities = this.listToPinYin(this.cityList)
+        })
     },
-			  getGuideItems(name){
-				//   console.log("7777"+name)
-       			console.log("哈哈哈哈哈哈哈哈哈哈哈哈哈哈:   "+ name)
-               let url = 'http://localhost:10088/guide/get'
-			   let data = {'category': "maker",'content': name}
-               axios.post(url, data)
-            .then((response) => {				
-				this.guideItems = response.data;
-				  console.log(111)
-				console.log(this.guideItems);
-				console.log(this.guideItems.length);
-				let maker_detail = [{name:null}];
-				if(this.guideItems.length>0){
-					maker_detail = [];
-					// for(var i=0;i<this.guideItems.length;i++)
-					for (let item in this.guideItems)
-					{
-						// console.log("item: "+item)
-						// console.log("guideItems[item]: "+this.guideItems[item])
-						console.log("guideItems[item].title: "+this.guideItems[item].title)
-					maker_detail.push({name:this.guideItems[item].title})
-					}
-				}
-				console.log("maker_detail: "+maker_detail[0].name)
-                this.$router.push({
-                name: "MakerDetail",
-                query: {guideItems: maker_detail}
-            });
-            })
-        	},
-			
-		
+    getSZM (name) {
+      var temp = {}
+      temp.name = name
+      temp.spell = vPinyin.chineseToPinYin(name)
+      let SX = ''
+      for (var i = 0; i < temp.spell.length; i++) {
+        var c = temp.spell.charAt(i)
+        if (/^[A-Z]+$/.test(c)) {
+          SX += c
+        }
+      }
+      temp.suoXie = SX
+      return temp
+    },
+    // 处理接收到的网络请求数据
+    listToPinYin (list) {
+      var PinYinList = {}
+      console.log(list)
 
-		},
-		activated() {
-			this.$store.dispatch('empty_symptom');
-			if (this.ifrmeHwUced && this.isResetMap) {
-				this.isResetMap = false;
-				// this.initMap();
-			}
-		},
-		mounted() {
-			// this.initMap();
-		},
-		 
-	}
+      for (var i = 0; i < list.length; i++) {
+        const temp = vPinyin.chineseToPinYin(list[i])
+        const key = temp[0]
+        const value = this.getSZM(list[i])
+        if (PinYinList[key] === undefined) {
+          PinYinList[key] = [value]
+        } else {
+          PinYinList[key].push(value)
+        }
+        // if (PinYinList[temp[0]] !== undefined) {
+        //   PinYinList[temp[0]].push(this.getSZM(list[i]))
+        // }
+      }
+      var newList = {}
+      Object.keys(PinYinList).sort().map(key => {
+        newList[key] = PinYinList[key]
+      })
+      console.log(newList)
+      return newList
+    },
+    handleLetterChange (letter) {
+      this.letter = letter
+    }
+  },
+  mounted () {
+    this.getCityInfo()
+  }
+}
 </script>
+
 
 <style lang="less" scoped>
 	@import "../../assets/css/common.less";
+
 
 	.page-content {
 		background-color: #f1f4f4;
 	}
 
-	.list {
-  position: relative;
-  top: 50px;
-  overflow: hidden;
-}
-.list-ul li{
-	text-align:center;
-  list-style: none;
-//   text-align: left;
-  padding: 10px 0;
-   padding-right: 10px;
-   padding-left: 10px;
-  font-size: 18px;
-  text-indent: 20px;
-}
-// .list-ul li:nth-child(odd){
-// //   background-color: #efefef;
-// }
-.list-ul h6{
-  margin: 5px 0;
-  text-align: left;
-  text-indent: 10px;
-  background-color: #cecece;
-}
+	.diseaselist-content {
+		background-color: #fff;
+	}
+
+	.disease-item {
+		height: .88rem;
+		padding: 0 .2rem;
+		font-size: .28rem;
+		color: #3d4550;
+		border-bottom: .01rem solid #e7ecf2;
+
+		& .disease-type {
+			width: .86*3rem;
+			font-size: .2rem;
+			color: #9fa1a9;
+
+			& i {
+				margin-left: .1rem;
+				width: .76rem;
+				height: .32rem;
+				border: 1px solid #9fa1a9;
+			}
+		}
+	}
+
+	.history{
+		font-family:"Times New Roman";
+		font-size:12px;
+		margin-top: 10px;
+		margin-bottom: 5px;
+		//color: #53575b;;
+		color: #1a1b1d;;
+	}
+	.clear_history{
+		font-family:"Times New Roman";
+		font-size:10px; 
+		margin-top: 4px;
+		color: #676b73;;
+	}
+	.history_item{
+		height: 23px;
+		margin-top: 6px;
+		margin-right: 10px;
+		font-size:10px
+	}
+	.tip {
+		margin-top:20px;
+		font-size:12px;
+	}
+	.blank {
+		height: 0.10rem;
+	}
 </style>

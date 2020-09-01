@@ -1,14 +1,6 @@
 <template> 
     <div class="page-full component-find fx-column"> 
     <app-header :title="appHeader.title"></app-header>
-
-    <!-- <section class="firstaid-search-box ac">
-            <div class="header-content fx">
-				<el-input v-model="searchData" placeholder="搜索指南"></el-input> 
-				<el-button type="primary" icon="el-icon-search" style="float:right" @click="search">搜索</el-button>
-			</div>
-      </section> -->
-
     	<section class="firstaid-search-box ac" >
 			<form action="/">
 				<van-search
@@ -49,54 +41,21 @@
 
         </section>
     
-<!--        <section>
-            <div class="page-content fx-1">
-                <ul class="firstaid-content">
-                    <li v-for="(item, index) in book" v-bind:key="index">
-                        <router-link tag="li" to="firstaid/detail/1">
-                            <div class="fx-1">{{item.title}}</div>
-                            <div class="fx-1">{{item.name}}</div>
-                            <div class="fx-1">{{item.date}}</div>
-                        </router-link>
-                    </li>
-                </ul>
-		    </div>
-        </section> -->
 		
 		<section>
 			<div class="page-content fx-1">
 				<ul class="firstaid-content">
 					<li v-for="(treatment,index) in example" v-bind:key="index" @click="getGuideItems(treatment.title)">
-						    <div class="fx-1">{{(treatment.title)}}</div>
-						    <div class="fx-1">{{treatment.maker}}</div>
-						    <div class="fx-1">{{treatment.year}}</div>
+                    <div>
+						<p class="pp1">{{(treatment.title)}}</p>
+						<p class="pp2">{{treatment.maker}}</p>
+						<p class="pp3">{{treatment.year}}</p>
+                    </div>
 					</li>
-<!-- 					<li>
-					<van-cell size="small" class="guide-item">
-					<div class="guide-item-1" >指南</div>
-					<div class="guide-item-2" >指南</div>
-					<div class="guide-item-3" >指南</div>
-					<van-divider :style="{ color: '#000000', borderColor: '#000000', padding: '0 1px' } " class="splitline">
-					</van-divider>
-					</van-cell>
-					</li> -->
 				</ul>
 			</div>
 		</section>
-		
-<!-- 		<section>
-		<div v-for="(treatment,index) in example" v-bind:key="index" @click="getGuideItems(treatment.title)">
-		      <van-cell size="small" class="guide-item">
-		      <div class="guide-item-1" >{{(treatment.title)}}</div>
-		      <div class="guide-item-2" >{{treatment.maker}}</div>
-		      <div class="guide-item-3" >{{treatment.year}}</div>
-		
-		      <van-divider :style="{ color: '#000000', borderColor: '#000000', padding: '0 1px' } " class="splitline">
-		      </van-divider>
-		      </van-cell>
-		    </div>
-		</section> -->
-		
+				
     </div>
     <app-nav></app-nav>
 </div>
@@ -121,16 +80,6 @@ export default {
        guideClass: null,
 	   example: [],
        book:[
-           {
-               title:"高血压基层诊疗指南（2019）",
-               name:"中华全科医学杂志",
-               date:"2019-3-20"
-           },
-            {
-               title:"中国高血压防治指南（2018）",
-               name:"中国心血管杂志",
-               date:"2018-2-20"
-           }
        ]
     }
   },
@@ -227,7 +176,6 @@ export default {
 		
 		},
 		getGuideItems(name){
-			console.log("哈哈哈哈哈哈哈哈哈哈哈哈哈哈:   "+ name)
 		   let url = 'http://localhost:10088/guide/detail'
 		   let data = {'content': name}
 		   axios.post(url, data)
@@ -351,5 +299,15 @@ export default {
     height: 0.8rem;
     font-size: 0.26rem;
     color: #646f7f;
+}
+.pp1{
+    font-weight: 900;
+    font-size: 0.30rem;
+}
+.pp2{
+    font-size: 0.27rem;
+}
+.pp3{
+    font-size: 0.26rem;
 }
 </style>

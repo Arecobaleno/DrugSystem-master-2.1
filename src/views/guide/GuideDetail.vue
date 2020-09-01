@@ -6,41 +6,24 @@
    </div>
 
    <div class="page-content fx-1">
-
-        <div class="d-header"  >
-            <h2 class="d-header-t">
-                 <div class="drug-main fx-3">
-                     <!-- <div class="fx-colum"> -->
-                        <p class="Guide_Title fx-ac" v-text="guideDetail.title || '--'"></p>
-                    <!-- </div> -->
-                 </div>
-            </h2>
-            <!-- <p class="d-header-d" v-text="guideDetail.title || '--'"></p> -->
+        <div class="detail-head detail-bg border-b"  >
+                        <h1 class="detail-head-title" v-text="guideDetail.title || '--'"></h1>
         </div>
-
-       <div class="drug-main">
-       <!-- <div class="drug-item">
-           <strong>标题</strong>
-           <p v-html="guideDetail.title || '--'"></p>
-       </div> -->
-        <div class="drug-item">
-           <strong>时间</strong>
-           <p v-html="guideDetail.time || '--'"></p>
-       </div>
-        <div class="drug-item">
-           <strong>作者</strong>
-           <p v-html="guideDetail.maker || '--'"></p>
-       </div>
-        <!-- <div class="drug-item" > -->
-          
-       <!-- </div>   -->
-       </div>
-
-        <div style="float:right" >
-           <el-button  size="mini" type="primary" @click="download()" >下载</el-button>
-            </div>
+        <div class="main">
+        <pdf :src="src" ref="ref" class="pdf" :page="currentPage" @num-pages="pageCount=$event"
+        @page-loaded="currentPage=$event"
+        @loaded="loadPdfHandler"></pdf>
+        </div>
+        <p class="arrow">
+        <span @click="changePdfPage(0)" class="turn" :class="{grey:currentPage===1}">上一页</span>
+        {{currentPage}} / {{pageCount}}
+        <span @click="changePdfPage(1)" class="turn" :class="{grey:currentPage===pageCount}">下一页</span>
+    </p>
    </div>
-    
+   
+    <!-- <div style="float:right" >
+           <el-button  size="mini" type="primary" @click="download()" >下载</el-button>
+    </div> -->  
     <app-nav></app-nav>
 </div>
 </template>
@@ -49,8 +32,10 @@
 import { mapGetters, mapActions } from 'vuex'
 import appHeader from '../../components/app-header.vue'
 import axios from 'axios'
+import pdf from 'vue-pdf'
+import CMapReaderFactory from 'vue-pdf/src/CMapReaderFactory.js'
 export default {
-    components: { appHeader },
+    components: { appHeader, pdf},
     data (){
         return {
             appHeader: {
@@ -60,7 +45,11 @@ export default {
                 title: this.$route.query.guideItems[0].title,
                 time:this.$route.query.guideItems[0].time,
                 maker: this.$route.query.guideItems[0].maker,
-            } 
+            },
+            currentPage: 0, // pdf文件页码
+            pageCount: 0, // pdf文件总页数
+            fileType: 'pdf', // 文件类型
+            src: ''
         }
     },
     activated (){
@@ -68,17 +57,28 @@ export default {
     deactivated (){
     },
     created () {
-   
-    //     if(this.$route.query) {
-    //     this.guideDetail = this.$route.query.guideItems;
-    //     // this.appHeader.title = this.$route.query.drugList;
- 
-    //   }
-     
+        let title = this.$route.query.guideItems[0].title
+        this.guideDetail.title = title
+        this.src = pdf.createLoadingTask({url: 'http://127.0.0.1:10088/guide/download?filename=' + title, CMapReaderFactory})
     },
     methods: {
       download(){
           window.location.href = 'http://127.0.0.1:10088/guide/download?filename='+this.guideDetail.title
+      },
+      changePdfPage (val) {
+        // console.log(val)
+        if (val === 0 && this.currentPage > 1) {
+            this.currentPage--
+        // console.log(this.currentPage)
+        }
+        if (val === 1 && this.currentPage < this.pageCount) {
+            this.currentPage++
+            // console.log(this.currentPage)
+        }
+      },
+      // pdf加载时
+      loadPdfHandler (e) {
+        this.currentPage = 1 // 加载的时候先加载第一页
       }
     },
     watch: {
@@ -115,8 +115,9 @@ export default {
     background-color: #fff;
 }
 
-// .detail-relevant{
-// }
+.page-content fx-1{
+    height: 600px;
+}
 .relevant-item{
     height: 1.9rem;
     color: @color_l;
@@ -254,6 +255,9 @@ export default {
         color: @color_l;
     }
 }
+.d-header-t{
+    width: 30px;
+}
 .d-header-d{
     margin-bottom: 0.12rem;
     line-height: 1.2em;
@@ -271,9 +275,7 @@ export default {
 .tag-group{
     .clearfix()
 }
-// .tag-i{
-//     float: right;
-// }
+
 .Guide_Title{
     text-transform: uppercase;
     font-size: 0.3rem;
@@ -283,5 +285,17 @@ export default {
 }
 .download_buttonn{
 float: right;
+}
+.pdf {
+margin-left: 0px;
+}
+.main {
+margin-top: 0px;
+width: 110%;
+margin-left: -20px;
+height: 500px;
+}
+.arrow {
+    position: relative;
 }
 </style>
