@@ -80,7 +80,7 @@ export default {
 .list {
   overflow: hidden;
   position: absolute;
-  top: 80px;
+  top: 90px;
   left: 0;
   right: 0;
   bottom: 0;

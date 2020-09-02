@@ -7,12 +7,9 @@
         </div>
     </app-header>
     <div class="page-content fx-1">
-        <div v-for="treatment in example2" :key="treatment">
-            <font color="black" size="10">{{getChinese(treatment)}}</font>
-        </div>
         <!-- 详情标题 -->
         <div class="detail-head detail-bg border-b">
-            <h2 class="detail-head-title" v-text="disease"></h2>
+            <h2 class="detail-head-title">{{example2[0]}}</h2>
             <p v-if="item.alias" class="detail-head-small" v-text="'别名：'+item.alias"></p>
             <p v-if="item.common_name" class="detail-head-small" v-text="'俗称：'+item.common_name"></p>
             <p v-if="item.advice" class="detail-head-small" v-text="'就诊建议：'+item.advice"></p>
@@ -40,6 +37,22 @@
                     <div v-for="treatment in example2" :key="treatment">
                         <p class="info-sub-dd">{{treatment}}</p>
                     </div> -->
+                    <div class="info-sub-h">成份：</div>
+                    <div v-for="treatment in example9" :key="treatment">
+                        <p class="info-sub-dd">{{treatment}}</p>
+                    </div>
+                    <div class="info-sub-h">相互作用列表：</div>
+                    <div>
+                        <p class="info-sub-dd router-link-active" @click="toPage(name)">{{ name + "的相互作用列表"}}</p>
+                    </div>
+                    <div class="info-sub-h">药品相互作用：</div>
+                    <div v-for="treatment in example14" :key="treatment">
+                        <p class="info-sub-dd">{{treatment}}</p>
+                    </div>
+                    <div class="info-sub-h">适应症：</div>
+                    <div v-for="treatment in example3" :key="treatment">
+                        <p class="info-sub-dd">{{treatment}}</p>
+                    </div>
                     <div class="info-sub-h">药品监管分级：</div>
                     <div v-for="treatment in example" :key="treatment">
                         <p class="info-sub-dd">{{treatment}}</p>
@@ -53,14 +66,6 @@
                             {{item}}
                           </li>
                         </ul> -->
-                    </div>
-                    <div class="info-sub-h">药品相互作用：</div>
-                    <div v-for="treatment in example14" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
-                    </div>
-                    <div class="info-sub-h">适应症：</div>
-                    <div v-for="treatment in example3" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">ATC编码：</div>
                     <div v-for="treatment in example4" :key="treatment">
@@ -81,14 +86,6 @@
                     <div class="info-sub-h">包装/零售价：</div>
                     <div v-for="treatment in example8" :key="treatment">
                         <p class="info-sub-dd">{{treatment}}</p>
-                    </div>
-                    <div class="info-sub-h">成份：</div>
-                    <div v-for="treatment in example9" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
-                    </div>
-                    <div class="info-sub-h">相互作用列表：</div>
-                    <div>
-                        <p class="info-sub-dd router-link-active" @click="toPage(name)">{{ name + "的相互作用列表"}}</p>
                     </div>
                     <div class="info-sub-h">注意事项：</div>
                     <div v-for="treatment in example10" :key="treatment">

@@ -83,7 +83,7 @@ export default {
 .search {
   height: 52px;
   background: #39b7ff;
-  padding: 5 5px;
+  // padding: 0 10px;
   .search-input {
     width: 100%;
     height: 42px;
@@ -92,7 +92,7 @@ export default {
     border-radius: 4px;
     font-size: 18px;
     color: $font666;
-    padding: 2 8px;
+    padding: 2 2px;
     box-sizing: border-box;
   }
 }

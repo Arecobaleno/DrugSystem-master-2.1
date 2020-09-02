@@ -1,22 +1,8 @@
-<! -- template>
-  <div>
-    <city-header></city-header>
-    <city-search :cities="cities"></city-search>
-    <city-list
-    :cities="cities"
-    :hot="hotCities"
-    :letter="letter"></city-list>
-    <city-alphabet
-    :cities="cities"
-    @change="handleLetterChange"></city-alphabet>
-  </div>
-</template> -->
-
 <template>
 <div>
 	<div class="page-full component-home fx-column">
 		<app-header :title="appHeader.title"></app-header>
-		<section class="firstaid-search-box ac" >
+		<section class='firstaid-search-box'>
 			<city-search :cities="cities"></city-search>
 		</section>
 		<city-list
@@ -125,7 +111,9 @@ export default {
 
 <style lang="less" scoped>
 @import "../../assets/css/common.less";
-
+.firstaid-search-box {
+	background: #39b7ff;
+}
 
 .page-content {
 	background-color: #f1f4f4;

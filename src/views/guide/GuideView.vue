@@ -1,7 +1,7 @@
 <template> 
     <div class="page-full component-find fx-column"> 
     <app-header :title="appHeader.title"></app-header>
-    	<section class="firstaid-search-box ac" >
+    	<section class="firstaid-search-box" >
 			<form action="/">
 				<van-search
 					v-model="searchData"
@@ -43,13 +43,13 @@
     
 		
 		<section>
-					<li v-for="(treatment,index) in example" v-bind:key="index" @click="getGuideItems(treatment.title)">
-                    <div>
-						<p class="pp1">{{(treatment.title)}}</p>
-						<p class="pp2">{{treatment.maker}}</p>
-						<p class="pp3">{{treatment.year}}</p>
-                    </div>
-					</li>
+            <li v-for="(treatment,index) in example" v-bind:key="index" @click="getGuideItems(treatment.title)">
+            <div>
+                <p class="Gtitle">《{{(treatment.title)}}》</p>
+                <p class="Gmaker">{{treatment.maker}}</p>
+                <p class="Gtime">{{treatment.year}}</p>
+            </div>
+            </li>
 		</section>
 				
     </div>
@@ -198,7 +198,6 @@ export default {
 <style lang="less" scoped>
 @import "../../assets/css/common.less";
 .firstaid-search-box {
-  padding: 0.18rem 0.2rem;
   background-color: #f2f3f5;
   & .search {
     color: #c5c7ce;
@@ -296,14 +295,17 @@ export default {
     font-size: 0.26rem;
     color: #646f7f;
 }
-.pp1{
+.Gtitle{
     font-weight: 900;
     font-size: 0.30rem;
+    margin: 10px 4px;
 }
-.pp2{
+.Gmaker{
     font-size: 0.27rem;
+    margin: 8px 10px;
 }
-.pp3{
+.Gtime{
     font-size: 0.26rem;
+    margin: 6px 10px;
 }
 </style>
