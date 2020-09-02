@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="search">
-    <input v-model="keyword" class="search-input" type="text" placeholder="请输入制定者" />>
+    <input v-model="keyword" class="search-input" type="text" placeholder="请输入制定者"/>
   </div>
   <div class="search-content"
       ref="search"
@@ -67,9 +67,6 @@ export default {
   },
   methods: {
     handleCityClick (city) {
-      // this.$store.dispatch('changeCity', city)
-      // this.$store.commit('changeCity', city)
-      // this.changeCity(city)
       this.$router.push({name: "MakerDetail", query: {maker: city}})
     },
     ...mapMutations(['changeCity'])
@@ -84,24 +81,24 @@ export default {
 @import "../../../assets/styles/layout.scss";
 @import "../../../assets/styles/varibles.scss";
 .search {
-  height: 72px;
+  height: 52px;
   background: #39b7ff;
-  padding: 0 10px;
+  padding: 5 5px;
   .search-input {
     width: 100%;
-    height: 62px;
-    line-height: 62px;
+    height: 42px;
+    line-height: 42px;
     text-align: center;
-    border-radius: 6px;
-    font-size: 28px;
+    border-radius: 4px;
+    font-size: 18px;
     color: $font666;
-    padding: 0 20px;
+    padding: 2 8px;
     box-sizing: border-box;
   }
 }
 .search-content {
   position: absolute;
-  top: 160px;
+  top: 80px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -109,8 +106,8 @@ export default {
   background: #eee;
   overflow: hidden;
   .search-item {
-    line-height: 62px;
-    padding-left: 20px;
+    line-height: 42px;
+    padding-left: 10px;
     color: #666;
     background: #fff;
   }

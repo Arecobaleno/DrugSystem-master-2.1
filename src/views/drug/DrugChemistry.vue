@@ -12,8 +12,8 @@
     </div>
     <div class="page-content fx-1">
         <ul class="druglist-content">
-            <li v-for="(item, index) in drugs" v-bind:key="index" @click="getDrugDetail(item)" class="drug-item fx-ac ac">
-                <div class="fx-1">{{item}}</div>
+            <li v-for="(item, index) in drugs" v-bind:key="index" @click="getDrugItems(item)" class="drug-item fx-ac ac">
+                <div class="fx-1">{{getChinese(item)}}</div>
             </li>
         </ul>
     </div>
@@ -94,29 +94,52 @@ export default {
       // console.log(111)
       // console.log(this.drugs);
     },
-    getDrugDetail(name){
-        let url = 'http://localhost:10088/detail'
-        console.log(name);
+    getDrugItems(name){
+        let url = 'http://localhost:10088/medicine_by_chemical'
+        //   console.log(name);
         // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
         //   console.log(name);
-        let data = {'category': 'drug', 'content': name}
+        let data = {'content': name}
         axios.post(url, data)
             .then((response) => {
                 // console.log(222)
                 // console.log(response.data)
-                this.drugDetail = response.data;
-                console.log(111)
-                console.log(this.drugDetail);
+                this.drugItems = response.data;
+                console.log(222222)
+                console.log(this.drugItems);
+                this.head = this.getChinese(name);
                 this.$router.push({
-                path: "/drugdetail",
-                query: {drugDetail: this.drugDetail, drugList: name}
+                path: "/drugitems",
+                query: {drugItems: this.drugItems, drugList: name, title: this.head}
             });
             })
             .catch((error) => {
                 console.log(error);
             })
-        
     },
+    // getDrugDetail(name){
+    //     let url = 'http://localhost:10088/detail'
+    //     console.log(name);
+    //     // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
+    //     //   console.log(name);
+    //     let data = {'category': 'drug', 'content': name}
+    //     axios.post(url, data)
+    //         .then((response) => {
+    //             // console.log(222)
+    //             // console.log(response.data)
+    //             this.drugDetail = response.data;
+    //             console.log(111)
+    //             console.log(this.drugDetail);
+    //             this.$router.push({
+    //             path: "/drugdetail",
+    //             query: {drugDetail: this.drugDetail, drugList: name}
+    //         });
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         })
+        
+    // },
 
     getChinese: function (name) {
         let isletter = /^[a-zA-Z]+$/.test(name);
@@ -132,13 +155,7 @@ export default {
   created() {
     this.show();
     if(this.$route.query) {
-    
-    if(Object.prototype.toString.call(this.$route.query.drugItems) == 'object String'){
-          
-        }
-    else{
-        this.drugs = this.$route.query.drugItems;
-    }
+    this.drugs = this.$route.query.drugItems;
     this.drugList = this.$route.query.drugList;
     this.appHeader.title = this.$route.query.title;
 		// this.init();
@@ -152,17 +169,10 @@ export default {
     }
   },
   watch: {
-	  '$route' (to, from) { //监听路由是否变化
+    '$route' (to, from) { //监听路由是否变化
 		  if(to.query.drugItems != from.query.drugItems && to.query.drugItems != undefined){
-        console.log(Object.prototype.toString.call(to.query.drugItems))
-        if(Object.prototype.toString.call(to.query.drugItems) == '[object String]'){
-
-          this.drugs = []
-          this.drugs.push(to.query.drugItems)
-        }
-        else{
-          this.drugs = to.query.drugItems;
-        }
+        console.log(Object.prototype.toString.call(to.query.drugItems[0]))
+        this.drugs = to.query.drugItems;
         this.drugList = to.query.drugList
         this.appHeader.title = to.query.title;
 			  // this.init();//重新加载数据

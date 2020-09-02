@@ -1,6 +1,5 @@
 <template>
 <div class="page-full component-news-detail fx-column"> 
-
     <app-header :title="appHeader.title">
         <div slot="right">
             <i class="icon-shoucang iconfont ac-o"></i>
@@ -10,7 +9,10 @@
     <div class="page-content fx-1">
         <!-- 详情标题 -->
         <div class="detail-head detail-bg border-b">
-            <h2 class="detail-head-title" v-text="search_data"></h2>
+            <h2 class="detail-head-title" v-text="interaction"></h2>
+            <p v-if="item.alias" class="detail-head-small" v-text="'别名：'+item.alias"></p>
+            <p v-if="item.common_name" class="detail-head-small" v-text="'俗称：'+item.common_name"></p>
+            <p v-if="item.advice" class="detail-head-small" v-text="'就诊建议：'+item.advice"></p>
         </div>
         <!-- 跳转模块 -->
         <div class="detail-relevant border-b">
@@ -27,7 +29,7 @@
                 <!-- 分点内容 -->
                 <div class="info-sub">
                     <div class="info-sub-h">相互作用：</div>
-                    <div v-for="(treatment,index) in example" :key="index">
+                    <div v-for="treatment in example" :key="treatment">
                        <p class="info-sub-d2">{{treatment[0]}}</p>
                         <font class="info-sub-d2">临床建议：</font><font  class="info-sub-dd">{{treatment[1]}}</font><br />
                         <font class="info-sub-d2">临床证据：</font><font  class="info-sub-dd">{{treatment[2]}}</font><br />
@@ -72,11 +74,11 @@ export default {
 	components: { appHeader },
 	data () {
 		return {
-		appHeader: {
-			title: '相互作用详情'},
-        interaction: [],
-        example:[],
-		search_data:"",
+				appHeader: {
+						title: '相互作用详情'
+				},
+        interaction: '',
+        example:[]
 		}
 	},
 	computed: mapGetters({
@@ -86,80 +88,36 @@ export default {
 	    informations: 'informations'
 	}),
 	created () {
-	    this.interaction =  this.$route.query.interactName;
-		this.getDrugData(this.interaction);
+	    this.interaction =  this.$route.params.interactName;
+			console.log("aaa"+this.$route.params.interactName);
+			this.getDrugData(this.interaction);
 	},
 	watch: {
 		'$route'(to,from) {
 			this.example = [];
-			this.interaction = this.$route.query.interactName;
-			if(this.interaction!=null)
-				this.getDrugData(this.interaction);
+			this.interaction = this.$route.params.interactName;
+			this.getDrugData(this.interaction);
 		}
 	},
 	methods: {
-		getChinese(name) {
-		        let isletter = /^[a-zA-Z]+$/.test(name);
-		        if(isletter){
-		          return name
-		        }
-		        else{
-		          name = name.replace(/[a-zA-Z]/g, "");
-		          name = name .replace(" ","");
-		          return name;
-		        }
-		    },
 		getDrugData(content){
-			let url=''
-			let data={}
-			console.log(123123)
-			console.log(this.interaction.length)
-			let len=this.interaction.length
-			if(len==1)
-			{
-			   url = 'http://127.0.0.1:10088/detail'
-			   data = {'category': 'interaction', 'content':this.interaction[0]}
-			}
-			else{
-			 url = 'http://127.0.0.1:10088/interaction_accurate'
-			// data = { 'content': ['卡托普利 Captopril','卡托普利 Captopril']},
-			  data = { 'content': this.interaction}
-			  console.log(666)
-			  console.log(this.interaction)
-			}
+			//console.log("aaa"+content);
+			let url = 'http://127.0.0.1:10088/detail'
+			let data = {'category': 'interaction', 'content': content}
+		   //let content='卡托普利 Captopril';
+			//let details="";
 			axios.post(url, data)
 			.then((response)=>{
 				let res = response.data
 				console.log(res);
-				if((this.interaction.length)==1){
-					this.search_data=this.getChinese(this.interaction[0]);
-					for (let index in res) {
-						let treatment = []
-						let sample = res[index]
-						treatment.push(content+"+"+sample.targetName, sample.edgeResult.properties.临床建议,
-						sample.edgeResult.properties.临床证据, sample.edgeResult.properties.作用机制,
-						sample.edgeResult.properties.证据级别, sample.edgeResult.properties.参考文献)
-						console.log(treatment)
-						this.example.push(treatment)
-					}
-				}else{
 				for (let index in res) {
 					let treatment = []
 					let sample = res[index]
-					let search_content=""
-					let i
-					for(i=0; i < (this.interaction.length)-1; i++){
-						search_content+=this.interaction[i];
-						search_content+="+";
-					}
-					search_content+=this.interaction[i];
-					this.search_data=this.getChinese(search_content);
-					treatment.push(search_content, sample.edgeResult.properties.临床建议,
+					treatment.push(content+"+"+sample.targetName, sample.edgeResult.properties.临床建议,
 					sample.edgeResult.properties.临床证据, sample.edgeResult.properties.作用机制,
 					sample.edgeResult.properties.证据级别, sample.edgeResult.properties.参考文献)
 					console.log(treatment)
 					this.example.push(treatment)
-				}
 				}
 			})
 			.catch((error) => {

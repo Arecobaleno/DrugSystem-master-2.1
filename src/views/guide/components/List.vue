@@ -52,8 +52,7 @@ export default {
   },
   methods: {
     handleCityClick (city) {
-      // this.$store.dispatch('changeCity', city)
-      // this.$store.commit('changeCity', city)
+      console.log('router push:' + city)
       this.$router.push({name: "MakerDetail", query: {maker: city}})
     },
     ...mapMutations(['changeCity'])
@@ -81,17 +80,17 @@ export default {
 .list {
   overflow: hidden;
   position: absolute;
-  top: 160px;
+  top: 80px;
   left: 0;
   right: 0;
   bottom: 0;
   background: #fff;
   .title {
-    line-height: 50px;
+    line-height: 30px;
     background: #eee;
     color: $font666;
     padding-left: 20px;
-    font-size: 26px;
+    font-size: 16px;
   }
 }
 .button-list {
@@ -111,7 +110,7 @@ export default {
 }
 .item-list {
   li {
-    line-height: 76px;
+    line-height: 46px;
     color: #666;
     padding-left: 20px;
     cursor: pointer;

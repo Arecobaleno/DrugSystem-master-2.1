@@ -2,10 +2,8 @@
 
 	<div class="page-full component-home fx-column">
 		<app-header :title="appHeader.title"></app-header>
-
 		<section class="firstaid-search-box ac">
         <div>
-
 			<form action="/">
 				<van-search
 				v-model="searchMsg[0]"
@@ -25,9 +23,8 @@
 				</van-search>
 			</form>
       </div>
-			 
 		</section>
-
+		
 		<section class="firstaid-search-box ac">
         <div v-for="(item, index) in searchNum" v-bind:key="item" >
 			<form action="/">
@@ -48,9 +45,7 @@
 				</van-search>
 			</form>
       </div>
-	  <div style="float: right">
-	  <van-button type="default" id="multi_search" style="display: none;" class="panel_back" align="center" @click="toPage">点击搜索</van-button>
-	  </div>
+
 		</section>
 
 		<div v-show="isShowData" class="page-content fx-1">
@@ -66,10 +61,8 @@
 			</ul>
 		</div>
 		<!-- <div class="blank"></div> -->
-		<!-- <van-button type="default" class="panel_back" align="center" @click="toPage">点击搜索</van-button> -->
+		<div v-show="isShowData==false" class="page-content">
 
-		<div v-show="isShowData==false" class="page-content fx-1">
-		<!-- <div class="blank_button"></div> -->
 			<a>
 				<van-row type="flex" justify="space-between">
 					<van-col id="search_history" v-model="history" align="left" class="history" span="11">{{history}}</van-col>
@@ -77,11 +70,11 @@
 				</van-row>
 				<van-button type="default" id="item_history"  class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="click_item(item,'history',search_index)">{{item}}</van-button>
 			</a>
-			<br />
-			<br />
+
 		</div>
-
-
+    <div class="panel_back">
+     <div class="click_search" @click="toPage">点击搜索</div>
+      </div>
 	  <app-nav style="position: fixed;bottom: 0px;"></app-nav>
 	</div>
 
@@ -160,15 +153,11 @@
 			addSearchItem() {
 			  this.searchNum+=1;
 			  console.log(this.searchMsg);
-			  document.getElementById("multi_search").style.display="inline";
 			},
 			delSearchItem(index) {
 			  this.searchNum-=1
 			  this.searchMsg.splice(index,1);
 			  console.log(this.searchMsg);
-			  if( this.searchNum==0){
-				  document.getElementById("multi_search").style.display="none";
-			  }
 			},
 			search(index) {
 			
@@ -255,11 +244,6 @@
 				storage.setItem('searchWord',JSON.stringify(this.historySearch))
 			},
 			click_item(item,type,index){
-				if(this.searchNum==0){
-					this.searchMsg[index]=item;
-					this.isShowData=false;
-					this.toPage();
-				}
 			  if(type=="page"){
 			  this.searchMsg[index]=item.value;
 			  this.isShowData=false;
@@ -288,7 +272,6 @@
      // this.isShowData=false
 
 			},
-			
 			
 		},
 		activated() {
@@ -383,26 +366,14 @@
     visibility: hidden
   }
   .panel_back{
-	  width:100px;
-	height: 30px;
-	margin-top: 2px;
-	margin-bottom: 8px;
-	 float:right;
-	 font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	 font-size: 15px;
-	 color:black;
-
- //   margin-bottom: 00px;
-    
+    background-color:white;
+    // margin-top: 100px;
+    // height: .88rem;
   }
-
   .click_search{
 	 float:right;
 	 font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	 color:#2c3e50;
 	 margin-top: 30px;
-  }
-  .blank_button{
-    height: 50px;
   }
 </style>

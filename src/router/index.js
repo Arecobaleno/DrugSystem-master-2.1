@@ -14,17 +14,12 @@ import NewsDetailView from '../views/news/NewsDetailView.vue'
 import CommentsView from '../views/news/CommentsView.vue'
 import CommentView from '../views/news/CommentView.vue'
 
-// import DiseaseView from '../views/DiseaseView.vue'
-// import DiseaseDetailView from '../views/disease/DiseaseDetailView.vue'
 
 import SymptomView from '../views/SymptomView.vue'
 import SymptomSelectView from '../views/symptom/SymptomSelectView.vue'
 import MySymptomView from '../views/symptom/MySymptomView.vue'
 import SymptomResultView from '../views/symptom/SymptomResultView.vue'
 
-import GoodsView from '../views/GoodsView.vue'
-import GoodsEatView from '../views/goods/GoodsEatView.vue'
-import GoodsUseView from '../views/goods/GoodsUseView.vue'
 
 import AccompanyView from '../views/AccompanyView.vue'
 import SelectcityView from '../views/accompany/SelectcityView.vue'
@@ -46,6 +41,7 @@ import AidView from '../views/AidView.vue'
 import DrugListView from '../views/aid/DrugListView.vue'
 import DrugsView from '../views/aid/DrugsView.vue'
 import DrugDetailView from '../views/aid/DrugDetailView.vue'
+import DrugChemistry from '../views/drug/DrugChemistry.vue'
 
 import MyView from '../views/MyView.vue'
 import InvitationView from '../views/my/InvitationView.vue'
@@ -56,7 +52,6 @@ import UserinfoView from '../views/my/UserinfoView.vue'
 import SetView from '../views/SetView.vue'
 import AgreementView from '../views/set/AgreementView.vue'
 
-import Iframe from '../views/Iframe.vue'
 
 import DrugView from '../views/drug/DrugView.vue'
 import DrugItems from '../views/drug/DrugItems.vue'
@@ -144,30 +139,8 @@ export default new Router({
                     component: SymptomResultView,
                     meta: { requiresAuth: false }
                 },
-                // {
-                //     path: 'disease/:id',
-                //     name: 'h-symptom-select-my-result-disease',
-                //     alias: '/symptom-disease/:id',
-                //     component: DiseaseDetailView,
-                //     meta: { requiresAuth: false }
-                // }
             ]
         },
-        // { // 疾病大全
-        //     path: '/disease',
-        //     component: Parent,
-        //     children: [{
-        //         path: '',
-        //         name: 'h-disease',
-        //         component: DiseaseView,
-        //         meta: { requiresAuth: false }
-        //     }, {
-        //         path: ':id',
-        //         name: 'h-disease-detail',
-        //         component: DiseaseDetailView,
-        //         meta: { requiresAuth: false }
-        //     }]
-        // },
         { // 陪诊
             path: '/accompany',
             component: Parent,
@@ -257,16 +230,6 @@ export default new Router({
                     path: '',
                     name: 'GuideView',
                     component: GuideView,
-                    meta: { requiresAuth: false }
-                }, {
-                    path: 'eat',
-                    name: 'goodseat',
-                    component: GoodsEatView,
-                    meta: { requiresAuth: false }
-                }, {
-                    path: 'use',
-                    name: 'goodsuse',
-                    component: GoodsUseView,
                     meta: { requiresAuth: false }
                 },
                 {
@@ -427,6 +390,12 @@ export default new Router({
             meta: { requiresAuth: false }
         },
         {
+            path: '/drugchemistry',
+            name: 'drug-chemistry',
+            component: DrugChemistry,
+            meta: { requiresAuth: false }
+        },
+        {
             path: '/drugitems',
             name: 'drug-items',
             component: DrugItems,
@@ -470,9 +439,8 @@ export default new Router({
                     meta: { requiresAuth: false }
                 },
                 {
-                    path: 'interactDetail/:interactName',
+                    path: '/interactDetail/',
                     name: 'interact-view-search-detail',
-                    alias: '/interactDetail/:interactName',
                     component: InteractSearchDetailView,
                     meta: { requiresAuth: false }
                 }

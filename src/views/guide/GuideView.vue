@@ -43,8 +43,6 @@
     
 		
 		<section>
-			<div class="page-content fx-1">
-				<ul class="firstaid-content">
 					<li v-for="(treatment,index) in example" v-bind:key="index" @click="getGuideItems(treatment.title)">
                     <div>
 						<p class="pp1">{{(treatment.title)}}</p>
@@ -52,8 +50,6 @@
 						<p class="pp3">{{treatment.year}}</p>
                     </div>
 					</li>
-				</ul>
-			</div>
 		</section>
 				
     </div>

@@ -1,62 +1,23 @@
 <template>
-
 	<div class="page-full component-home fx-column">
 		<app-header :title="appHeader.title"></app-header>
-
 		<section class="firstaid-search-box ac">
-        <div>
-
 			<form action="/">
 				<van-search
-				v-model="searchMsg[0]"
-				show-action
-				shape="round"
-				placeholder="请输入搜索关键词"
-				@click="search(0)"
-				@input="search(0)"
-				@search="search(0)"
-				@clear="onClear"
-				@change="search(0)"
-				>
-				  <template slot="action">
-				    <van-icon name="plus"  @click="addSearchItem"/>
-					<!-- <van-icon name="plus" class="blank_item" @click="delSearchItem"/> -->
-				  </template>
-				</van-search>
+					v-model="inputMsg"
+					show-action
+					shape="round"
+					placeholder="请输入搜索关键词"
+					@search="search"
+					@cancel="onCancel"
+					@clear="onClear"
+				/>
 			</form>
-      </div>
-			 
 		</section>
-
-		<section class="firstaid-search-box ac">
-        <div v-for="(item, index) in searchNum" v-bind:key="item" >
-			<form action="/">
-				<van-search
-				  v-model="searchMsg[index+1]"
-				  show-action
-          shape="round"
-				  placeholder="请输入搜索关键词"
-          @click="search(index+1)"
-          @input="search(index+1)"
-				  @search="search(index+1)"
-          @clear="onClear"
-				>
-				  <template  slot="action">
-				    <!-- <van-icon name="plus"  @click="addSearchItem"/> -->
-					<van-icon name="cross"  @click="delSearchItem(index+1)"/>
-				  </template>
-				</van-search>
-			</form>
-      </div>
-	  <div style="float: right">
-	  <van-button type="default" id="multi_search" style="display: none;" class="panel_back" align="center" @click="toPage">点击搜索</van-button>
-	  </div>
-		</section>
-
 		<div v-show="isShowData" class="page-content fx-1">
 			<ul class="interactlist-content">
-				<li v-for="(item, index) in interaction" v-bind:key="index"  @click="click_item(item,'history',search_index)" class="interact-item fx-ac ac">
-					<div align="left">{{item}}</div>
+				<li v-for="(item, index) in interaction" v-bind:key="index"  @click="toPage(item,'page')" class="interact-item fx-ac ac">
+					<div class="fx-1">{{item.value}}</div>
 				</li>
 			</ul>
 			<ul class="interactlist-content" v-if="isresultEmpty">
@@ -66,25 +27,20 @@
 			</ul>
 		</div>
 		<!-- <div class="blank"></div> -->
-		<!-- <van-button type="default" class="panel_back" align="center" @click="toPage">点击搜索</van-button> -->
-
 		<div v-show="isShowData==false" class="page-content fx-1">
-		<!-- <div class="blank_button"></div> -->
+			
 			<a>
 				<van-row type="flex" justify="space-between">
 					<van-col id="search_history" v-model="history" align="left" class="history" span="11">{{history}}</van-col>
 					<van-col id="clear_history" class="clear_history" align="right" @click="clear_history" span="8">清空搜索</van-col>
 				</van-row>
-				<van-button type="default" id="item_history"  class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="click_item(item,'history',search_index)">{{item}}</van-button>
+				<van-button type="default" id="item_history"  class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="toPage(item,'history')">{{item}}</van-button>
 			</a>
-			<br />
-			<br />
 		</div>
 
-
-	  <app-nav style="position: fixed;bottom: 0px;"></app-nav>
+		<app-nav></app-nav>
 	</div>
-
+	
 </template>
 
 <script>
@@ -107,8 +63,6 @@
 				appHeader: {
 				title: "相互作用"
       },
-				searchMsg: [],
-				searchNum: 0,
 				isResetMap: true,
 				searchData: "",
 				interaction: [],
@@ -117,8 +71,7 @@
 				inputMsg:"",
 				historySearch:["尼卡地平 Nicardipine","asdsadsa","ewqe1ew"],
 				history:"历史搜索：暂无",
-				repeat:0,
-				search_index:0
+				repeat:0
 			}
 		},
 		computed: mapGetters({
@@ -154,43 +107,20 @@
 			}
 		},
 		methods: {
-			showData(){
-			   console.log(this.searchMsg);
-			},
-			addSearchItem() {
-			  this.searchNum+=1;
-			  console.log(this.searchMsg);
-			  document.getElementById("multi_search").style.display="inline";
-			},
-			delSearchItem(index) {
-			  this.searchNum-=1
-			  this.searchMsg.splice(index,1);
-			  console.log(this.searchMsg);
-			  if( this.searchNum==0){
-				  document.getElementById("multi_search").style.display="none";
-			  }
-			},
-			search(index) {
-			
-			  this.inputMsg=this.searchMsg[index];
-			  this.search_index=index;
-			  console.log(this.search_index)
-			  if(this.inputMsg==null)
-			  return 0
+			search() {
 				//document.getElementById("clear_history").style.display="none"
 				//document.getElementById("search_history").style.display="none"
 				//document.getElementById("item_history").style.display="none"
 				// if (this.historySearch.indexOf(this.inputMsg) != -1){
 				// 	this.repeat=1;
 				// }
-			  console.log(this.inputMsg)
 				if(this.inputMsg !=''){
 					let storage=window.localStorage
 					{//console.log(444)
 					    {//console.log(this.historySearch.indexOf(this.inputMsg))
 						//console.log(444)
 							if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
-			
+
 							          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
 							          this.historySearch.unshift(this.inputMsg);
 									  console.log(88888)
@@ -199,36 +129,35 @@
 							 }else{
 									   this.historySearch.unshift(this.inputMsg)
 									}
-			
+
 					        if( this.historySearch.length >= 6){
 					                this.historySearch.pop()
 					            }
-			
+
 					            storage.setItem('searchWord',JSON.stringify(this.historySearch))
 					    }
 					}
 						//console.log(storage.getItem('searchWord'))
 				}
-			
+
 				this.isShowData=true;
 				this.searchData=this.inputMsg
 				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/interaction_candidate'
+					let url = 'http://127.0.0.1:10088/query'
 					let data = {
+						'category': 'interaction',
 						'content': this.searchData
 					}
 					axios.post(url, data)
 						.then((response) => {
-			
+
 							if(response.data.length==0){
 								this.isresultEmpty=true;
 								this.interaction = response.data;
-			
 							}
 							else{
 								this.isresultEmpty=false;
 								this.interaction = response.data;
-			          console.log(this.interaction)
 							}
 						})
 				}
@@ -244,9 +173,7 @@
 				this.interaction = [];
 			},
 			onClear() {
-				this.isShowData=false;
 				this.searchData = "";
-				this.interaction = [];
 			},
 			clear_history(){
 				this.history="历史搜索：暂无";
@@ -254,41 +181,55 @@
 				let storage=window.localStorage
 				storage.setItem('searchWord',JSON.stringify(this.historySearch))
 			},
-			click_item(item,type,index){
-				if(this.searchNum==0){
-					this.searchMsg[index]=item;
-					this.isShowData=false;
-					this.toPage();
+			toPage: function(item,type) {
+				this.history="历史搜索：";
+				//console.log(111111);
+				this.inputMsg=item.value;
+				if(type=="history"){
+					this.inputMsg=item;
+				}else{
+					this.inputMsg=item.value;
 				}
-			  if(type=="page"){
-			  this.searchMsg[index]=item.value;
-			  this.isShowData=false;
-			 console.log(this.searchMsg)
-			     }
-			     else{
-			       this.searchMsg[index]=item;
-			       this.isShowData=false;
-			       console.log(this.searchMsg)
-			       console.log(index)
-			     }
-			  this.search(index)
-			  this.isShowData=false;
-			},
-			toPage: function() {
+				console.log(this.inputMsg);
+				console.log(111111);
+				if(this.inputMsg !=''){
+					let storage=window.localStorage
+					{//console.log(444)
+					    {//console.log(this.historySearch.indexOf(this.inputMsg))
+						//console.log(444)
+							if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
+							
+							          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
+							          this.historySearch.unshift(this.inputMsg);
+							 }else{
+									   this.historySearch.unshift(this.inputMsg)
+									}
 
-			console.log(this.searchMsg);
+					        if( this.historySearch.length >= 6){
+					                this.historySearch.pop()                            
+					            }
+								
+					            storage.setItem('searchWord',JSON.stringify(this.historySearch))
+					    }
+					}
+						//console.log(storage.getItem('searchWord'))
+				}
+				if(type!="history"){
 				this.$router.push({
-					path: "interactDetail",
-					query: {interactName: this.searchMsg},
-				})
-				console.log(12321321)
-				console.log(this.inputMsg)
-
+					name: "interact-view-search-detail",
+					params: {interactName: this.inputMsg},
+				}) 
+				this.inputMsg='';
+				 }
+				else{
+					this.inputMsg=item;
+					//console.log(this.searchData)
+					console.log(666);
+					this.search();
+					
+				}
 			//this.inputMsg=''
-     // this.isShowData=false
-
 			},
-			
 			
 		},
 		activated() {
@@ -314,7 +255,6 @@
 	}*/
 	.page-content {
 		background-color: #f1f4f4;
-		//margin-bottom: 10px;
 	}
 
 	.interactlist-content {
@@ -341,7 +281,7 @@
 			}
 		}
 	}
-
+	
 	.history{
 		font-family:"Times New Roman";
 		font-size:12px;
@@ -352,7 +292,7 @@
 	}
 	.clear_history{
 		font-family:"Times New Roman";
-		font-size:10px;
+		font-size:10px; 
 		margin-top: 4px;
 		color: #676b73;;
 	}
@@ -369,40 +309,4 @@
 	.blank {
 		height: 0.10rem;
 	}
-  .button {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    cursor: pointer;
-    background-color: yellow;
-  }
-  .blank_item {
-    visibility: hidden
-  }
-  .panel_back{
-	  width:100px;
-	height: 30px;
-	margin-top: 2px;
-	margin-bottom: 8px;
-	 float:right;
-	 font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	 font-size: 15px;
-	 color:black;
-
- //   margin-bottom: 00px;
-    
-  }
-
-  .click_search{
-	 float:right;
-	 font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	 color:#2c3e50;
-	 margin-top: 30px;
-  }
-  .blank_button{
-    height: 50px;
-  }
 </style>

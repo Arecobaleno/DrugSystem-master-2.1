@@ -2,20 +2,11 @@
 <div class="page-full component-drug-list fx-column"> 
     <div class="druglist-header">
         <app-header :title="appHeader.title"></app-header>
-        
-    <!-- <section class="firstaid-search-box ac">
-            <div class="header-content fx">
-				<el-input v-model="searchData" placeholder="搜索指南"></el-input> 
-				<el-button type="primary" icon="el-icon-search" style="float:right" @click="search">搜索</el-button>
-			</div>
-    </section> -->
-
     </div>
     <div class="page-content fx-1">
-        <!-- <ul class="druglist-content" v-for="(item, index) in guideContent" v-bind:key="index"> -->
           <ul  class="druglist-content" >
-            <li v-for="(guide, index) in guideContent" v-bind:key="index" @click="getGuideItems(guide.name)" class="drug-item fx-ac ac">
-                <div class="fx-1">{{guide.name}}</div>
+            <li v-for="(guide, index) in guideContent" v-bind:key="index" @click="getGuideItems(guide.title)" class="drug-item fx-ac ac">
+                <div class="fx-1">{{guide.title}}</div>
             </li>
         </ul>
     </div>
@@ -38,56 +29,61 @@ export default {
   data() {
     return {
     appHeader: {title: "临床指南"},
-    guideContent:this.$route.query.guideItems,
+    maker: '',
+    guideContent: [],
     searchData: "",
     guideItems:null,
-    };
-  },
-    watch: {
-    '$route'(to, from) {
-      this.$router.go(0);
-
-    }
-  },
-  watch: {
-	  '$route' (to, from) { //监听路由是否变化
-     this.searchData=''
     }
   },
   methods: 
   {
-    
-     getGuideItems(name){
-       console.log("哈哈哈哈哈哈哈哈哈哈哈哈哈哈:   "+ name)
-               let url = 'http://localhost:10088/guide/detail'
-               let data = {'content': name}
-               axios.post(url, data)
-            .then((response) => {
-                    this.guideItems = response.data;
-                console.log(111)
-                console.log(this.guideItems);
-                console.log(this.guideItems[0].time);
-                console.log(this.guideItems[0].maker);
-
-                this.$router.push({
-                name: "GuideDetail",
-                query: {guideItems: this.guideItems}
-            });
-            })
-        },
-  },
-   created () {
-        // let content = this.appHeader.title
-        // this.disease = content
-        // this.showResult(content)
-        if(this.$route.query) {
-            this.guideContent = this.$route.query.guideItems
-      
+     getGuideItems(name) {
+        let url = 'http://localhost:10088/guide/detail'
+        let data = {'content': name}
+        axios.post(url, data)
+        .then((response) => {
+            this.guideItems = response.data;
+        console.log(this.guideItems);
+        console.log(this.guideItems[0].time);
+        console.log(this.guideItems[0].maker);
+        this.$router.push({
+        name: "GuideDetail",
+        query: {guideItems: this.guideItems}
+        });
+        })
+    },
+    getGuideContent (maker) {
+      let url = 'http://localhost:10088/guide/get'
+      let fbsArr = ['(',')']
+      for(let key in fbsArr){
+        maker = maker.toString().replace(fbsArr[key], '\\' + fbsArr[key])
       }
-      this.searchData = ""
-      console.log("888"+this.$route.query.guideItems);
-}
-
+      console.log('maker'+ maker.toString())
+      let data = {'category': 'maker', 'content': maker.toString()}
+      axios.post(url, data)
+      .then((response) => {
+        console.log(response.data)
+        let content = []
+        for (let item in response.data) {
+          content.push(response.data[item])
+        }
+        this.guideContent = content
+      })
+    }
+  },
+  mounted () {
+    if(this.$route.query) {
+      console.log('makerdetail:' + this.maker)
+      this.getGuideContent(this.maker)
+    }   
+  },
+  watch: {
+    '$route'(to,from) {
+      this.maker = this.$route.query.maker
+      console.log('watch:' + this.maker)
+      this.getGuideContent(this.maker)
+    }
+  }
 }
 </script>
 

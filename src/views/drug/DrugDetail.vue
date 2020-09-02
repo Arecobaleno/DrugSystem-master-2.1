@@ -7,12 +7,12 @@
         </div>
     </app-header>
     <div class="page-content fx-1">
+        <div v-for="treatment in example2" :key="treatment">
+            <font color="black" size="10">{{getChinese(treatment)}}</font>
+        </div>
         <!-- 详情标题 -->
         <div class="detail-head detail-bg border-b">
-            <div v-for="treatment in example2" :key="treatment">
-                <h2 class="detail-head-title">{{getChinese(treatment)}}</h2>
-            </div>
-            <!-- h2 class="detail-head-title" v-text="disease" -->
+            <h2 class="detail-head-title" v-text="disease"></h2>
             <p v-if="item.alias" class="detail-head-small" v-text="'别名：'+item.alias"></p>
             <p v-if="item.common_name" class="detail-head-small" v-text="'俗称：'+item.common_name"></p>
             <p v-if="item.advice" class="detail-head-small" v-text="'就诊建议：'+item.advice"></p>
@@ -86,6 +86,10 @@
                     <div v-for="treatment in example9" :key="treatment">
                         <p class="info-sub-dd">{{treatment}}</p>
                     </div>
+                    <div class="info-sub-h">相互作用列表：</div>
+                    <div>
+                        <p class="info-sub-dd router-link-active" @click="toPage(name)">{{ name + "的相互作用列表"}}</p>
+                    </div>
                     <div class="info-sub-h">注意事项：</div>
                     <div v-for="treatment in example10" :key="treatment">
                         <p class="info-sub-dd">{{treatment}}</p>
@@ -155,7 +159,8 @@ export default {
             example13: [],
             example14: [],
             drugDetail: this.$route.query.drugDetail, 
-            drugList: this.$route.query.drugList
+            drugList: this.$route.query.drugList,
+            name: null,
         }
     },
     activated (){
@@ -175,41 +180,7 @@ export default {
       this.test1();
     },
     methods: {
-        // showResult (content) {
-        //     let url = 'http://127.0.0.1:10088/detail'
-        //     let data = {'category': 'disease', 'content': '心力衰竭'}
-        //     axios.post(url, data)
-        //         .then((response) => {
-        //             console.log(response.data)
-        //             let res = response.data
-        //             for (let index in res) {
-        //                 let treatment = []
-        //                 let sample = res[index]
-        //                 treatment.push(sample.properties.ATC编码,sample.properties.FDA妊娠分级,
-        //                 )
-        //                 console.log(treatment)
-        //                 this.example.push(treatment)
-        //             }
-        //         })
-        // },
         getDrugDetail(){
-        //   for (let index in this.drugDetail) {
-        //       let treatment = []
-        //       let arr = []
-        //       let sample = this.drugDetail[index]
-        //       treatment.push(sample.properties)
-        //       let arr1 = Object.values(treatment[0])
-        //       let arr2 = Object.keys(treatment[0])
-        //       for(let i in arr1){
-        //           let s1 = arr1[i]
-        //           let s2 = arr2[i]
-        //           console.log(s2)
-        //           s2 = s2.concat(':', s1)
-        //           this.example.push(s2)
-        //       }
-        //       console.log(666)
-        //       console.log(treatment[0])
-            //   this.example.push(treatment)
             for (let index in this.drugDetail) {
                 let treatment = []
                 let tag = [0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -237,10 +208,12 @@ export default {
                     }
                     if(this.isInArray(arr2, "name")){
                         if(arr2[i] == "name"){
-                            let s1 = arr1[i]
-                            let s2 = "名称"
-                            s2 = s2.concat(':', s1)
-                            this.example2.push(s1)
+                            let s1 = arr1[i];
+                            let s2 = "名称";
+                            s2 = s2.concat(':', s1);
+                            this.example2.push(s1);
+                            this.name = this.example2[0];
+                            this.getChemistry(this.name)
                         }
                     }else{
                         let s1 = '--'
@@ -462,6 +435,25 @@ export default {
 
             }
               
+        },
+        toPage: function(searchMsg) {
+            this.$router.push({
+            path: "interactDetail",
+            query: {interactName: searchMsg},
+            })
+
+        },
+        getChemistry(){
+            let url = 'http://localhost:10088/return_chemical'
+            let data = {'content': this.name}
+            axios.post(url, data)
+                .then((response) => {
+                    this.name = response.data;
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+
         },
         getChinese: function (name) {
         let isletter = /^[a-zA-Z]+$/.test(name);
@@ -691,4 +683,8 @@ export default {
     color: @color_s;
     font-size: .24rem;
 }
+.router-link-active {
+    text-decoration: underline;
+    color: blue;
+ }
 </style>

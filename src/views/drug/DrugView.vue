@@ -27,19 +27,21 @@
       </form>
     </section>
     <section class="firstaid-search-box ac">
-      <div class="header-content fx" v-if="showClass == 1">
-        <span class="fx-1" size="10"><strong>药品分类</strong>/基于ATC编码</span>
+      <div class="header-content fx">
+        <span class="fx-1" size="10"><strong>药品</strong>/基于ATC编码</span>
       </div>
     </section>
     <div class="page-content fx-1">
         <ul class="firstaid-content">
             <li class="fx-ac" v-for="(item, index) in drugClass" v-bind:key="index">
-                <span class="fx-1" @click="getDrugItems(item.value)">
+                <span class="fx-1" @click="getDrugChemistry(item.value)" v-if="item.value != undefined">
                     {{getChinese(item.value)}}
+                </span>
+                <span class="fx-1" @click="useMethod(item)" v-if="item.name != undefined">
+                    {{getChinese(item.name)}}
                 </span>
                 <i class="iconfont icon-qianjin"></i>
             </li>
-            
         </ul>
     </div>
     <app-nav></app-nav>
@@ -65,7 +67,6 @@ export default {
       drug:[],
       drugClass1: null,
       head: '',
-      showClass: 1,
     };
   },
   watch: {
@@ -88,21 +89,31 @@ export default {
 	  }
   },
   methods: {
+    useMethod(item){
+      if(item.label == '药品商品名'){
+        this.getDrugDetail(item.name);
+      }
+      else if(item.label == '药品分类'){
+        this.getDrugChemistry(item.name);
+      }
+      else{
+        this.getDrugItems(item.name);
+      }
+
+    },
     search() {
 				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/query'
+					let url = 'http://127.0.0.1:10088/medicine_query'
 					let data = {
-						'category': 'drug',
 						'content': this.searchData
 					}
 					axios.post(url, data)
 						.then((response) => {
-              console.log(777);
-							console.log(response.data);
               this.drug = response.data;
+              console.log(1313)
+              console.log(this.drug)
               this.drugClass = response.data;
               this.drugClass1 = response.data;
-              this.showClass = 0;
             })
           // this.$router.push({
           //       path: "/drugitems",
@@ -132,22 +143,41 @@ export default {
                 console.log(error);
             })
     },
-    getDrugItems(name){
-        let url = 'http://localhost:10088/medicine_by_class'
+    getDrugChemistry(name){
+        let url = 'http://localhost:10088/chemical_by_class'
         //   console.log(name);
-        name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
+        // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
         //   console.log(name);
-        let data = {'category': name}
+        let data = {'content': name}
         axios.post(url, data)
             .then((response) => {
                 // console.log(222)
                 // console.log(response.data)
                 this.drugItems = response.data;
-                console.log(111)
+                this.head = this.getChinese(name);
+                this.$router.push({
+                path: "/drugchemistry",
+                query: {drugItems: this.drugItems, drugList: name, title: this.head}
+            });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    },
+    getDrugItems(name){
+        let url = 'http://localhost:10088/medicine_by_chemical'
+        //   console.log(name);
+        // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
+        //   console.log(name);
+        let data = {'content': name}
+        axios.post(url, data)
+            .then((response) => {
+                // console.log(222)
+                // console.log(response.data)
+                this.drugItems = response.data;
+                console.log(222222)
                 console.log(this.drugItems);
                 this.head = this.getChinese(name);
-                console.log(7979)
-                console.log(this.head)
                 this.$router.push({
                 path: "/drugitems",
                 query: {drugItems: this.drugItems, drugList: name, title: this.head}
@@ -156,6 +186,29 @@ export default {
             .catch((error) => {
                 console.log(error);
             })
+    },
+    getDrugDetail(name){
+        let url = 'http://localhost:10088/detail'
+        console.log(name);
+        // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
+        //   console.log(name);
+        let data = {'category': 'drug', 'content': name}
+        axios.post(url, data)
+            .then((response) => {
+                // console.log(222)
+                // console.log(response.data)
+                this.drugDetail = response.data;
+                console.log(111)
+                console.log(this.drugDetail);
+                this.$router.push({
+                path: "/drugdetail",
+                query: {drugDetail: this.drugDetail, drugList: name}
+            });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        
     },
     backPage: function() {
 				this.searchData = "";

@@ -95,7 +95,6 @@ export default {
     listToPinYin (list) {
       var PinYinList = {}
       console.log(list)
-
       for (var i = 0; i < list.length; i++) {
         const temp = vPinyin.chineseToPinYin(list[i])
         const key = temp[0]
@@ -105,9 +104,6 @@ export default {
         } else {
           PinYinList[key].push(value)
         }
-        // if (PinYinList[temp[0]] !== undefined) {
-        //   PinYinList[temp[0]].push(this.getSZM(list[i]))
-        // }
       }
       var newList = {}
       Object.keys(PinYinList).sort().map(key => {
@@ -128,63 +124,63 @@ export default {
 
 
 <style lang="less" scoped>
-	@import "../../assets/css/common.less";
+@import "../../assets/css/common.less";
 
 
-	.page-content {
-		background-color: #f1f4f4;
-	}
+.page-content {
+	background-color: #f1f4f4;
+}
 
-	.diseaselist-content {
-		background-color: #fff;
-	}
+.diseaselist-content {
+	background-color: #fff;
+}
 
-	.disease-item {
-		height: .88rem;
-		padding: 0 .2rem;
-		font-size: .28rem;
-		color: #3d4550;
-		border-bottom: .01rem solid #e7ecf2;
+.disease-item {
+	height: .88rem;
+	padding: 0 .2rem;
+	font-size: .28rem;
+	color: #3d4550;
+	border-bottom: .01rem solid #e7ecf2;
 
-		& .disease-type {
-			width: .86*3rem;
-			font-size: .2rem;
-			color: #9fa1a9;
+	& .disease-type {
+		width: .86*3rem;
+		font-size: .2rem;
+		color: #9fa1a9;
 
-			& i {
-				margin-left: .1rem;
-				width: .76rem;
-				height: .32rem;
-				border: 1px solid #9fa1a9;
-			}
+		& i {
+			margin-left: .1rem;
+			width: .76rem;
+			height: .32rem;
+			border: 1px solid #9fa1a9;
 		}
 	}
+}
 
-	.history{
-		font-family:"Times New Roman";
-		font-size:12px;
-		margin-top: 10px;
-		margin-bottom: 5px;
-		//color: #53575b;;
-		color: #1a1b1d;;
-	}
-	.clear_history{
-		font-family:"Times New Roman";
-		font-size:10px; 
-		margin-top: 4px;
-		color: #676b73;;
-	}
-	.history_item{
-		height: 23px;
-		margin-top: 6px;
-		margin-right: 10px;
-		font-size:10px
-	}
-	.tip {
-		margin-top:20px;
-		font-size:12px;
-	}
-	.blank {
-		height: 0.10rem;
-	}
+.history{
+	font-family:"Times New Roman";
+	font-size:12px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	//color: #53575b;;
+	color: #1a1b1d;;
+}
+.clear_history{
+	font-family:"Times New Roman";
+	font-size:10px; 
+	margin-top: 4px;
+	color: #676b73;;
+}
+.history_item{
+	height: 23px;
+	margin-top: 6px;
+	margin-right: 10px;
+	font-size:10px
+}
+.tip {
+	margin-top:20px;
+	font-size:12px;
+}
+.blank {
+	height: 0.10rem;
+}
 </style>

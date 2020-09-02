@@ -1,6 +1,6 @@
 <template>
 <header class="header fx">
-    <div class="header-box fx-c fx-1">
+    <div class="head header-box fx-c fx-1">
         <i @click="toPage" class="icon-fanhui iconfont back-icon ac-o"></i>
         <p class="fx-1 fx-jc">
             <slot name="center">
@@ -41,3 +41,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.head {
+    font-size: 18px;
+    text-align: center;
+}
+</style>>
