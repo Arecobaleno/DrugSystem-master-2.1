@@ -12,7 +12,6 @@
 				show-action
 				shape="round"
 				placeholder="请输入搜索关键词"
-				@click="search(0)"
 				@input="search(0)"
 				@search="search(0)"
 				@clear="onClear"
@@ -36,7 +35,6 @@
 				  show-action
           shape="round"
 				  placeholder="请输入搜索关键词"
-          @click="search(index+1)"
           @input="search(index+1)"
 				  @search="search(index+1)"
           @clear="onClear"
@@ -68,20 +66,15 @@
 		<!-- <div class="blank"></div> -->
 		<!-- <van-button type="default" class="panel_back" align="center" @click="toPage">点击搜索</van-button> -->
 
-		<div v-show="isShowData==false" class="page-content fx-1">
-		<!-- <div class="blank_button"></div> -->
+		<div v-show="isShowData==false" class="fx-1">
 			<a>
 				<van-row type="flex" justify="space-between">
 					<van-col id="search_history" v-model="history" align="left" class="history" span="11">{{history}}</van-col>
 					<van-col id="clear_history" class="clear_history" align="right" @click="clear_history" span="8">清空搜索</van-col>
 				</van-row>
-				<van-button type="default" id="item_history"  class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="click_item(item,'history',search_index)">{{item}}</van-button>
+				<van-button plain hairline type="info" id="item_history" size="normal" class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="click_item(item,'history',search_index)">{{item}}</van-button>
 			</a>
-			<br />
-			<br />
 		</div>
-
-
 	  <app-nav style="position: fixed;bottom: 0px;"></app-nav>
 	</div>
 
@@ -115,7 +108,7 @@
 				isShowData: false,
 				isresultEmpty: false,
 				inputMsg:"",
-				historySearch:["尼卡地平 Nicardipine","asdsadsa","ewqe1ew"],
+				historySearch:["尼卡地平 Nicardipine"],
 				history:"历史搜索：暂无",
 				repeat:0,
 				search_index:0
@@ -344,22 +337,25 @@
 
 	.history{
 		font-family:"Times New Roman";
-		font-size:12px;
-		margin-top: 10px;
+		font-size:14px;
+		margin-top: 4px;
+		margin-left: 6px;
 		margin-bottom: 5px;
 		//color: #53575b;;
 		color: #1a1b1d;;
 	}
 	.clear_history{
 		font-family:"Times New Roman";
-		font-size:10px;
+		font-size:12px;
 		margin-top: 4px;
+		margin-right: 6px;
 		color: #676b73;;
 	}
 	.history_item{
 		height: 23px;
 		margin-top: 6px;
-		margin-right: 10px;
+		margin-left: 6px;
+		margin-right: 7px;
 		font-size:10px
 	}
 	.tip {

@@ -53,13 +53,6 @@
                 />
             </form>
 
-
-            <van-dropdown-menu>
-                <van-dropdown-item v-model="value1" :options="option1"  @change="searchYear"/>
-                <van-dropdown-item v-model="value2" :options="option2"  @change="searchYear"/>
-            </van-dropdown-menu>
-
-
       <!-- <van-cell is-link v-for="item in station" :key="item.Id" :id="item.Id" :title="item.Name" @click="onClick"/> -->
             <van-cell-group >
                 <van-cell v-for="data in returnData" :key='data.title' :title = "data.title" size="large" :label="data.summary|ellipsis" @click="getReferenceDetail(data.title)"/>
@@ -108,21 +101,6 @@ export default {
             content: '',
             returnData:[],
             referenceDetail: null,
-            value1: 1,
-            value2: 1,
-            option1: [
-                { text: '所有年份', value: 1 },
-                { text: '2020', value: 2020 },
-                { text: '2019', value: 2019 },
-                { text: '2018', value: 2018 },
-                { text: '2017', value: 2017 },
-                { text: '2016', value: 2016 },
-            ],
-            option2: [
-                { text: '按时间排序', value: 1 },
-                { text: '按热度排序', value: 2 },
-            ],
-            example: [],
         }
     },
     filters: {
@@ -197,58 +175,6 @@ export default {
             this.$router.push({ path: 'evaluation'});
             }
         },
-        searchYear() {
-
-                this.example=[]
-
-                let url = 'http://localhost:10088/reference/get'
-                let data = {
-                    'category': 'search',
-                    'content': ''
-                }        
-
-                // let url = 'http://127.0.0.1:10088/guide/get'
-                // let data = {'category': 'search','content':''}
-
-           			//let details="";
-           			axios.post(url, data)
-           			.then((response)=>{
-           				let res = response.data
-           				//console.log(res);
-           				for (let index in res) {
-
-           					let treatment = []
-           					let sample = res[index]
-                    var year=sample.time.split('-')
-                    //时间比较
-                    if(this.value1==1 || year[0]==this.value1){
-           					treatment.push(sample)
-
-           				//	this.example.push(treatment)
-                  this.example.push({index:index, year:sample.time, title:sample.title, count:sample.count,maker:sample.maker})
-                  console.log(this.example)
-                     }
-           				}
-                 // alert(JSON.stringify(this.example));
-                 function getSortFun(order, sortBy) {
-                     var ordAlpah = (order == 'asc') ? '>' : '<';
-                     var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '?1:-1');
-                     return sortFun;
-                 }
-                 if(this.value2==1){
-                  this.example.sort(getSortFun('desc', 'year'));
-                  }else
-                  {
-                    this.example.sort(getSortFun('desc', 'count'));
-                  }
-
-
-           			})
-           			.catch((error) => {
-           				console.log(error);
-           			})
-
-         },
         mounted () {
             // this.$nextTick(() => {
             //     myScroll = new IScroll('.scroll-evaluations', { scrollX: true, scrollY: false, mouseWheel: false, click: Utils.iScrollClick() });

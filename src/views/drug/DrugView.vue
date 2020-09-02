@@ -4,16 +4,6 @@
       <i slot="right" class="icon-xiaoxi iconfont ac-o"></i>
     </app-header>
     <section class="firstaid-search-box ac">
-        <!-- <a class="search" href="javascript:;">
-            <div class="search-content fx">
-                <i class="icon-sousuo iconfont"></i>
-                <span class="search-text">搜索症状/疾病/药品</span>
-            </div>
-        </a> -->
-      <!-- <div class="header-content fx">
-				<el-input v-model="searchData" placeholder="搜索症状/疾病/药品"></el-input>
-				<el-button type="primary" icon="el-icon-search" style="float:right" @click="search">搜索</el-button>
-				<el-button type="primary" style="float:right" @click="backPage">返回</el-button> -->
 			<form action="/">
         <van-search
             v-model="searchData"
@@ -26,9 +16,9 @@
           />
       </form>
     </section>
-    <section class="firstaid-search-box ac">
+    <section class="firstaid-search-box">
       <div class="header-content fx">
-        <span class="fx-1" size="10"><strong>药品</strong>/基于ATC编码</span>
+        <span class="act"><h1 class="act">药品分类</h1>/基于ATC编码</span>
       </div>
     </section>
     <div class="page-content fx-1">
@@ -238,21 +228,10 @@ export default {
     }
 
 },
-// computed: {
-    
-// },
-
     mounted (){
-    // this.initMap();
-    // this.getDrugData();
+
   },
   created() {
-  //   if(this.$route.query) {
-  //   this.drugClass = this.$route.query.drugItems;
-  //   this.drugList = this.$route.query.drugList;
-  //   this.appHeader.title = this.$route.query.drugList;
-	// 	// this.init();
-	// }
       this.getDrugData();
       this.searchData = ""
   }
@@ -264,7 +243,7 @@ export default {
 <style lang="less" scoped>
 @import "../../assets/css/common.less";
 .firstaid-search-box {
-  padding: 0.18rem 0.2rem;
+  padding: 3px 0px;
   background-color: #f2f3f5;
   & .search {
     color: #c5c7ce;
@@ -292,5 +271,9 @@ export default {
 		height: 100%;
 		width: 100%;
 		align-items: center;
-	}
+}
+.act {
+  margin-left: 5px;
+  display: inline;
+}
 </style>

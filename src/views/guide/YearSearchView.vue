@@ -27,23 +27,10 @@
         <van-divider :style="{ color: '#000000', borderColor: '#000000', padding: '0 1px' } " class="splitline">
         </van-divider>
         </van-cell>
-		<!-- </router-link> -->
-  <!--       </van-cell-group> -->
+
       </div>
-		<!-- </header> -->
-		<!-- <div class="blank"></div> -->
-
-		<!-- <div class="blank"></div> -->
-
-<!-- 		<div class="blank"></div>
-		<div class="page-content fx-1">
-			<ul class="interactlist-content">
-
-			</ul>
-		</div>
-		<app-nav></app-nav> -->
+		<!-- <app-nav></app-nav> -->
 	</div>
-	
 </template>
 
 <script>

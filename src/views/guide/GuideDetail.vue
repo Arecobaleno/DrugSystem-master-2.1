@@ -6,25 +6,24 @@
    </div>
 
    <div class="page-content fx-1">
-        <div class="detail-head detail-bg border-b"  >
-                        <h1 class="detail-head-title" v-text="guideDetail.title || '--'"></h1>
+        <div class="detail-head detail-bg border-b">
+            <h1 class="detail-head-title" v-text="guideDetail.title || '--'"></h1>
         </div>
         <div class="main">
-        <pdf :src="src" ref="ref" class="pdf" :page="currentPage" @num-pages="pageCount=$event"
-        @page-loaded="currentPage=$event"
-        @loaded="loadPdfHandler"></pdf>
+            <pdf :src="src" ref="ref" class="pdf" :page="currentPage" @num-pages="pageCount=$event"
+            @page-loaded="currentPage=$event"
+            @loaded="loadPdfHandler"></pdf>
         </div>
-        <p class="arrow">
-        <span @click="changePdfPage(0)" class="turn" :class="{grey:currentPage===1}">上一页</span>
-        {{currentPage}} / {{pageCount}}
-        <span @click="changePdfPage(1)" class="turn" :class="{grey:currentPage===pageCount}">下一页</span>
-    </p>
+        <van-pagination class="arrow"
+        v-model="currentPage"
+        :total-items="pageCount"
+        items-per-page="5"/>
    </div>
    
     <!-- <div style="float:right" >
            <el-button  size="mini" type="primary" @click="download()" >下载</el-button>
     </div> -->  
-    <app-nav></app-nav>
+
 </div>
 </template>
 
@@ -42,24 +41,13 @@ export default {
                 title:"指南详情"
             },
             guideDetail:{
-                title: this.$route.query.guideItems[0].title,
-                time:this.$route.query.guideItems[0].time,
-                maker: this.$route.query.guideItems[0].maker,
+                title: ''
             },
             currentPage: 0, // pdf文件页码
             pageCount: 0, // pdf文件总页数
             fileType: 'pdf', // 文件类型
             src: ''
         }
-    },
-    activated (){
-    },
-    deactivated (){
-    },
-    created () {
-        let title = this.$route.query.guideItems[0].title
-        this.guideDetail.title = title
-        this.src = pdf.createLoadingTask({url: 'http://127.0.0.1:10088/guide/download?filename=' + title, CMapReaderFactory})
     },
     methods: {
       download(){
@@ -83,23 +71,14 @@ export default {
     },
     watch: {
     '$route'(to, from) {
-      this.$router.go(0);
-
+        if(this.$route.query){
+            let title = this.$route.query.guideItems[0].title
+            console.log(title)
+            this.guideDetail.title = title
+            this.src = pdf.createLoadingTask({url: 'http://127.0.0.1:10088/guide/download?filename=' + title, CMapReaderFactory})
+        }
     }
   },
-   watch: {
-	  '$route' (to, from) { //监听路由是否变化
-		  if(to.query.guideItems != from.query.guideItems && to.query.guideItems != undefined && Object.prototype.toString.call(to.query.guideItems[0]) != '[object String]'){
-        console.log(333);
-        console.log(to.query.guideItems);
-        console.log(Object.prototype.toString.call(to.query.guideItems[0]))
-       this.guideDetail.time = to.query.guideItems[0].time;
-       this.guideDetail.maker = to.query.guideItems[0].maker;
-       this.guideDetail.title = to.query.guideItems[0].title;
-			  // this.init();//重新加载数据
-		  }
-	  }
-},
     computed: mapGetters({
         backPath: 'backPath',
         item: 'diseaseItem',
@@ -290,12 +269,15 @@ float: right;
 margin-left: 0px;
 }
 .main {
-margin-top: 0px;
+margin-top: -20px;
 width: 110%;
 margin-left: -20px;
 height: 500px;
 }
 .arrow {
-    position: relative;
+    margin-top: 40px;
+}
+.line {
+display: inline;
 }
 </style>

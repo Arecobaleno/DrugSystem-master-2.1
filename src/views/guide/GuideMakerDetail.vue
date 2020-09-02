@@ -10,8 +10,6 @@
             </li>
         </ul>
     </div>
-   
-    <app-nav></app-nav>
 </div>
 </template>
 
@@ -72,16 +70,14 @@ export default {
     }
   },
   mounted () {
-    if(this.$route.query) {
-      console.log('makerdetail:' + this.maker)
-      this.getGuideContent(this.maker)
-    }   
   },
   watch: {
-    '$route'(to,from) {
-      this.maker = this.$route.query.maker
-      console.log('watch:' + this.maker)
-      this.getGuideContent(this.maker)
+    '$route'(to, from) {
+      if(this.$route.query){
+        this.maker = this.$route.query.maker
+        console.log('watch:' + this.maker)
+        this.getGuideContent(this.maker)
+      }
     }
   }
 }

@@ -44,8 +44,8 @@
 		
 		<section>
             <li v-for="(treatment,index) in example" v-bind:key="index" @click="getGuideItems(treatment.title)">
-            <div>
-                <p class="Gtitle">《{{(treatment.title)}}》</p>
+            <div class="modules">
+                <p class="Gtitle">{{(treatment.title)}}</p>
                 <p class="Gmaker">{{treatment.maker}}</p>
                 <p class="Gtime">{{treatment.year}}</p>
             </div>
@@ -79,12 +79,6 @@ export default {
        ]
     }
   },
-   watch: {
-    '$route'(to, from) {
-      this.$router.go(0);
-
-    }
-  },
     watch: {
 	  '$route' (to, from) { //监听路由是否变化
       this.searchData = ""
@@ -93,8 +87,7 @@ export default {
   computed: {
   },
    created() {
-	 this.getNewGuide(2);
-	 console.log(1111)
+	 this.getNewGuide(3);
       this.searchData = ""
   },
   methods: {
@@ -298,7 +291,10 @@ export default {
 .Gtitle{
     font-weight: 900;
     font-size: 0.30rem;
-    margin: 10px 4px;
+    margin: 10px 10px;
+}
+.newGuides{
+border-radius: 1px
 }
 .Gmaker{
     font-size: 0.27rem;
