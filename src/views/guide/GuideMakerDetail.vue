@@ -41,12 +41,9 @@ export default {
         axios.post(url, data)
         .then((response) => {
             this.guideItems = response.data;
-        console.log(this.guideItems);
-        console.log(this.guideItems[0].time);
-        console.log(this.guideItems[0].maker);
-        this.$router.push({
-        name: "GuideDetail",
-        query: {guideItems: this.guideItems}
+            this.$router.push({
+            name: "GuideDetail",
+            query: {guideItems: this.guideItems}
         });
         })
     },

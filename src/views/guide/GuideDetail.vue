@@ -19,11 +19,9 @@
         :total-items="pageCount"
         items-per-page="5"/>
    </div>
-   
     <!-- <div style="float:right" >
            <el-button  size="mini" type="primary" @click="download()" >下载</el-button>
     </div> -->  
-
 </div>
 </template>
 
@@ -54,14 +52,11 @@ export default {
           window.location.href = 'http://127.0.0.1:10088/guide/download?filename='+this.guideDetail.title
       },
       changePdfPage (val) {
-        // console.log(val)
         if (val === 0 && this.currentPage > 1) {
             this.currentPage--
-        // console.log(this.currentPage)
         }
         if (val === 1 && this.currentPage < this.pageCount) {
             this.currentPage++
-            // console.log(this.currentPage)
         }
       },
       // pdf加载时
