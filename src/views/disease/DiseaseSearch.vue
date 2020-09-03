@@ -6,7 +6,6 @@
 				<collapse v-for="(item, index) in dataSet" :key="index" :searchItem="item"></collapse>
 			</van-collapse>
 		</section>
-<<<<<<< HEAD
 		<div v-show="isShowData" class="page-content fx-1">
 			<ul class="diseaselist-content" v-if="!isresultEmpty">
 				<li v-for="(item, index) in disease" v-bind:key="index" @click="toPage(item,'page')" class="disease-item fx-ac ac">
@@ -29,8 +28,6 @@
 				<van-button plain hairline type="info" id="item_history"  class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="toPage(item,'history')">{{item}}</van-button>
 			</a>
 		</div>
-=======
->>>>>>> ccab2254ab2d7cca1bfafeb50220fbb1f8d6e08e
 		<app-nav></app-nav>
 	</div>
 </template>
@@ -213,15 +210,14 @@
 		padding: 0px 16px;
 	}
 
-<<<<<<< HEAD
 	.history{
 		font-family:"Times New Roman";
 		font-size:14px;
 		margin-top: 4px;
 		margin-left: 6px;
 		margin-bottom: 5px;
-		//color: #53575b;;
-		color: #1a1b1d;;
+		/* color: #53575b;; */
+		color: #1a1b1d;
 	}
 	.clear_history{
 		font-family:"Times New Roman";
@@ -244,7 +240,4 @@
 	.blank {
 		height: 0.10rem;
 	}
-=======
-	
->>>>>>> ccab2254ab2d7cca1bfafeb50220fbb1f8d6e08e
 </style>
