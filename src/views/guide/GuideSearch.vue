@@ -78,7 +78,7 @@ export default {
      {
         if(this.searchData!="")
         {
-					let url = 'http://127.0.0.1:10088/guide/get'
+					let url = '/api/guide/get'
           let data = 
           {
             'category': 'search',
@@ -102,7 +102,7 @@ export default {
       },
      getGuideItems(name){
        console.log("哈哈哈哈哈哈哈哈哈哈哈哈哈哈:   "+ name)
-               let url = 'http://localhost:10088/guide/detail'
+               let url = '/api/guide/detail'
                let data = {'content': name}
                axios.post(url, data)
             .then((response) => {

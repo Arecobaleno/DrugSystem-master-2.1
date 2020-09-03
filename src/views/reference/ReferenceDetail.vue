@@ -155,7 +155,7 @@ export default {
     },
     methods: {
         // showResult (content) {
-        //     let url = 'http://127.0.0.1:10088/detail'
+        //     let url = '/api/detail'
         //     let data = {'category': 'disease', 'content': '心力衰竭'}
         //     axios.post(url, data)
         //         .then((response) => {

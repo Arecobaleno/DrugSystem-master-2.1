@@ -95,7 +95,7 @@ export default {
       // console.log(this.drugs);
     },
     getDrugItems(name){
-        let url = 'http://localhost:10088/medicine_by_chemical'
+        let url = '/api/medicine_by_chemical'
         //   console.log(name);
         // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
         //   console.log(name);
@@ -118,7 +118,7 @@ export default {
             })
     },
     // getDrugDetail(name){
-    //     let url = 'http://localhost:10088/detail'
+    //     let url = '/api/detail'
     //     console.log(name);
     //     // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
     //     //   console.log(name);

@@ -95,7 +95,7 @@ export default {
       // console.log(this.drugs);
     },
     getDrugDetail(name){
-        let url = 'http://localhost:10088/detail'
+        let url = '/api/detail'
         console.log(name);
         // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
         //   console.log(name);

@@ -206,7 +206,7 @@
 				this.isShowData=true;
 				this.searchData=this.inputMsg
 				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/interaction_candidate'
+					let url = '/api/interaction_candidate'
 					let data = {
 						'content': this.searchData
 					}

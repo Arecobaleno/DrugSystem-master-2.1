@@ -101,7 +101,7 @@ export default {
 			},
      onSearch() {
 				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/guide/get'
+					let url = '/api/guide/get'
 					let data = {
                         'category': 'search',
 						'content': this.searchData
@@ -121,13 +121,13 @@ export default {
 				else{
 					this.Clinical_literature = [];
                 }
-                	
+                
             },
 		getNewGuide(num_of_items) {
 		
 		       this.example=[]
 		        let count=0
-		       let url = 'http://127.0.0.1:10088/guide/get'
+		       let url = '/api/guide/get'
 		       let data = {'category': 'search','content':''}
 		
 		  			//let details="";
@@ -165,7 +165,7 @@ export default {
 		
 		},
 		getGuideItems(name){
-		   let url = 'http://localhost:10088/guide/detail'
+		   let url = '/api/guide/detail'
 		   let data = {'content': name}
 		   axios.post(url, data)
 		.then((response) => {

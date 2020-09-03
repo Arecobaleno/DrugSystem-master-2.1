@@ -441,7 +441,7 @@ export default {
 
         },
         getChemistry(){
-            let url = 'http://localhost:10088/return_chemical'
+            let url = '/api/return_chemical'
             let data = {'content': this.name}
             axios.post(url, data)
                 .then((response) => {

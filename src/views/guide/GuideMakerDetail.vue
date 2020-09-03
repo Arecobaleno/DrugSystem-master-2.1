@@ -36,7 +36,7 @@ export default {
   methods: 
   {
      getGuideItems(name) {
-        let url = 'http://localhost:10088/guide/detail'
+        let url = '/api/guide/detail'
         let data = {'content': name}
         axios.post(url, data)
         .then((response) => {
@@ -48,7 +48,7 @@ export default {
         })
     },
     getGuideContent (maker) {
-      let url = 'http://localhost:10088/guide/get'
+      let url = '/api/guide/get'
       let fbsArr = ['(',')']
       for(let key in fbsArr){
         maker = maker.toString().replace(fbsArr[key], '\\' + fbsArr[key])
