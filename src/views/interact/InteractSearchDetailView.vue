@@ -103,11 +103,11 @@ export default {
 			let len=this.interaction.length
 			if(len==1)
 			{
-			   url = 'http://127.0.0.1:10088/detail'
+			   url = '/api/detail'
 			   data = {'category': 'interaction', 'content':this.interaction[0]}
 			}
 			else{
-			 url = 'http://127.0.0.1:10088/interaction_accurate'
+			 url = '/api/interaction_accurate'
 			// data = { 'content': ['卡托普利 Captopril','卡托普利 Captopril']},
 			  data = { 'content': this.interaction}
 			  console.log(666)

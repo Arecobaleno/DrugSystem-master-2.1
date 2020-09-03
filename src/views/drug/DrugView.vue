@@ -93,7 +93,7 @@ export default {
     },
     search() {
 				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/medicine_query'
+					let url = '/api/medicine_query'
 					let data = {
 						'content': this.searchData
 					}
@@ -123,7 +123,7 @@ export default {
       this.searchData = "";
     },
     getDrugData(){
-        let url = 'http://localhost:10088/medicine_class'
+        let url = '/api/medicine_class'
         axios.get(url)
             .then((response)=>{
                 console.log(response);
@@ -134,7 +134,7 @@ export default {
             })
     },
     getDrugChemistry(name){
-        let url = 'http://localhost:10088/chemical_by_class'
+        let url = '/api/chemical_by_class'
         //   console.log(name);
         // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
         //   console.log(name);
@@ -155,7 +155,7 @@ export default {
             })
     },
     getDrugItems(name){
-        let url = 'http://localhost:10088/medicine_by_chemical'
+        let url = '/api/medicine_by_chemical'
         //   console.log(name);
         // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
         //   console.log(name);
@@ -178,7 +178,7 @@ export default {
             })
     },
     getDrugDetail(name){
-        let url = 'http://localhost:10088/detail'
+        let url = '/api/detail'
         console.log(name);
         // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
         //   console.log(name);

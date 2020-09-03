@@ -8,7 +8,7 @@
             <div class="fx-1 fx-c filter-item" :class="{active: showDrug}" @click="showOtc = false, showType = false, showDrug = !showDrug">药品类别<i class="icon-sanjiaoxia iconfont"></i></div>
             <div class="fx-1 fx-c filter-item" :class="{active: showOtc}" @click="showOtc = !showOtc, showType = false, showDrug = false">OTC/非OTC<i class="icon-sanjiaoxia iconfont"></i></div>
             <div class="fx-1 fx-c filter-item" :class="{active: showType}" @click="showOtc = false, showType = !showType, showDrug = false">医保类别<i class="icon-sanjiaoxia iconfont"></i></div> -->
-        <!-- </div> --> 
+        <!-- </div> -->
     </div>
     <div class="page-content fx-1">
         <ul class="druglist-content">
@@ -95,7 +95,7 @@ export default {
       // console.log(this.drugs);
     },
     getDrugItems(name){
-        let url = 'http://localhost:10088/medicine_by_chemical'
+        let url = '/api/medicine_by_chemical'
         //   console.log(name);
         // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
         //   console.log(name);
@@ -118,7 +118,7 @@ export default {
             })
     },
     // getDrugDetail(name){
-    //     let url = 'http://localhost:10088/detail'
+    //     let url = '/api/detail'
     //     console.log(name);
     //     // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
     //     //   console.log(name);

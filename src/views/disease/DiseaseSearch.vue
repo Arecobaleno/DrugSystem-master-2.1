@@ -6,6 +6,28 @@
 				<collapse v-for="(item, index) in dataSet" :key="index" :searchItem="item"></collapse>
 			</van-collapse>
 		</section>
+		<div v-show="isShowData" class="page-content fx-1">
+			<ul class="diseaselist-content" v-if="!isresultEmpty">
+				<li v-for="(item, index) in disease" v-bind:key="index" @click="toPage(item,'page')" class="disease-item fx-ac ac">
+					<div class="fx-1">{{item.value}}</div>
+				</li>
+			</ul>
+			<ul class="diseaselist-content" v-if="isresultEmpty">
+				<li class="disease-item fx-ac ac">
+					<div class="fx-1">暂无数据</div>
+				</li>
+			</ul>
+		</div>
+		<div v-show="isShowData==false" class="fx-1">
+			
+			<a>
+				<van-row type="flex" justify="space-between">
+					<van-col id="search_history" v-model="history" align="left" class="history" span="11">{{history}}</van-col>
+					<van-col id="clear_history" class="clear_history" align="right" @click="clear_history" span="8">清空搜索</van-col>
+				</van-row>
+				<van-button plain hairline type="info" id="item_history"  class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="toPage(item,'history')">{{item}}</van-button>
+			</a>
+		</div>
 		<app-nav></app-nav>
 	</div>
 </template>
@@ -50,7 +72,7 @@
 				/*this.isShowData=true;
 				this.searchData=this.inputMsg
 				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/query'
+					let url = '/api/query'
 					let data = {
 						'category': 'disease',
 						'content': this.searchData
@@ -175,5 +197,34 @@
 		padding: 0px 16px;
 	}
 
-	
+	.history{
+		font-family:"Times New Roman";
+		font-size:14px;
+		margin-top: 4px;
+		margin-left: 6px;
+		margin-bottom: 5px;
+		/* color: #53575b;; */
+		color: #1a1b1d;
+	}
+	.clear_history{
+		font-family:"Times New Roman";
+		font-size:12px;
+		margin-top: 4px;
+		margin-right: 6px;
+		color: #676b73;;
+	}
+	.history_item{
+		height: 33px;
+		margin-top: 6px;
+		margin-left: 6px;
+		margin-right: 7px;
+		font-size:10px
+	}
+	.tip {
+		margin-top:20px;
+		font-size:12px;
+	}
+	.blank {
+		height: 0.10rem;
+	}
 </style>

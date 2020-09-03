@@ -49,7 +49,7 @@ export default {
     },
     methods: {
       download(){
-          window.location.href = 'http://127.0.0.1:10088/guide/download?filename='+this.guideDetail.title
+          window.location.href = '/api/guide/download?filename='+this.guideDetail.title
       },
       changePdfPage (val) {
         if (val === 0 && this.currentPage > 1) {
@@ -68,7 +68,7 @@ export default {
         let title = this.$route.query.guideItems[0].title
         console.log(title)
         this.guideDetail.title = title
-        this.src = pdf.createLoadingTask({url: 'http://127.0.0.1:10088/guide/download?filename=' + title, CMapReaderFactory})
+        this.src = pdf.createLoadingTask({url: '/api/guide/download?filename=' + title, CMapReaderFactory})
     },
     computed: mapGetters({
         backPath: 'backPath',

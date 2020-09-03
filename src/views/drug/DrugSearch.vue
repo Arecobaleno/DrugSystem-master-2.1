@@ -50,7 +50,7 @@ export default {
   methods: {
     search() {
 				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/query'
+					let url = '/api/query'
 					let data = {
 						'category': 'drug',
 						'content': this.searchData
@@ -66,7 +66,7 @@ export default {
 				}
 			},
     getDrugData(){
-        let url = 'http://localhost:10088/medicine_class'
+        let url = '/api/medicine_class'
         axios.get(url)
             .then((response)=>{
                 console.log(response);
@@ -77,7 +77,7 @@ export default {
             })
     },
     getDrugItems(name){
-        let url = 'http://localhost:10088/medicine_by_class'
+        let url = '/api/medicine_by_class'
         //   console.log(name);
         name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
         //   console.log(name);
@@ -115,7 +115,7 @@ export default {
 },
 // computed: {
 //     getDrugItems: function (name){
-//         let url = 'http://localhost:10088/medicine_by_class'
+//         let url = '/api/medicine_by_class'
 //         console.log(name);
 //         name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
 //         console.log(name);

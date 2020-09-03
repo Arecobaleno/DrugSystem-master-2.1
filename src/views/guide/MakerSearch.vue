@@ -52,7 +52,7 @@ export default {
   methods: {
     getCityInfo () {
       // 获取远端信息 数据接收详见方法handleGetCityInfoSucc
-      axios.get('http://localhost:10088/guide/maker')
+      axios.get('/api/guide/maker')
         .then((response) => {
           console.log(response.data)
           let makers = []

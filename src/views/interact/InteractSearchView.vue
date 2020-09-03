@@ -206,7 +206,7 @@
 				this.isShowData=true;
 				this.searchData=this.inputMsg
 				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/interaction_candidate'
+					let url = '/api/interaction_candidate'
 					let data = {
 						'content': this.searchData
 					}
@@ -352,7 +352,7 @@
 		color: #676b73;;
 	}
 	.history_item{
-		height: 23px;
+		height: 33px;
 		margin-top: 6px;
 		margin-left: 6px;
 		margin-right: 7px;

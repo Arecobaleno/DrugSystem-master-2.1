@@ -137,7 +137,7 @@ export default {
 
     methods: {
         ask(){
-            let url = 'http://localhost:10088/reference/get'
+            let url = '/api/reference/get'
             let data = {
                 'category': this.category,
                 'content': this.content
@@ -169,7 +169,7 @@ export default {
             Toast('取消');
         },
         getReferenceDetail(title){
-            let url = 'http://localhost:10088/reference/detail'
+            let url = '/api/reference/detail'
             console.log("title");
             console.log(title);
             let data = {'content': title}
@@ -201,13 +201,13 @@ export default {
 
                 this.example=[]
 
-                let url = 'http://localhost:10088/reference/get'
+                let url = '/api/reference/get'
                 let data = {
                     'category': 'search',
                     'content': ''
                 }        
 
-                // let url = 'http://127.0.0.1:10088/guide/get'
+                // let url = '/api/guide/get'
                 // let data = {'category': 'search','content':''}
 
            			//let details="";
