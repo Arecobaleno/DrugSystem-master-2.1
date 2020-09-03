@@ -271,14 +271,6 @@ export default new Router({
                     component: FindView,
                     meta: { requiresAuth: false }
                 },
-                // {
-                //     path: 'evaluation',
-                //     name: 'find-evaluation',
-                //     alias: '/evaluation',
-                //     component: Iframe,
-                //     meta: { requiresAuth: false }
-                // }
-
             ]
         },
         {
