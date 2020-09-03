@@ -13,7 +13,7 @@
         </header>
         <div class="page-content fx-1" @touchstart="startMove" @scroll="onMove" @touchend="stopMove" @touchcancel="stopMove">
             <section class="banner-box">
-                <a class="banner-item ac" href="javascript:;"><img @load="imgLoad" src="../assets/images/index/banner@2x.jpg"></a>
+                <a class="banner-item ac" href="javascript:;"><img @load="imgLoad" src="../assets/images/index/hypertension.jpg"></a>
             </section>
             <section class="modules">
                 <ul class="modules-content fx">
@@ -70,26 +70,7 @@
                     <router-link class="fx-c fx-1 ac" to="/disease/1">肩周炎</router-link>
                 </div>
             </section>
-            <section class="step-group group-item">
-                <a class="group-more fx-ac ac" href="javascript:;">
-                    <strong class="fx fx-1">健康计步<span class="group-small">目标5000步</span></strong><i class="group-gold fx-ac">领取昨日金币</i><i class="icon-jinru iconfont"></i>
-                </a>
-                <div class="step-group-item fx">
-                    <div class="step-item fx-1 fx-jc">
-                        <div class="step-map fx-c">
-                            <!--<div><span class="step-strong">50<i class="step-small">%</i></span><p>完成</p></div>-->
-                            <canvas id="map" width="280" height="280" data-line="20" data-percent="50"></canvas>
-                        </div>
-                    </div>
-                    <div class="step-item fx-c fx-1">
-                        <div><span class="step-strong">3603<i class="step-small">步</i></span><p><i class="icon-bushu iconfont"></i>步数</p></div>
-                    </div>
-                    <div class="step-item fx-c fx-1">
-                        <div><span class="step-strong">854<i class="step-small">卡</i></span><p><i class="icon-ranzhi iconfont"></i>燃脂</p></div>
-                    </div>
-                </div>
-            </section>
-            <section class="news-group group-item">
+            <!-- <section class="news-group group-item">
                 <router-link class="group-more fx-ac ac" to="/news/0">
                     <strong class="fx fx-1">健康资讯</strong><i class="icon-jinru iconfont"></i>
                 </router-link>
@@ -141,7 +122,7 @@
                         </li>
                     </ul>
                 </div>
-            </section>
+            </section> -->
         </div>
         <app-nav></app-nav>
     </div>

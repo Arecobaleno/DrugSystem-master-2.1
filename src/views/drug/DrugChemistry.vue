@@ -8,7 +8,7 @@
             <div class="fx-1 fx-c filter-item" :class="{active: showDrug}" @click="showOtc = false, showType = false, showDrug = !showDrug">药品类别<i class="icon-sanjiaoxia iconfont"></i></div>
             <div class="fx-1 fx-c filter-item" :class="{active: showOtc}" @click="showOtc = !showOtc, showType = false, showDrug = false">OTC/非OTC<i class="icon-sanjiaoxia iconfont"></i></div>
             <div class="fx-1 fx-c filter-item" :class="{active: showType}" @click="showOtc = false, showType = !showType, showDrug = false">医保类别<i class="icon-sanjiaoxia iconfont"></i></div> -->
-        <!-- </div> --> 
+        <!-- </div> -->
     </div>
     <div class="page-content fx-1">
         <ul class="druglist-content">

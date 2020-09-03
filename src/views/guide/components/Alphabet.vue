@@ -36,11 +36,11 @@ export default {
       timer: null
     }
   },
-  updated () {
-    if(letters){
-      this.startY = this.$refs[letters[0]][0].offsetTop
-    }
-  },
+  // updated () {
+  //   if(letters){
+  //     this.startY = this.$refs[letters[0]][0].offsetTop
+  //   }
+  // },
   methods: {
     handleLetterClick (e) {
       this.$emit('change', e.target.innerText)

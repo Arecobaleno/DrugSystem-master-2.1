@@ -352,7 +352,7 @@
 		color: #676b73;;
 	}
 	.history_item{
-		height: 23px;
+		height: 33px;
 		margin-top: 6px;
 		margin-left: 6px;
 		margin-right: 7px;
