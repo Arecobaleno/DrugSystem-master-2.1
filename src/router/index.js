@@ -56,7 +56,6 @@ import AgreementView from '../views/set/AgreementView.vue'
 import DrugView from '../views/drug/DrugView.vue'
 import DrugItems from '../views/drug/DrugItems.vue'
 import DrugDetail from '../views/drug/DrugDetail.vue'
-import DiseaseView from '../views/DiseaseView.vue'
 import DiseaseSearchView from '../views/disease/DiseaseSearch.vue'
 import DiseaseSearchDetailView from '../views/disease/DiseaseDetailView.vue'
 
@@ -409,13 +408,7 @@ export default new Router({
             component: Parent,
             children: [{
                 path: '',
-                name: 'disease',
-                component: DiseaseView,
-                meta: { requiresAuth: false }
-            }, {
-                path: 'diseaseSearch',
                 name: 'disease-search',
-                alias: '/diseaseSearch',
                 component: DiseaseSearchView,
                 meta: { requiresAuth: false }
             }, {
