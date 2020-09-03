@@ -41,12 +41,9 @@ export default {
         axios.post(url, data)
         .then((response) => {
             this.guideItems = response.data;
-        console.log(this.guideItems);
-        console.log(this.guideItems[0].time);
-        console.log(this.guideItems[0].maker);
-        this.$router.push({
-        name: "GuideDetail",
-        query: {guideItems: this.guideItems}
+            this.$router.push({
+            name: "GuideDetail",
+            query: {guideItems: this.guideItems}
         });
         })
     },
@@ -69,17 +66,13 @@ export default {
       })
     }
   },
-  mounted () {
-  },
-  watch: {
-    '$route'(to, from) {
-      if(this.$route.query){
+  created () {
+    if(this.$route.query){
         this.maker = this.$route.query.maker
         console.log('watch:' + this.maker)
         this.getGuideContent(this.maker)
-      }
     }
-  }
+  },
 }
 </script>
 

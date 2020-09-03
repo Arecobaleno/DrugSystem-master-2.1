@@ -84,8 +84,6 @@ export default {
         let data = {'category': name}
         axios.post(url, data)
             .then((response) => {
-                // console.log(222)
-                // console.log(response.data)
                 this.drugItems = response.data;
                 console.log(111)
                 console.log(this.drugItems);
