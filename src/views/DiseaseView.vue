@@ -1,130 +1,235 @@
-<template> 
-<div class="page-full component-disease fx-column"> 
-    <app-header :title="appHeader.title">
-        <div slot="right">
-            <i class="icon-chaxun iconfont ac-o"></i>
-        </div>
-    </app-header>
-    <div class="page-content fx-1">
-        <div id="scroll-left">
-            <ul>
-                <li v-for="(subject, index) in subjects" :key="subject.id" class="ac" :class="{'active': index == curSubjectIndex}"  @click="selectSubject(index)"><span>{{subject.name}}</span></li>
-            </ul>
-        </div>
-        <div id="scroll-right">
-            <ul>
-                <li v-for="item in diseaseItems" :key="item.condition_id"><router-link to="/disease/1">{{item.condition_name}}</router-link></li>
-            </ul>
-        </div>
-    </div>
-</div>
+<template>
+	<div class="page-full component-home fx-column">
+		<app-header :title="appHeader.title" ref="header"></app-header>
+		<section class="page-content" >
+			<form action="/">
+				<van-search
+					v-model="inputMsg"
+					show-action
+					shape="round"
+					placeholder="请输入搜索关键词"
+					@search="search"
+					@cancel="onCancel"
+					@clear="onClear"
+                    @focus="onFocus"
+				/>
+			</form>
+		</section>
+		<div v-show="isShowData" class="page-content fx fx-1">
+			<van-sidebar v-model="activeKey" @change="onChange">
+                <div  >
+                    <van-sidebar-item 
+                        v-for="(item, index) in diseaseTitle" 
+                        :key="index" 
+                        :title="item.value"  />
+                </div>
+            </van-sidebar>
+            <div class="blank"></div>
+            <div class="detail-bg border-b fx-1">
+                <h2 class="detail-head-title">{{titleText}}</h2>
+                <van-button 
+                type="default" 
+                class="history_item" 
+                round
+                
+                align="center" 
+                v-for="(item, index) in disease" 
+                v-bind:key="index" 
+                @click="toPage(item)">{{item}}</van-button>
+            </div>
+		</div>
+
+		<div v-show="isShowData==false" class="page-content fx-1">	
+			<a>
+				<van-row type="flex" justify="space-between">
+					<van-col id="search_history" v-model="history" align="left" class="history" span="11">{{history}}</van-col>
+					<van-col id="clear_history" class="clear_history" align="right" @click="clear_history" span="8">清空搜索</van-col>
+				</van-row>
+				<van-button 
+                    type="default" 
+                    id="item_history"  
+                    class="history_item" 
+                    round
+                    align="center" 
+                    v-for="(item, index) in historySearch" 
+                    v-bind:key="index" 
+                    @click="onHistory(item)">{{item}}</van-button>
+			</a>
+		</div>
+		<app-nav></app-nav>
+	</div>
 </template>
 
 <script>
+	import Utils from '../utils'
+	import appNav from '../components/app-nav.vue'
+	import appHeader from '../components/app-header.vue'
+	import axios from 'axios';
+	import router from '../router';
+	import {
+		mapGetters,
+		mapActions
+	} from 'vuex'
+	export default {
+		components: {
+			appNav,
+			appHeader
+        },
 
-import IScroll from 'iscroll'
-import Utils from '../utils'
-import { mapGetters, mapActions } from 'vuex'
-import appHeader from '../components/app-header.vue'
+		data() {
+			return {
+				isResetMap: true,
+                diseaseTitle: [],
+                disease: [],
+                activeKey: 0,
+                titleText: "",
+				isShowData: true,
+				inputMsg:"",
+				appHeader: {
+     		    	title: "疾病",
+				},
+				historySearch:['心力衰竭'],
+                history:"历史搜索：暂无",
+			}
+		},
+		computed: mapGetters({
+			ifrmeHwUced: 'ifrmeHwUced',
+		}),
+		methods: {
+			search() {
+				if(this.inputMsg !=''){
+					let storage=window.localStorage
+					{
+					    {
+							if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
 
-var myScroll = null, myScroll2 = null;
+							          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
+							          this.historySearch.unshift(this.inputMsg);
+							 }else{
+									   this.historySearch.unshift(this.inputMsg)
+									}
 
-export default {
-    components: { appHeader },
-    data () {
-        return {
-            appHeader: {
-                title: '疾病大全'
+					        if( this.historySearch.length >= 6){
+					                this.historySearch.pop()
+                            }
+                            storage.setItem('searchWord',JSON.stringify(this.historySearch))
+					    }
+                    }
+                    
+                    this.$router.push({
+                        name: "disease-search",
+                        params: {diseaseName: this.inputMsg, type: "text"},
+                    })
+                }
+			},
+			onCancel() {
+				this.isShowData=true;
+				this.inputMsg = "";
+			},
+			onClear() {
+				this.inputMsg = "";
             },
-            curSubjectIndex: 0,
-            subjects: [{
-                id: 1,
-                name: '外科学'
-            },{
-                id: 2,
-                name: '内科学'
-            },{
-                id: 3,
-                name: '儿科学'
-            },{
-                id: 4,
-                name: '妇产科学'
-            },{
-                id: 5,
-                name: '肿瘤学'
-            },{
-                id: 6,
-                name: '急诊医学'
-            },{
-                id: 7,
-                name: '皮肤病学'
-            },{
-                id: 8,
-                name: '口腔医学'
-            },{
-                id: 9,
-                name: '眼科学'
-            },{
-                id: 10,
-                name: '耳鼻咽喉科学'
-            },{
-                id: 11,
-                name: '性医学'
-            },{
-                id: 12,
-                name: '保健医学'
-            },{
-                id: 13,
-                name: '麻醉学'
-            },{
-                id: 14,
-                name: '神经病学'
-            },{
-                id: 15,
-                name: '精神病学'
-            }],
-        }
-    },
-    methods: {
-        resetFn: function () {
-            myScroll2.isAnimating = false;
-            myScroll2._execEvent('scrollEnd');
-            setTimeout(() => {
-                myScroll2.refresh();
-                myScroll2.scrollTo(0, 0, 150);
-            }, 100);
+            onFocus() {
+                this.isShowData=false;
+            },
+            onChange(index) {
+                this.titleText = this.diseaseTitle[index].value;
+            },
+			onHistory: function(item) {
+				this.history="历史搜索：";
+				this.$router.push({
+					name: "disease-search",
+					params: {diseaseName: item, type: "text"},
+				}) 
+            },
+            toPage: function(item) {
+				this.$router.push({
+					name: "disease-search",
+					params: {diseaseName: item, type: "title"},
+				}) 
+            },
+            
+			clear_history(){
+				this.history="历史搜索：暂无";
+				this.historySearch = [];
+				let storage=window.localStorage
+				storage.setItem('searchWord',JSON.stringify(this.historySearch))
+			},
+		},
+		created () {
+            this.diseaseTitle = [{value:"标签1"}, {value:"标签2"}, {value:"标签3"}];
+            this.disease = ["标签1","标签2", "内容3","标签2", "内容3"]
+            this.titleText =  this.diseaseTitle[this.activeKey].value;
         },
-        selectSubject: function (index) {
-            this.curSubjectIndex = index;
-            this.$store.dispatch('set_disease_list', { id: index, fn: this.resetFn})
+        
+	    beforeRouteEnter(to, from, next) {
+            next(vm => {
+                let storage=window.localStorage;
+                if(from.name == "home"){
+                    storage.setItem('isShowData',JSON.stringify(true));
+                }
+                else{
+                    storage.setItem('isShowData',JSON.stringify(false));
+                }
+            })
         },
-        initFn: function () {
-            setTimeout(() => {
-                myScroll2 = new IScroll('#scroll-right', { scrollbars: true, shrinkScrollbars: 'scale', fadeScrollbars: true, mouseWheel: false, deceleration: 0.001, click: Utils.iScrollClick() });
-            }, 100)
-        }    
-    },
-    computed: mapGetters({
-        backPath: 'backPath',
-        diseaseItems: 'diseaseItems',
-    }),
-    mounted () {
-        this.$nextTick(() => {
-            this.initFn();
-            myScroll = new IScroll('#scroll-left', { mouseWheel: false, deceleration: 0.001, click: Utils.iScrollClick() })
-        })
-    },
-    created () {
-        //this.$store.dispatch('set_disease_list', { id: this.curSubjectIndex, fn: this.initFn })
-        this.$store.dispatch('set_disease_list', { id: this.curSubjectIndex })
-    }
-}
+		mounted() {
+            this.$nextTick(()=>{
+                let storage=window.localStorage;
+                this.inputMsg = "";
+                this.isShowData = true;
+                if(storage.getItem('isShowData')) {
+                    this.isShowData = JSON.parse(storage.getItem('isShowData'))
+                }
+            })
+            let storage=window.localStorage;
+            var x=document.getElementById("search_history");
+			//window.localStorage.removeItem('searchWord')
+			if(storage.getItem('searchWord')!==null){
+                this.historySearch=JSON.parse(storage.getItem('searchWord'))
+			} 
+			if(this.historySearch.length==0){
+				this.history="历史搜索：暂无";}
+			else{
+				this.history="历史搜索：";
+			}
+		}
+	}
 </script>
 
 <style lang="less" scoped>
-@import "../assets/css/common.less";
-.page-content{
-    position: relative;
-    background-color: #fff;
-}
+	@import "../assets/css/common.less";
+    /deep/ .van-button--default {
+        //color: #fff;
+        background-color: #ebedf0;
+    }
+
+	.page-content {
+		background-color: #f1f4f4;
+	}
+
+	.history{
+		font-family:"Times New Roman";
+		font-size:12px;
+		margin-top: 10px;
+		margin-bottom: 5px;
+		color: #1a1b1d;
+	}
+	.clear_history{
+		font-family:"Times New Roman";
+		font-size:10px; 
+		margin-top: 4px;
+		color: #676b73;;
+	}
+	.history_item{
+		height: 23px;
+		margin-top: 6px;
+		margin-right: 10px;
+        font-size:10px;
+        color: "black";
+    }
+    .blank{
+        width: 10px;
+        background-color: #fff;
+    }
 </style>

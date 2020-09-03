@@ -34,7 +34,7 @@
                 <!-- 分点内容 -->
                 <div class="info-sub">
                     <div class="info-sub-h">治疗方法：</div>
-                    <div v-for="treatment in example" :key="treatment">
+                    <div v-for="(treatment, index) in example" :key="index">
                         <p class="info-sub-dd">药品：{{treatment[0]}}</p>
                         <p class="info-sub-dd">建议：{{treatment[1]}}</p>
                         <p class="info-sub-dd">参考文献：{{treatment[2]}}</p>
@@ -50,7 +50,7 @@
     <div v-if="hasInformations" class="detail-bg detail-advice">
         <div class="head-more s-icon-next icon-after"><a :href="'javascript:;'" class="cell">相关资讯</a></div>
         <ul class="advice-con-list">
-            <li v-for="(value, key) in informations" class="list-cell border-b">
+            <li v-for="(value, key) in informations" class="list-cell border-b" v-bind:key="key">
                 <a :href="'http://192.168.99.40:8001/news?id='+value.id" class="cell">
                     <div class="fx">
                         <img :src="value.image" class="cell-img" />
@@ -133,8 +133,6 @@ export default {
     background-color: #fff;
 }
 
-.detail-relevant{
-}
 .relevant-item{
     height: 1.9rem;
     color: @color_l;
