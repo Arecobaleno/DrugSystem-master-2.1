@@ -26,7 +26,7 @@
             <div class="info-group">
                 <!-- 分点内容 -->
                 <div class="info-sub">
-                    <div v-if="no_inter">
+                    <div v-if="no_inter" class="info-sub-h">
                         <h2>无此成份相互作用数据</h2>
                     </div>
                     <div v-else class="info-sub-h">相互作用：</div>
@@ -77,6 +77,7 @@ export default {
 	},
 	watch: {
 		'$route'(to,from) {
+            this.no_inter = false
 			this.example = [];
 			this.interaction = this.$route.query.interactName;
 			if(this.interaction!=null)
@@ -116,12 +117,13 @@ export default {
 			.then((response)=>{
 				let res = response.data
                 console.log(res);
-                if(res === []){
-                    this.no_inter = true
-                }
-                else {
-                    if((this.interaction.length)==1){
-                        this.search_data=this.getChinese(this.interaction[0]);
+                
+                if((this.interaction.length)==1){
+                    this.search_data=this.getChinese(this.interaction[0]);
+                    if(res.length == 0){
+                        this.no_inter = true
+                    }
+                    else{
                         for (let index in res) {
                             let treatment = []
                             let sample = res[index]
@@ -131,15 +133,20 @@ export default {
                             console.log(treatment)
                             this.example.push(treatment)
                         }
-                    }else{
-                        let search_content=""
-                        let i
-                        for(i=0; i < (this.interaction.length)-1; i++){
-                                search_content+=this.interaction[i];
-                                search_content+="+";
-                            }
-                        search_content+=this.interaction[i];
-                        this.search_data=this.getChinese(search_content);
+                    }
+                }else{
+                    let search_content=""
+                    let i
+                    for(i=0; i < (this.interaction.length)-1; i++){
+                            search_content+=this.interaction[i];
+                            search_content+="+";
+                        }
+                    search_content+=this.interaction[i];
+                    this.search_data=this.getChinese(search_content);
+                    if(res.length == 0){
+                        this.no_inter = true
+                    }
+                    else {
                         for (let index in res) {
                             let treatment = []
                             let sample = res[index]
@@ -151,6 +158,7 @@ export default {
                         }
                     }
                 }
+                
 			})
 			.catch((error) => {
 				console.log(error);

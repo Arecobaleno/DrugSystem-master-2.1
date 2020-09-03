@@ -289,12 +289,13 @@ export default {
     color: #646f7f;
 }
 .Gtitle{
-    font-weight: 900;
-    font-size: 0.30rem;
-    margin: 10px 10px;
+    font-family: "Times New Roman";
+    font-weight: 1000;
+    font-size: 0.32rem;
+    margin: 8px 10px;
 }
 .newGuides{
-border-radius: 1px
+    border-radius: 0 2px 2px; 
 }
 .Gmaker{
     font-size: 0.27rem;
