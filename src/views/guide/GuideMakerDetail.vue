@@ -69,17 +69,13 @@ export default {
       })
     }
   },
-  mounted () {
-  },
-  watch: {
-    '$route'(to, from) {
-      if(this.$route.query){
+  created () {
+    if(this.$route.query){
         this.maker = this.$route.query.maker
         console.log('watch:' + this.maker)
         this.getGuideContent(this.maker)
-      }
     }
-  }
+  },
 }
 </script>
 

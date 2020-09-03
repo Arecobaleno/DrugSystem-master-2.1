@@ -69,16 +69,12 @@ export default {
         this.currentPage = 1 // 加载的时候先加载第一页
       }
     },
-    watch: {
-    '$route'(to, from) {
-        if(this.$route.query){
-            let title = this.$route.query.guideItems[0].title
-            console.log(title)
-            this.guideDetail.title = title
-            this.src = pdf.createLoadingTask({url: 'http://127.0.0.1:10088/guide/download?filename=' + title, CMapReaderFactory})
-        }
-    }
-  },
+    mounted () {
+        let title = this.$route.query.guideItems[0].title
+        console.log(title)
+        this.guideDetail.title = title
+        this.src = pdf.createLoadingTask({url: 'http://127.0.0.1:10088/guide/download?filename=' + title, CMapReaderFactory})
+    },
     computed: mapGetters({
         backPath: 'backPath',
         item: 'diseaseItem',

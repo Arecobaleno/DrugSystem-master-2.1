@@ -91,9 +91,7 @@ const Parent = {
     template: `
         <div class="child-wraper">
             <transition :name="transitionName">
-                <keep-alive>
                     <router-view class="child-view"></router-view>
-                </keep-alive>
             </transition>
         </div>
     `

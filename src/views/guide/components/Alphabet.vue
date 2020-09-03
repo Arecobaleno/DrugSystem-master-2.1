@@ -37,7 +37,9 @@ export default {
     }
   },
   updated () {
-    this.startY = this.$refs['A'][0].offsetTop
+    if(letters){
+      this.startY = this.$refs[letters[0]][0].offsetTop
+    }
   },
   methods: {
     handleLetterClick (e) {
@@ -76,7 +78,7 @@ export default {
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 158px;
+  top: 58px;
   right: 0;
   bottom: 0;
   width: 40px;

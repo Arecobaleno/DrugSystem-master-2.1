@@ -6,9 +6,7 @@
             <img class="app-start-text" src="./assets/images/app_logo_txt.png">
         </div>
         </transition>
-        <keep-alive v-if="started">
             <router-view id="app-main"></router-view>
-        </keep-alive>
     </div>
 </template>
 <script>
