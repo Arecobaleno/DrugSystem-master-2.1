@@ -14,14 +14,16 @@
             @page-loaded="currentPage=$event"
             @loaded="loadPdfHandler"></pdf>
         </div>
+        <!-- van-pagination总页数参数为page-count 总记录数即total-items不大一样 -->
         <van-pagination class="arrow"
         v-model="currentPage"
-        :total-items="pageCount"
+        :page-count="pageCount"
         items-per-page="5"/>
+        
    </div>
-    <!-- <div style="float:right" >
-           <el-button  size="mini" type="primary" @click="download()" >下载</el-button>
-    </div> -->  
+    <div class='download'>
+           <el-button class='download_button' size="normal" type="primary" @click="download()" >下载</el-button>
+    </div>  
 </div>
 </template>
 
@@ -64,11 +66,17 @@ export default {
         this.currentPage = 1 // 加载的时候先加载第一页
       }
     },
-    mounted () {
-        let title = this.$route.query.guideItems[0].title
-        console.log(title)
-        this.guideDetail.title = title
+    created () {
+        
+        let title = this.$route.query.guideItems
         this.src = pdf.createLoadingTask({url: '/api/guide/download?filename=' + title, CMapReaderFactory})
+        console.log(this.src)
+        this.guideDetail.title = title
+    },
+    destroyed(){
+        
+        delete this.src
+        // localStorage.clear()
     },
     computed: mapGetters({
         backPath: 'backPath',
@@ -88,64 +96,6 @@ export default {
 .page-content fx-1{
     height: 600px;
 }
-.relevant-item{
-    height: 1.9rem;
-    color: @color_l;
-}
-
-.flex-icon {
-    display: block;
-    width: 0.88rem;
-    height: 0.88rem;
-    margin-bottom: 0.18rem;
-    background-size: 0.88rem 0.88rem;
-}
-
-.flex-icon.icon-1 {
-    background-image: url(../../assets/images/disease/therapy@2x.png);
-}
-
-.flex-icon.icon-2 {
-    background-image: url(../../assets/images/disease/doctor@2x.png);
-}
-
-.flex-icon.icon-3 {
-    background-image: url(../../assets/images/disease/hospital@2x.png);
-}
-
-.flex-icon.icon-4 {
-    background-image: url(../../assets/images/disease/drug@2x.png);
-}
-
-/*页面其他小图标*/
-.s-icon {
-    margin-right: .06rem;
-    width: 0.26rem;
-    height: 0.2rem;
-    vertical-align: middle;
-}
-
-
-/*图标">"*/
-
-.s-icon-next:after {
-    content: '';
-    width: 0.16rem;
-    height: 0.28rem;
-    position: absolute;
-    right: 0.2rem;
-    top: 0.02rem;
-    cursor: pointer;
-}
-
-
-/*症状详情*/
-
-.info-sub-dd {
-    color: @color;
-    line-height: 0.52rem;
-}
-
 
 /*相关资讯*/
 
@@ -170,78 +120,6 @@ export default {
     color: @color;
 }
 
-.list-cell .cell {
-    color: @color_l;
-}
-
-.list-cell {
-    padding: 0 .2rem;
-    position: relative;
-}
-
-.list-cell .cell-img {
-    width: 1.6rem;
-    height: 1.2rem;
-    border-radius: .05rem;
-    margin: .26rem .23rem .26rem 0;
-}
-
-.list-cell .fx-cell {
-    flex: 1;
-    margin-top: .26rem;
-    line-height: .4rem;
-    font-size: .3rem;
-}
-
-.list-cell .cell-tit {
-    overflow: hidden;
-    height: 0.91rem;
-    line-height: 0.45rem;
-    font-size: .3rem;
-    color: #3d4550;
-    .elsn();
-}
-
-.list-cell .fx-cell .tr {
-    position: absolute;
-    right: .2rem;
-    bottom: .17rem
-}
-
-.list-cell .read-num {
-    color: @color_s;
-    font-size: .24rem;
-}
-.drug-main{
-    padding: 0.28rem 0.2rem 0 0.2rem;
-    font-size: 0.28rem;
-    background-color: @bg_cont;
-}
-.drug-item{
-    padding-bottom: 0.3rem;
-    line-height: 0.5rem;
-    & strong{
-        font-weight: bold;
-        color: @color_l;
-    }
-}
-.d-header-t{
-    width: 30px;
-}
-.d-header-d{
-    margin-bottom: 0.12rem;
-    line-height: 1.2em;
-    font-size: 0.24rem;
-    color: @color_s;
-    &:last-child{
-        margin-bottom: 0;
-    }
-    & strong{
-        font-weight: bold;
-        color: @color_l;
-    }
-}
-
 .tag-group{
     .clearfix()
 }
@@ -253,8 +131,9 @@ export default {
       overflow: hidden;
       color: #000000;
 }
-.download_buttonn{
-float: right;
+.download_button{
+width: 100%;
+
 }
 .pdf {
 margin-left: 0px;
@@ -264,6 +143,7 @@ margin-top: -20px;
 width: 110%;
 margin-left: -20px;
 height: 500px;
+overflow: scroll;
 }
 .arrow {
     margin-top: 40px;
