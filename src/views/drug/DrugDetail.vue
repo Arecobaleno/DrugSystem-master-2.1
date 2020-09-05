@@ -3,7 +3,6 @@
     <app-header :title="appHeader.title">
         <div slot="right">
             <i class="icon-shoucang iconfont ac-o"></i>
-            <!-- <i class="icon-fenxiang iconfont ac-o"></i> -->
         </div>
     </app-header>
     <div class="page-content fx-1">
@@ -26,82 +25,62 @@
         <!-- 详情内容 -->
         <div class="detail-info">
             <div class="info-group">
-                <!-- 分点内容 -->
-                <!-- <div class="info-sub">
-                    <div class="info-sub-h">药品简介：</div>
-                    <p class="info-sub-dd" >--</p>
-                </div> -->
-                <!-- 分点内容 -->
                 <div class="info-sub">
-                    <!-- <div class="info-sub-h">名称：</div>
-                    <div v-for="treatment in example2" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
-                    </div> -->
                     <div class="info-sub-h">成份：</div>
-                    <div v-for="treatment in example9" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example9" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">相互作用列表：</div>
                     <div>
                         <p class="info-sub-dd router-link-active" @click="toPage(name)">{{ name + "的相互作用列表"}}</p>
                     </div>
                     <div class="info-sub-h">药品相互作用：</div>
-                    <div v-for="treatment in example14" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example14" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">适应症：</div>
-                    <div v-for="treatment in example3" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example3" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">药品监管分级：</div>
-                    <div v-for="treatment in example" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
-                        <!-- <p class="info-sub-dd"><font color="black">药品描述：</font></p>
-                        <p class="info-sub-dd">药品生产信息：</p>
-                        <p class="info-sub-dd">患者须知：</p> -->
-                        <!-- <p class="info-sub-dd">证据级别：{{treatment[4]}}</p> -->
-                        <!-- <p>--</p>
-                        <ul class="info-sub-dd">
-                          <li class="info-sub-dd" v-for="(item, index) in treatment.properties" :key="index">
-                            {{item}}
-                          </li>
-                        </ul> -->
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">ATC编码：</div>
-                    <div v-for="treatment in example4" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example4" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">MIMS药物分类：</div>
-                    <div v-for="treatment in example5" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example5" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">不良反应：</div>
-                    <div v-for="treatment in example6" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example6" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">制造商：</div>
-                    <div v-for="treatment in example7" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example7" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">包装/零售价：</div>
-                    <div v-for="treatment in example8" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example8" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">注意事项：</div>
-                    <div v-for="treatment in example10" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example10" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">用法用量：</div>
-                    <div v-for="treatment in example11" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example11" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">禁忌：</div>
-                    <div v-for="treatment in example12" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example12" :key="index">{{treatment}}</p>
                     </div>
                     <div class="info-sub-h">其他信息：</div>
-                    <div v-for="treatment in example13" :key="treatment">
-                        <p class="info-sub-dd">{{treatment}}</p>
+                    <div >
+                        <p class="info-sub-dd" v-for="(treatment,index) in example13" :key="index">{{treatment}}</p>
                     </div>
                 </div>
             </div>
@@ -155,7 +134,7 @@ export default {
             example12: [],
             example13: [],
             example14: [],
-            drugDetail: this.$route.query.drugDetail, 
+            drugDetail: null, 
             drugList: this.$route.query.drugList,
             name: null,
         }
@@ -165,23 +144,37 @@ export default {
     deactivated (){
     },
     created () {
-        // let content = this.appHeader.title
-        // this.disease = content
-        // this.showResult(content)
+        this.getDrugDetailData();
         if(this.$route.query) {
-        this.drugDetail = this.$route.query.drugDetail;
-        // this.appHeader.title = this.$route.query.drugList;
-        // this.init();
+        this.drugList = this.$route.query.drugList;
       }
-      this.getDrugDetail();
-      this.test1();
     },
     methods: {
+        getDrugDetailData (){
+            console.log(81818);
+            console.log(this.drugList)
+            let url = 'http://localhost:10088/detail'
+            let data = {'category': 'drug', 'content': this.drugList}
+            axios.post(url, data)
+                .then((response) => {
+                    this.drugDetail = response.data;
+                    console.log('hhh')
+                    console.log(this.drugDetail);
+                    this.getDrugDetail();
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+        },
         getDrugDetail(){
+            console.log(1)
+            console.log(this.drugDetail)
             for (let index in this.drugDetail) {
                 let treatment = []
                 let tag = [0,0,0,0,0,0,0,0,0,0,0,0,0]
                 let sample = this.drugDetail[index]
+                console.log(1)
+                console.log(this.drugDetail)
                 treatment.push(sample.properties)
                 let arr1 = Object.values(treatment[0])
                 let arr2 = Object.keys(treatment[0])
@@ -424,11 +417,6 @@ export default {
                     }
 
                 }
-                console.log(999)
-                console.log(this.example)
-                console.log(this.example2)
-                console.log(this.example3)
-                console.log(tag)
 
             }
               
@@ -441,7 +429,7 @@ export default {
 
         },
         getChemistry(){
-            let url = '/api/return_chemical'
+            let url = 'http://localhost:10088/return_chemical'
             let data = {'content': this.name}
             axios.post(url, data)
                 .then((response) => {
@@ -474,29 +462,6 @@ export default {
                 let arr = Object.values(a);
                 console.log(arr);
                 let arr1 = Object.keys(a);
-                console.log(arr1)
-
-                // var keyList=Object.keys(a)
-
-                // var projectList={"self":{}}
-                // var rex=/[0-9]$/g
-                
-                // for(var i=0;i<keyList.length;i++){
-                //     var latNum=keyList[i].match(rex)
-
-                //     if(!rex.test(keyList[i])){
-                //         projectList["self"][keyList[i]]=a[keyList[i]]
-                //     }
-                //     if(latNum!==null){
-                //     if(!projectList['list'+latNum[0]]){
-                //         console.log(projectList[latNum[0]])
-                //         projectList["list"+latNum[0]]={}//创建空对象
-                //     }
-
-                //     projectList["list"+latNum[0]][keyList[i]]=a[keyList[i]]
-                //     }
-                // }
-                // console.log(projectList)
         },
         isInArray(arr, value){
             for(let i = 0; i < arr.length; i++){
@@ -515,11 +480,8 @@ export default {
   },
   watch: {
       '$route' (to, from) { //监听路由是否变化
-		if(to.query.drugDetail != from.query.drugDetail){
-            this.drugDetail = to.query.drugDetail;
+		if(to.query.drugList != from.query.drugList && to.query.drugList != undefined){
             this.drugList = to.query.drugList
-            // this.appHeader.title = to.query.drugList;
-			  // this.init();//重新加载数据
           }
         this.example = []
         this.example2 = []
@@ -535,8 +497,7 @@ export default {
         this.example12 = []
         this.example13 = []
         this.example14 = []
-
-        this.getDrugDetail();
+        this.getDrugDetailData();
 	  }
 },
     computed: mapGetters({
