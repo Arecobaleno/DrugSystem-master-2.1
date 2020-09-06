@@ -5,7 +5,7 @@
                 <a class="search fx-1 ac" href="javascript:;">
                     <div class="search-content fx">
                         <i class="icon-tubiao- iconfont"></i>
-                        <span class="search-text">搜索症状/疾病/药品</span>
+                        <span class="search-text">搜索疾病/药品/相互作用</span>
                     </div>
                 </a>
                 <a class="message-btn fx-c ac" href="javascript:;"><i class="icon-xiaoxi iconfont fx"></i></a>
