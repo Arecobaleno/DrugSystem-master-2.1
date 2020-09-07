@@ -203,11 +203,13 @@ export default {
     this.$store.dispatch('empty_symptom');
     if(this.ifrmeHwUced && this.isResetMap){
         this.isResetMap = false;
-        this.initMap();
+        //this.initMap();
     }
   },
   mounted (){
-    this.initMap();
+    this.$nextTick(()=>{
+        //this.initMap();
+    })
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
 	<div class="page-full component-home fx-column">
-		<app-header :title="appHeader.title" ref="header"></app-header>
+		<app-header :title="appHeader.title" ref="header" :backUrl="appHeader.backUrl"></app-header>
 		<section class="page-content" >
 			<form action="/">
 				<van-search
@@ -86,7 +86,8 @@
 				isShowData: true,
 				inputMsg:"",
 				appHeader: {
-     		    	title: "疾病",
+					 title: "疾病",
+					 backUrl: "/home"
 				},
 				historySearch:['心力衰竭'],
                 history:"历史搜索：暂无",
@@ -114,8 +115,8 @@
                             }
                             storage.setItem('searchWord',JSON.stringify(this.historySearch))
 					    }
-                    }
-                    
+					}
+                    storage.setItem('isShowData',JSON.stringify(fasle));
                     this.$router.push({
                         name: "disease-search",
                         params: {diseaseName: this.inputMsg, type: "text"},
@@ -136,6 +137,8 @@
                 this.titleText = this.diseaseTitle[index].value;
             },
 			onHistory: function(item) {
+				let storage=window.localStorage;
+				storage.setItem('isShowData',JSON.stringify(false));
 				this.history="历史搜索：";
 				this.$router.push({
 					name: "disease-search",
@@ -143,9 +146,11 @@
 				}) 
             },
             toPage: function(item) {
+				let storage=window.localStorage;
+				storage.setItem('isShowData',JSON.stringify(true));
 				this.$router.push({
-					name: "disease-search",
-					params: {diseaseName: item, type: "title"},
+					name: "disease-detail",
+					params: {diseaseName: item},
 				}) 
             },
             
@@ -157,9 +162,9 @@
 			},
 		},
 		created () {
-            this.diseaseTitle = [{value:"标签1"}, {value:"标签2"}, {value:"标签3"}];
-            this.disease = ["标签1","标签2", "内容3","标签2", "内容3"]
-            this.titleText =  this.diseaseTitle[this.activeKey].value;
+            this.diseaseTitle = [{value:"高血压"}, {value:"标签2"}, {value:"标签3"}];
+            this.disease = ["高血压合并心肌梗死","高血压合并症"]
+            this.titleText = this.diseaseTitle[this.activeKey].value;
         },
         
 	    beforeRouteEnter(to, from, next) {
@@ -169,7 +174,7 @@
                     storage.setItem('isShowData',JSON.stringify(true));
                 }
                 else{
-                    storage.setItem('isShowData',JSON.stringify(false));
+                    //storage.setItem('isShowData',JSON.stringify(false));
                 }
             })
         },

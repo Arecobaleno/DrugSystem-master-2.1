@@ -1,12 +1,14 @@
 <template>
-    <div v-if="hasChild">
+    <div>
         <van-collapse-item 
-            :title="searchItem.value"
-            :name="searchItem.value">
-            <collapse v-for="(item, index) in searchItem.data" :key="index" :searchItem="item"></collapse>
+            :title="searchItem.name"
+            :name="searchItem.name">
+            <div v-if="hasChild">    
+                <collapse v-for="(item, index) in searchItem.subTitle" :key="index" :searchItem="item" :isTreeRoot="false"></collapse>
+            </div>
+            <div v-else class="text" @click="toPage(item)" v-for="(item, index) in searchItem.leafTitle" :key="index">{{item}}</div>
         </van-collapse-item>
     </div>
-    <div v-else class="text" @click="toPage(searchItem)">{{searchItem.value}}</div>
 </template>
 
 <script>
@@ -18,19 +20,35 @@ export default {
         searchItem: {
             type: [Object, Array],
             required: true
+        },
+        isTreeRoot: {
+            type: [Boolean],
+            required: true
+        },
+    },
+    data() {
+        return {
+            tree: null,
+            isShow: false,
         }
     },
     computed: {
         hasChild() {
-            return this.searchItem.data && this.searchItem.data.length
+            return this.searchItem.subTitle && this.searchItem.subTitle.length
         }
+    },
+    created() {
+        let parent = this.$parent
+        while(parent && !parent.isTreeRoot) {
+            parent = parent.$parent
+        }
+        this.tree = parent
+        
     },
     methods: {
         toPage: function(item) {
-            this.$router.push({
-                name: "disease-detail",
-                params: {diseaseName: item.value},
-            }) 
+            this.isShow = true;
+            this.tree.$emit('event',this.isShow,item)
         },
     },
 }
@@ -52,7 +70,7 @@ export default {
     }
 
 	.text {
-		padding: 10px 16px;
+		padding: 10px 32px;
         background-color: #fff;
 	}
 </style>
