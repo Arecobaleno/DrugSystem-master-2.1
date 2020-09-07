@@ -116,7 +116,7 @@
                             storage.setItem('searchWord',JSON.stringify(this.historySearch))
 					    }
 					}
-                    storage.setItem('isShowData',JSON.stringify(fasle));
+                    storage.setItem('isShowData',JSON.stringify(false));
                     this.$router.push({
                         name: "disease-search",
                         params: {diseaseName: this.inputMsg, type: "text"},
