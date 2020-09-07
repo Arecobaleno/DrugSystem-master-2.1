@@ -37,13 +37,28 @@
                             </div>
                             <!-- 分点内容 -->
                             <div class="info-sub">
-                                <div class="info-sub-h">治疗方法：</div>
+                                <div class="info-sub-h">适应药物：</div>
                                 <div v-for="(treatment, index) in example" :key="index">
                                     <p class="info-sub-dd">药品：{{treatment[0]}}</p>
                                     <p class="info-sub-dd">建议：{{treatment[1]}}</p>
                                     <p class="info-sub-dd">参考文献：{{treatment[2]}}</p>
                                     <p class="info-sub-dd">临床证据：{{treatment[3]}}</p>
                                     <p class="info-sub-dd">证据级别：{{treatment[4]}}</p>
+                                    <span class="info-sub-dd">禁用人群：<span class="info-sub-dd" v-for="(item, index) in treatment[5]" :key="index">{{item+" "}}</span></span>
+                                    <p class="info-sub-dd">目的：{{treatment[6]}}</p>
+                                    <p>--</p>
+                                </div>
+                            </div>
+                            <div class="info-sub">
+                                <div class="info-sub-h">禁忌药物：</div>
+                                <div v-for="(treatment, index) in exampleCon" :key="index">
+                                    <p class="info-sub-dd">药品：{{treatment[0]}}</p>
+                                    <p class="info-sub-dd">建议：{{treatment[1]}}</p>
+                                    <p class="info-sub-dd">参考文献：{{treatment[2]}}</p>
+                                    <p class="info-sub-dd">临床证据：{{treatment[3]}}</p>
+                                    <p class="info-sub-dd">证据级别：{{treatment[4]}}</p>
+                                    <span class="info-sub-dd">禁用人群：<span class="info-sub-dd" v-for="(item, index) in treatment[5]" :key="index">{{item+" "}}</span></span>
+                                    <p class="info-sub-dd">目的：{{treatment[6]}}</p>
                                     <p>--</p>
                                 </div>
                             </div>
@@ -110,7 +125,8 @@
                 dataSet: [],
                 isShow: false,
                 detailName: '',
-                example: []
+                example: [],
+                exampleCon: []
 			}
 		},
 		computed: mapGetters({
@@ -147,20 +163,32 @@
                 this.showResult(this.detailName)
             },
             showResult (content) {
-                let url = '/api/detail'
-                let data = {'category': 'disease', 'content': content}
+                let url = '/api/disease_detail'
+                let data = {'content': content}
                 axios.post(url, data)
                     .then((response) => {
-                        console.log(response.data)
-                        let res = response.data
+                        console.log(response.data.indication)
+                        let res = response.data.indication
                         for (let index in res) {
                             let treatment = []
                             let sample = res[index]
-                            treatment.push(sample.targetName, sample.edgeResult.properties.建议,
-                            sample.edgeResult.properties.参考文献, sample.edgeResult.properties.临床证据,
-                            sample.edgeResult.properties.证据级别)
-                            console.log(treatment)
+                            console.log("sample",sample)
+                            treatment.push(sample.drugName, sample.property.建议,
+                            sample.property.参考文献, sample.property.临床证据,
+                            sample.property.证据级别, sample.banPeople, sample.purpose)
+                            this.example.length = 0;
                             this.example.push(treatment)
+                        }
+                        let resCon = response.data.contraindication
+                        for (let index in resCon) {
+                            let treatment = []
+                            let sampleCon = resCon[index]
+                            console.log("sampleCon",sampleCon)
+                            treatment.push(sampleCon.drugName, sampleCon.property.建议,
+                            sampleCon.property.参考文献, sampleCon.property.临床证据,
+                            sampleCon.property.证据级别, sampleCon.banPeople, sampleCon.purpose)
+                            this.exampleCon.length = 0;
+                            this.exampleCon.push(treatment)
                         }
                     })
             }
