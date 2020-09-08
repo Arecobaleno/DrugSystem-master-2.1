@@ -58,16 +58,13 @@
                     <strong class="fx fx-1">常见疾病</strong><i class="icon-jinru iconfont"></i>
                 </router-link>
                 <div class="fx diseases-group-item">
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">脱发</router-link>
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">早泄</router-link>
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">风湿</router-link>
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">头痛</router-link>
+                    <router-link class="fx-c fx-1 ac" to="/disease/1">高血压</router-link>
+                    <router-link class="fx-c fx-1 ac" to="/disease/1">冠心病</router-link>
+                    <router-link class="fx-c fx-1 ac" to="/disease/1">心力衰竭</router-link>
                 </div>
                 <div class="fx diseases-group-item">
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">牙周炎</router-link>
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">胃炎</router-link>
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">腹泻</router-link>
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">肩周炎</router-link>
+                    <router-link class="fx-c fx-1 ac" to="/disease/1">高血压并发症</router-link>
+                    <router-link class="fx-c fx-1 ac" to="/disease/1">高血压合并心肌梗死</router-link>
                 </div>
             </section>
             <!-- <section class="news-group group-item">
