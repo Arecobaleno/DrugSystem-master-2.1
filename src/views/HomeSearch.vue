@@ -370,33 +370,33 @@ export default {
     search() {
 		
 		this.showAll();
+		this.record_history(this.searchData);
+		// this.inputMsg=this.searchData;
+		// if(this.inputMsg !=''){
+		// 	let storage=window.localStorage
+		// 	{//console.log(444)
+		// 	    {//console.log(this.historySearch.indexOf(this.inputMsg))
+		// 		//console.log(444)
+		// 			if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
 		
-		this.inputMsg=this.searchData;
-		if(this.inputMsg !=''){
-			let storage=window.localStorage
-			{//console.log(444)
-			    {//console.log(this.historySearch.indexOf(this.inputMsg))
-				//console.log(444)
-					if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
+		// 			          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
+		// 			          this.historySearch.unshift(this.inputMsg);
+		// 					  console.log(88888)
+		// 					  console.log(this.historySearch)
+		// 					  console.log(88888)
+		// 			 }else{
+		// 					   this.historySearch.unshift(this.inputMsg)
+		// 					}
 		
-					          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
-					          this.historySearch.unshift(this.inputMsg);
-							  console.log(88888)
-							  console.log(this.historySearch)
-							  console.log(88888)
-					 }else{
-							   this.historySearch.unshift(this.inputMsg)
-							}
+		// 	        if( this.historySearch.length >= 6){
+		// 	                this.historySearch.pop()
+		// 	            }
 		
-			        if( this.historySearch.length >= 6){
-			                this.historySearch.pop()
-			            }
-		
-			            storage.setItem('searchWord',JSON.stringify(this.historySearch))
-			    }
-			}
-				//console.log(storage.getItem('searchWord'))
-		}
+		// 	            storage.setItem('searchWord',JSON.stringify(this.historySearch))
+		// 	    }
+		// 	}
+		// 		//console.log(storage.getItem('searchWord'))
+		// }
 		
 		this.isShowSearch=true;
 
@@ -419,6 +419,7 @@ export default {
        
     },
    useMethod(item){
+	   this.record_history(item.value);
      if(item.label == '药品商品名'){
        this.getDrugDetail(item.value);
      }
@@ -540,7 +541,7 @@ export default {
 	  },
 	toInteraction: function(searchMsg)
 	{
-
+		this.record_history(searchMsg);
 		this.$router.push({
 		     path: "/interactDetail",
 		     query: {interactName: searchMsg},
@@ -550,6 +551,7 @@ export default {
 		this.searchData = item;
 	},
 	toDesease: function(item) {
+		this.record_history(item);
 				// let storage=window.localStorage;
 				// storage.setItem('isShowData',JSON.stringify(true));
 				console.log("item: "+item);
@@ -578,7 +580,34 @@ export default {
 				  this.isShowmore =false;
 			  }
 	},
-
+	 record_history(str){
+		 this.inputMsg=str;
+		 if(this.inputMsg !=''){
+		 	let storage=window.localStorage
+		 	{//console.log(444)
+		 	    {//console.log(this.historySearch.indexOf(this.inputMsg))
+		 		//console.log(444)
+		 			if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
+		 
+		 			          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
+		 			          this.historySearch.unshift(this.inputMsg);
+		 					  console.log(88888)
+		 					  console.log(this.historySearch)
+		 					  console.log(88888)
+		 			 }else{
+		 					   this.historySearch.unshift(this.inputMsg)
+		 					}
+		 
+		 	        if( this.historySearch.length >= 6){
+		 	                this.historySearch.pop()
+		 	            }
+		 
+		 	            storage.setItem('searchWord',JSON.stringify(this.historySearch))
+		 	    }
+		 	}
+		 		//console.log(storage.getItem('searchWord'))
+		 }
+	 },
 },
     mounted (){
 
@@ -590,6 +619,12 @@ export default {
 	}else{
 		this.history="历史搜索："
 	}
+
+	 let storage=window.localStorage
+ 
+ if(storage.getItem('searchWord')!==null){
+  this.historySearch=JSON.parse(storage.getItem('searchWord'))
+ } 
   }
 };
 
