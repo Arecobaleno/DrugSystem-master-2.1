@@ -164,21 +164,10 @@ export default {
 		  			})
 		
 		},
-		getGuideItems(name){
-		   let url = '/api/guide/detail'
-		   let data = {'content': name}
-		   axios.post(url, data)
-		.then((response) => {
-		        this.guideItems = response.data;
-		    console.log(111)
-		    console.log(this.guideItems);
-		    console.log(this.guideItems[0].time);
-		    console.log(this.guideItems[0].maker);
-		
+		getGuideItems(name){		
 		    this.$router.push({
 		    name: "GuideDetail",
-		    query: {guideItems: this.guideItems}
-		});
+		    query: {guideItems: name}
 		})
 		},
         getDrugItems(name){
