@@ -134,7 +134,13 @@
                 this.isShowData=false;
             },
             onChange(index) {
-                this.titleText = this.diseaseTitle[index].value;
+				this.titleText = this.diseaseTitle[index].value;
+				if(this.titleText == "高血压"){
+					this.disease = ["高血压合并心肌梗死","高血压并发症"]	
+				}
+				else{
+					this.disease = [];
+				}
             },
 			onHistory: function(item) {
 				let storage=window.localStorage;
@@ -163,7 +169,7 @@
 		},
 		created () {
             this.diseaseTitle = [{value:"高血压"}, {value:"标签2"}, {value:"标签3"}];
-            this.disease = ["高血压合并心肌梗死","高血压合并症"]
+            this.disease = ["高血压合并心肌梗死","高血压并发症"]
             this.titleText = this.diseaseTitle[this.activeKey].value;
         },
         
