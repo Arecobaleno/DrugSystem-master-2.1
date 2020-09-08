@@ -30,6 +30,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import appHeader from '../../components/app-header.vue'
+// import pdfLib from '../../../static/js/build/pdf'
 import axios from 'axios'
 import pdf from 'vue-pdf'
 import CMapReaderFactory from 'vue-pdf/src/CMapReaderFactory.js'
@@ -61,15 +62,24 @@ export default {
             this.currentPage++
         }
       },
+      stringToUint8Array(str){
+        var rawLength = str.length;  
+        //转换成pdf.js能直接解析的Uint8Array类型,见pdf.js-4068  
+        var array = new Uint8Array(new ArrayBuffer(rawLength));    
+        for(var i = 0; i < rawLength; i++) {  
+        array[i] = str.charCodeAt(i) & 0xff;  
+        }  
+        return array;  
+    },
       // pdf加载时
       loadPdfHandler (e) {
         this.currentPage = 1 // 加载的时候先加载第一页
       }
     },
-    created () {
-        
+    async created () {
         let title = this.$route.query.guideItems
-        this.src = pdf.createLoadingTask({url: '/api/guide/download?filename=' + title, CMapReaderFactory})
+        
+        this.src = pdf.createLoadingTask({url:'/api/guide/download?filename=' + title, cMapUrl: '../../../static/js/', cMapPacked: true})
         console.log(this.src)
         this.guideDetail.title = title
     },
