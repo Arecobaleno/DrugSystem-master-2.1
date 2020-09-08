@@ -125,12 +125,13 @@
 			var x=document.getElementById("search_history");
 
 
-			window.localStorage.removeItem('searchWord')
+			//window.localStorage.removeItem('searchWord')
 			let storage=window.localStorage
 
 			if(storage.getItem('searchWord')!==null){
 				this.historySearch=JSON.parse(storage.getItem('searchWord'))
 			} 
+			
 		},
 		watch: {
 			'$route'(to,from) {
