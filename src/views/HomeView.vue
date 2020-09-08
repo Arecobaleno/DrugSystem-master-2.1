@@ -5,7 +5,9 @@
                 <a class="search fx-1 ac" href="javascript:;">
                     <div class="search-content fx">
                         <i class="icon-tubiao- iconfont"></i>
+                         <router-link class="fx-c fx-1 ac" to="/homesearch">
                         <span class="search-text">搜索疾病/药品/相互作用</span>
+                         </router-link>
                     </div>
                 </a>
                 <a class="message-btn fx-c ac" href="javascript:;"><i class="icon-xiaoxi iconfont fx"></i></a>
@@ -391,5 +393,8 @@ export default {
  */
 .news-group-item{
     margin-top: -0.1rem;
+}
+.search-text{
+    color: black;
 }
 </style>
