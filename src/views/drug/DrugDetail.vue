@@ -8,7 +8,7 @@
     <div class="page-content fx-1">
         <!-- 详情标题 -->
         <div class="detail-head detail-bg border-b">
-            <h2 class="detail-head-title">{{example2[0]}}</h2>
+            <h2 class="detail-head-title">{{getChinese(example2[0])}}</h2>
             <p v-if="item.alias" class="detail-head-small" v-text="'别名：'+item.alias"></p>
             <p v-if="item.common_name" class="detail-head-small" v-text="'俗称：'+item.common_name"></p>
             <p v-if="item.advice" class="detail-head-small" v-text="'就诊建议：'+item.advice"></p>
@@ -28,7 +28,7 @@
                 <div class="info-sub">
                     <div class="info-sub-h">成份：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example9" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example9" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">相互作用列表：</div>
                     <div>
@@ -36,51 +36,51 @@
                     </div>
                     <div class="info-sub-h">药品相互作用：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example14" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example14" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">适应症：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example3" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example3" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">药品监管分级：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">ATC编码：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example4" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example4" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">MIMS药物分类：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example5" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example5" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">不良反应：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example6" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example6" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">制造商：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example7" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example7" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">包装/零售价：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example8" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example8" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">注意事项：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example10" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example10" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">用法用量：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example11" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example11" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">禁忌：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example12" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example12" :key="index">{{item}}</p>
                     </div>
                     <div class="info-sub-h">其他信息：</div>
                     <div >
-                        <p class="info-sub-dd" v-for="(treatment,index) in example13" :key="index">{{treatment}}</p>
+                        <p class="info-sub-dd" v-for="(item,index) in example13" :key="index">{{item}}</p>
                     </div>
                 </div>
             </div>
