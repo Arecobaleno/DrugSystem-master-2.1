@@ -16,7 +16,7 @@
 			</form>
 		</section>
 		<div v-show="isShowData" class="page-content fx fx-1">
-			<van-sidebar v-model="activeKey" @change="onChange">
+			<van-sidebar v-model="activeKey" @change="onChange" class="sidebar">
                 <div  >
                     <van-sidebar-item 
                         v-for="(item, index) in diseaseTitle" 
@@ -31,7 +31,6 @@
                 type="default" 
                 class="history_item" 
                 round
-                
                 align="center" 
                 v-for="(item, index) in disease" 
                 v-bind:key="index" 
@@ -162,8 +161,8 @@
 			},
 		},
 		created () {
-            this.diseaseTitle = [{value:"高血压"}, {value:"标签2"}, {value:"标签3"}];
-            this.disease = ["高血压合并心肌梗死","高血压合并症"]
+            this.diseaseTitle = [{value:"高血压"}, {value:"心血管疾病"}, {value:"消化系统疾病"}];
+            this.disease = ["高血压合并心肌梗死","高血压并发症"]
             this.titleText = this.diseaseTitle[this.activeKey].value;
         },
         
@@ -236,5 +235,8 @@
     .blank{
         width: 10px;
         background-color: #fff;
-    }
+	}
+	.sidebar{
+		width: 108px;
+	}
 </style>
