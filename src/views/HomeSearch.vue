@@ -181,6 +181,90 @@ export default {
 		}
 	},
 	
+	// searchDrug(){
+	// 	 this.drugClass = [];
+
+	// 					if(this.searchData!=""){
+	// 						let url = '/api/medicine_query'
+	// 						let data = {
+	// 							'content': this.searchData
+	// 						}
+	// 						axios.post(url, data)
+	// 							.then((response) => {
+	// 	        let drug = response.data
+	// 			let len=3 //默认显示长度
+	// 			if(this.searchAll==1){
+	// 				len=drug.length
+	// 			}
+	// 			for(var i=0; i<len;i++){
+	// 				this.drugClass.push({"value":drug[i].name,"label":drug[i].label})
+	// 			}
+	// 			console.log(666666);
+	// 	        console.log(this.drugClass)
+
+	// 	      })
+	// 					}
+	// 					else{
+	// 						this.drugClass = [];
+	// 					}
+	// },
+	// searchDisease(){
+	// this.diseaseClass = [];
+
+	// 				if(this.searchData!=""){
+	// 					let url = '/api/query'
+	// 					let data = {
+	// 					'category':"disease",
+	// 					'content': this.searchData
+	// 					}
+	// 					axios.post(url, data)
+	// 						.then((response) => {
+	// 	    let disease = response.data
+	// 		let len=3 //默认显示长度
+	// 		if(this.searchAll==1){
+	// 			len=disease.length
+	// 		}
+	// 			for(var i=0; i<len;i++){
+	// 				this.diseaseClass.push({"value":disease[i].value,"label":disease[i].label})
+	// 			}
+	// 		console.log(77777);
+	//         console.log(this.diseaseClass)
+	
+	//       })
+	// 				}
+	// 				else{
+	// 					this.diseaseClass = [];
+	// 				}
+	// },
+	// searchInteraction(){
+	// 		this.interactClass=[];
+	// 			if(this.searchData!=""){
+	// 				let url = '/api/interaction_candidate'
+	// 				let data = {
+	// 					'content': this.searchData
+	// 				}
+	// 				axios.post(url, data)
+	// 					.then((response) => {
+	// 						{
+	// 							let interaction = response.data
+	// 							let len=3 //默认显示长度
+	// 							if(this.searchAll==1){
+	// 								len=interaction.length
+	// 							}
+	// 								for(var i=0; i<len;i++){
+	// 									this.interactClass.push({"value":interaction[i]})
+	// 								}
+	// 							console.log(88888);
+	// 							console.log(this.interactClass);
+	// 						}
+
+	// 					})
+	// 			}
+	// 			else{
+	// 				this.interactClass = []
+	// 			}
+
+	// },
 	searchDrug(){
 		 this.drugClass = [];
 
@@ -193,15 +277,20 @@ export default {
 								.then((response) => {
 		        let drug = response.data
 				let len=3 //默认显示长度
-				if(this.searchAll==1){
+				if(this.searchAll==1 || len>drug.length){
 					len=drug.length
 				}
+				if(drug.length==0){
+					this.isShowDrug=false;
+				}else{
+					this.isShowDrug=true;
 				for(var i=0; i<len;i++){
 					this.drugClass.push({"value":drug[i].name,"label":drug[i].label})
 				}
+				}
 				console.log(666666);
 		        console.log(this.drugClass)
-
+				
 		      })
 						}
 						else{
@@ -221,11 +310,17 @@ export default {
 							.then((response) => {
 		    let disease = response.data
 			let len=3 //默认显示长度
-			if(this.searchAll==1){
+			if(this.searchAll==1 || len>disease.length){
 				len=disease.length
 			}
+			if(disease.length==0){
+				this.isShowDisease=false;
+			}
+			else{
+				this.isShowDisease=true;
 				for(var i=0; i<len;i++){
 					this.diseaseClass.push({"value":disease[i].value,"label":disease[i].label})
+				}
 				}
 			console.log(77777);
 	        console.log(this.diseaseClass)
@@ -238,6 +333,7 @@ export default {
 	},
 	searchInteraction(){
 			this.interactClass=[];
+
 				if(this.searchData!=""){
 					let url = '/api/interaction_candidate'
 					let data = {
@@ -248,11 +344,16 @@ export default {
 							{
 								let interaction = response.data
 								let len=3 //默认显示长度
-								if(this.searchAll==1){
+								if(this.searchAll==1 || len>interaction.length){
 									len=interaction.length
 								}
+									if(interaction.length==0){
+										this.isShowInteract=false;
+									}else{
+									this.isShowInteract=true;
 									for(var i=0; i<len;i++){
 										this.interactClass.push({"value":interaction[i]})
+									}
 									}
 								console.log(88888);
 								console.log(this.interactClass);
@@ -263,6 +364,7 @@ export default {
 				else{
 					this.interactClass = []
 				}
+
 
 	},
     search() {
@@ -401,9 +503,9 @@ export default {
 		  this.searchDisease();
 		  this.searchInteraction();
 		  this.isShowSearch= true;
-		  this.isShowDrug= true;
-		  this.isShowDisease= true;
-		  this.isShowInteract= true;
+		//   this.isShowDrug= true;
+		//   this.isShowDisease= true;
+		//   this.isShowInteract= true;
 		  this.isShowmore = true;
 	  },
 	  showDrug(){
