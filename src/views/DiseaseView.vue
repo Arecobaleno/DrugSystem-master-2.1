@@ -1,6 +1,6 @@
 <template>
 	<div class="page-full component-home fx-column">
-		<app-header :title="appHeader.title" ref="header"></app-header>
+		<app-header :title="appHeader.title" ref="header" :backUrl="appHeader.backUrl"></app-header>
 		<section class="page-content" >
 			<form action="/">
 				<van-search
@@ -16,26 +16,28 @@
 			</form>
 		</section>
 		<div v-show="isShowData" class="page-content fx fx-1">
-			<van-sidebar v-model="activeKey" @change="onChange">
-                <div  >
+			<van-sidebar v-model="activeKey" @change="onChange" class="sidebar">
+                <div>
                     <van-sidebar-item 
                         v-for="(item, index) in diseaseTitle" 
                         :key="index" 
                         :title="item.value"  />
                 </div>
             </van-sidebar>
-            <div class="blank"></div>
+            <div class="blankW"></div>
             <div class="detail-bg border-b fx-1">
-                <h2 class="detail-head-title">{{titleText}}</h2>
-                <van-button 
-                type="default" 
-                class="history_item" 
-                round
-                
-                align="center" 
-                v-for="(item, index) in disease" 
-                v-bind:key="index" 
-                @click="toPage(item)">{{item}}</van-button>
+				<div v-for="(item, index) in titleText" v-bind:key="index">
+					<h2 class="detail-head-title">{{item}}</h2>
+					<van-button 
+					type="default" 
+					class="history_item" 
+					round
+					align="center" 
+					v-for="(item, index1) in disease[index]" 
+					v-bind:key="index1" 
+					@click="toPage(item)">{{item}}</van-button>
+					<div class="blankH"></div>
+				</div>
             </div>
 		</div>
 
@@ -80,13 +82,15 @@
 			return {
 				isResetMap: true,
                 diseaseTitle: [],
-                disease: [],
                 activeKey: 0,
-                titleText: "",
+				titleText: [],
+				disease: [],
+				dataSet: [],
 				isShowData: true,
 				inputMsg:"",
 				appHeader: {
-     		    	title: "疾病",
+					 title: "疾病",
+					 backUrl: "/home"
 				},
 				historySearch:['心力衰竭'],
                 history:"历史搜索：暂无",
@@ -114,8 +118,8 @@
                             }
                             storage.setItem('searchWord',JSON.stringify(this.historySearch))
 					    }
-                    }
-                    
+					}
+                    storage.setItem('isShowData',JSON.stringify(false));
                     this.$router.push({
                         name: "disease-search",
                         params: {diseaseName: this.inputMsg, type: "text"},
@@ -133,9 +137,23 @@
                 this.isShowData=false;
             },
             onChange(index) {
-                this.titleText = this.diseaseTitle[index].value;
+				/*this.titleText = this.diseaseTitle[index].value;
+				if(this.titleText == "高血压"){
+					this.disease = ["高血压合并心肌梗死","高血压并发症"]	
+				}
+				else{
+					this.disease = [];
+				}*/
+				this.titleText.length = 0;
+				this.disease.length = 0;
+				for(var i = 0; i < this.dataSet[index].length; i++){
+					this.titleText.push(this.dataSet[index][i].title)
+					this.disease.push(this.dataSet[index][i].value)
+				}
             },
 			onHistory: function(item) {
+				let storage=window.localStorage;
+				storage.setItem('isShowData',JSON.stringify(false));
 				this.history="历史搜索：";
 				this.$router.push({
 					name: "disease-search",
@@ -143,9 +161,11 @@
 				}) 
             },
             toPage: function(item) {
+				let storage=window.localStorage;
+				storage.setItem('isShowData',JSON.stringify(true));
 				this.$router.push({
-					name: "disease-search",
-					params: {diseaseName: item, type: "title"},
+					name: "disease-detail",
+					params: {diseaseName: item},
 				}) 
             },
             
@@ -157,9 +177,24 @@
 			},
 		},
 		created () {
-            this.diseaseTitle = [{value:"标签1"}, {value:"标签2"}, {value:"标签3"}];
-            this.disease = ["标签1","标签2", "内容3","标签2", "内容3"]
-            this.titleText =  this.diseaseTitle[this.activeKey].value;
+            this.diseaseTitle = [{value:"高血压"}, {value:"心血管疾病"}, {value:"消化系统疾病"}];
+			this.dataSet = [
+				[
+					{title: "高血压", value: ["高血压合并心肌梗死","高血压并发症"]},
+					{title: "冠心病", value: ["详情1","详情2"]},
+					{title: "xx病", value: ["详情1","详情2"]}
+				],
+				[
+					{title: "疾病2", value: ["详情1","详情2"]}
+				],
+				[
+					{title: "疾病3", value: ["详情1","详情2"]}
+				]
+			]
+			for(var i = 0; i < this.dataSet[0].length; i++){
+				this.titleText.push(this.dataSet[0][i].title)
+				this.disease.push(this.dataSet[0][i].value)
+			}
         },
         
 	    beforeRouteEnter(to, from, next) {
@@ -169,7 +204,7 @@
                     storage.setItem('isShowData',JSON.stringify(true));
                 }
                 else{
-                    storage.setItem('isShowData',JSON.stringify(false));
+                    //storage.setItem('isShowData',JSON.stringify(false));
                 }
             })
         },
@@ -228,8 +263,15 @@
         font-size:10px;
         color: "black";
     }
-    .blank{
+    .blankW{
         width: 10px;
         background-color: #fff;
-    }
+	}
+	.blankH{
+        height: 40px;
+        background-color: #fff;
+	}
+	.sidebar{
+		width: 108px;
+	}
 </style>

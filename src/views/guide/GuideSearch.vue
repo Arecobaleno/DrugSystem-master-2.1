@@ -87,10 +87,10 @@ export default {
 					  axios.post(url, data)
             .then((response) => 
             {
-                            console.log("6666");
-                            console.log(response.data);
-                            this.guideContent = null;
-                            this.guideContent = response.data;
+              console.log("6666");
+              console.log(response.data);
+              this.guideContent = null;
+              this.guideContent = response.data;
 							// this.disease = response.data;
 						})
 				}
@@ -101,21 +101,9 @@ export default {
                 
       },
      getGuideItems(name){
-       console.log("哈哈哈哈哈哈哈哈哈哈哈哈哈哈:   "+ name)
-               let url = '/api/guide/detail'
-               let data = {'content': name}
-               axios.post(url, data)
-            .then((response) => {
-                    this.guideItems = response.data;
-                console.log(111)
-                console.log(this.guideItems);
-                console.log(this.guideItems[0].time);
-                console.log(this.guideItems[0].maker);
-
                 this.$router.push({
                 name: "GuideDetail",
-                query: {guideItems: this.guideItems}
-            });
+                query: {guideItems: name}
             })
         },
   },

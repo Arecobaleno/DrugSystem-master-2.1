@@ -1,14 +1,9 @@
 <template>
 	<div class="page-full component-home fx-column">
 		<app-header :title="appHeader.title"></app-header>
-		<section class="page-content fx-1" >
-			<van-collapse v-model="activeNames">
-				<collapse v-for="(item, index) in dataSet" :key="index" :searchItem="item"></collapse>
-			</van-collapse>
-		</section>
-		<div v-show="isShowData" class="page-content fx-1">
+		<div class="page-content fx-1">
 			<ul class="diseaselist-content" v-if="!isresultEmpty">
-				<li v-for="(item, index) in disease" v-bind:key="index" @click="toPage(item,'page')" class="disease-item fx-ac ac">
+				<li v-for="(item, index) in disease" v-bind:key="index" @click="toPage(item)" class="disease-item fx-ac ac">
 					<div class="fx-1">{{item.value}}</div>
 				</li>
 			</ul>
@@ -17,16 +12,6 @@
 					<div class="fx-1">暂无数据</div>
 				</li>
 			</ul>
-		</div>
-		<div v-show="isShowData==false" class="fx-1">
-			
-			<a>
-				<van-row type="flex" justify="space-between">
-					<van-col id="search_history" v-model="history" align="left" class="history" span="11">{{history}}</van-col>
-					<van-col id="clear_history" class="clear_history" align="right" @click="clear_history" span="8">清空搜索</van-col>
-				</van-row>
-				<van-button plain hairline type="info" id="item_history"  class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="toPage(item,'history')">{{item}}</van-button>
-			</a>
 		</div>
 		<app-nav></app-nav>
 	</div>
@@ -42,26 +27,20 @@
 		mapGetters,
 		mapActions
 	} from 'vuex'
-	import collapse from '../../components/disease/collapse.vue'
 	export default {
 		components: {
 			appNav,
 			appHeader,
-			collapse
 		},
 		data() {
 			return {
 				isResetMap: true,
-				disease: "",
-				type: "",
-				activeNames: [],
-				isShowData: false,
+				disease: [],
 				isresultEmpty: false,
 				inputMsg:"",
 				appHeader: {
-     		    	title: "疾病"
+     		    	title: "疾病搜索"
 				},
-				dataSet: [],
 			}
 		},
 		computed: mapGetters({
@@ -69,7 +48,6 @@
 		}),
 		methods: {
 			search() {
-				/*this.isShowData=true;
 				this.searchData=this.inputMsg
 				if(this.searchData!=""){
 					let url = '/api/query'
@@ -92,139 +70,62 @@
 				}
 				else{
 					this.disease  = [];
-					this.isShowData=false;
-				}*/
+				}
 			},
 			
 			toPage: function(item) {
-				this.inputMsg=item.value;
+				
 				this.$router.push({
 					name: "disease-detail",
-					params: {diseaseName: this.inputMsg},
+					params: {diseaseName: item.value},
 				}) 
 				this.inputMsg='';
 			},
-			findActiveName(item) {
-				var flag = -1;
-				if(item.data.length==0||!item.data){
-					if(item.value.search(this.disease) != -1){
-						flag = 0;
-					}
-					else{
-						flag = 1;
-					}
-				}
-				else{
-					for (var i = 0; i < item.data.length; i++){
-						if(this.findActiveName(item.data[i])==0){
-							flag = 0;
-							this.activeNames.push(item.value);
-						}
-						if(item.value.search(this.disease) != -1){
-							flag = 0;
-						}
-					}
-				}
-				return flag
-			},
 		},
 		created () {
-			this.dataSet=[{
-				value: "标签1",
-				data: [{
-					value: "标签2",
-					data: [{
-						value: "标签c",
-						data: [{
-							value: "心力衰竭",
-							data: []
-						}]
-					}]
-				}]
-			},{
-				value: "标签a",
-				data: [{
-					value: "心力衰竭",
-					data: []
-				}]
-			},{
-				value: "标签b",
-				data: [{
-					value: "标签c",
-					data: []
-				}]
-			},
-			];
+			let storage=window.localStorage;
 			if(this.$route.params.diseaseName){
-				this.disease = this.$route.params.diseaseName;
-				this.type = this.$route.params.type;
-				this.search();
-				if(this.type=="text"){
-					for (var i = 0; i < this.dataSet.length; i++){
-						this.findActiveName(this.dataSet[i]);
-					}
-				}
-				else{
-					this.activeNames.push(this.disease);
-				}
+				this.inputMsg = this.$route.params.diseaseName;
+				storage.setItem('disease',JSON.stringify(this.inputMsg));
 			}
 			else{
-				let storage=window.localStorage;
-				if(!this.$route.params.diseaseName){
-					this.disease = JSON.parse(storage.getItem('disease'));
-					this.activeNames = JSON.parse(storage.getItem('activeNames'));
-				}
+				this.inputMsg = JSON.parse(storage.getItem('disease'))
 			}
-			
-			
-		},
-		destroyed() {
-			let storage=window.localStorage;
-			storage.setItem('disease',JSON.stringify(this.disease));
-			storage.setItem('activeNames',JSON.stringify(this.activeNames));
+			this.search();
 		},
 	}
 </script>
 
-<style scoped="">
+<style lang="less" scoped>
 	@import "../../assets/css/common.less";
 
 	.page-content {
 		background-color: #f1f4f4;
 	}
 
-	.van-collapse-item >>> .van-collapse-item__content {
-		padding: 0px 16px;
+	.diseaselist-content {
+		background-color: #fff;
 	}
 
-	.history{
-		font-family:"Times New Roman";
-		font-size:14px;
-		margin-top: 4px;
-		margin-left: 6px;
-		margin-bottom: 5px;
-		/* color: #53575b;; */
-		color: #1a1b1d;
+	.disease-item {
+		height: .88rem;
+		padding: 0 .2rem;
+		font-size: .28rem;
+		color: #3d4550;
+		border-bottom: .01rem solid #e7ecf2;
+
+		& .disease-type {
+			width: .86*3rem;
+			font-size: .2rem;
+			color: #9fa1a9;
+
+			& i {
+				margin-left: .1rem;
+				width: .76rem;
+				height: .32rem;
+				border: 1px solid #9fa1a9;
+			}
+		}
 	}
-	.clear_history{
-		font-family:"Times New Roman";
-		font-size:12px;
-		margin-top: 4px;
-		margin-right: 6px;
-		color: #676b73;;
-	}
-	.history_item{
-		height: 33px;
-		margin-top: 6px;
-		margin-left: 6px;
-		margin-right: 7px;
-		font-size:10px
-	}
-	.tip {
-		margin-top:20px;
-		font-size:12px;
-	}
-	.blank {
-		height: 0.10rem;
-	}
+	
 </style>

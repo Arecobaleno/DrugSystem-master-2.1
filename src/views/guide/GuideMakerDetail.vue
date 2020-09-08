@@ -36,15 +36,9 @@ export default {
   methods: 
   {
      getGuideItems(name) {
-        let url = '/api/guide/detail'
-        let data = {'content': name}
-        axios.post(url, data)
-        .then((response) => {
-            this.guideItems = response.data;
             this.$router.push({
             name: "GuideDetail",
-            query: {guideItems: this.guideItems}
-        });
+            query: {guideItems: name}
         })
     },
     getGuideContent (maker) {
