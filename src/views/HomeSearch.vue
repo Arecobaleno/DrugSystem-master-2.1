@@ -43,7 +43,7 @@
 	<section class="drug" v-show="isShowDrug==true" >
     <section class="firstaid-search-box">
       <div class="header-content fx">
-        <span class="act fx fx-1"><h1 class="act">药品分类</h1>/基于ATC编码</span><p @click="changeShowType(1)">更多</p>
+        <span class="act fx fx-1"><h1 class="act">药品分类</h1>/基于ATC编码</span><p @click="changeShowType(1)" v-show="isShowmore==true">更多</p>
       </div>
     </section>
     <div class="page-content fx-1">
@@ -63,13 +63,13 @@
      <section class="disease" v-show="isShowDisease==true">
     <section class="firstaid-search-box">
       <div class="header-content fx">
-        <span class="act fx fx-1"><h1 class="act">疾病分类</h1></span><p @click="changeShowType(2)">更多</p>
+        <span class="act fx fx-1"><h1 class="act">疾病分类</h1></span><p @click="changeShowType(2)"  v-show="isShowmore==true">更多</p>
       </div>
     </section>
     <div class="page-content fx-1">
         <ul class="firstaid-content">
             <li class="fx-ac" v-for="(item, index) in diseaseClass" v-bind:key="index">
-                <span class="fx-1" @click="getData(item.value)" v-if="item.value != undefined">
+                <span class="fx-1" @click="toDesease(item.value)" v-if="item.value != undefined">
                      {{item.value}}
                 </span>
                 <i class="iconfont icon-qianjin"></i>
@@ -81,7 +81,7 @@
     <section class="interact" v-show="isShowInteract==true" >
     <section class="firstaid-search-box">
       <div class="header-content fx">
-        <span class="act fx fx-1"><h1 class="act">相互作用</h1></span><p @click="changeShowType(3)">更多</p>
+        <span class="act fx fx-1"><h1 class="act">相互作用</h1></span><p @click="changeShowType(3)"  v-show="isShowmore==true">更多</p>
       </div>
     </section>
     <div class="page-content fx-1">
@@ -107,6 +107,7 @@ import { mapGetters, mapActions } from "vuex";
 import appHeader from "../components/app-header.vue";
 import appNav from "../components/app-nav.vue"
 import axios from 'axios'
+import func from '../../vue-temp/vue-editor-bridge';
 
 export default {
   components: { appHeader , appNav},
@@ -126,6 +127,7 @@ export default {
 	  isresultEmpty: false,
 	  isShowSearch: false,
 	  isShowDrug: false,
+	  isShowmore: false,
 	  isShowDisease:false,
 	  isShowInteract:false,
 	  inputMsg:"",
@@ -387,9 +389,6 @@ export default {
 				let storage=window.localStorage
 				storage.setItem('searchWord',JSON.stringify(this.historySearch))
 			},
-	  toPage(){
-		  
-	  },
 	  showAll(){
 		  this.isShowData=false;
 		  this.isShowSearch=true;
@@ -404,6 +403,7 @@ export default {
 		  this.isShowDrug= true;
 		  this.isShowDisease= true;
 		  this.isShowInteract= true;
+		  this.isShowmore = true;
 	  },
 	  showDrug(){
 		   this.searchAll=1;
@@ -413,6 +413,7 @@ export default {
 		   this.isShowDrug= true;
 		   this.isShowDisease= false;
 		   this.isShowInteract= false;
+		   this.isShowmore = false;
 	  },
 	  showDisease(){
 		   this.searchAll=1;
@@ -422,6 +423,7 @@ export default {
 		   this.isShowDrug= false;
 		   this.isShowDisease= true;
 		   this.isShowInteract= false;
+		   this.isShowmore = false;
 	  },
 	  showInteract(){
 		   this.searchAll=1;
@@ -431,6 +433,7 @@ export default {
 		   this.isShowDrug= false;
 		   this.isShowDisease= false;
 		   this.isShowInteract= true;
+		   this.isShowmore = false;
 	  },
 	toInteraction: function(searchMsg)
 	{
@@ -440,20 +443,35 @@ export default {
 		     query: {interactName: searchMsg},
 		    })
 	},
+	toPage: function(item,label) {
+			this.searchData = item;
+			},
+	toDesease: function(item) {
+				let storage=window.localStorage;
+				storage.setItem('isShowData',JSON.stringify(true));
+				this.$router.push({
+					name: "disease-detail",
+					params: {diseaseName: item},
+				}) 
+            },
 	changeShowType(index){
 			  let types=["first","second","third","fourth"];
 			  this.active=types[index];
 			  if(index==0){
 				  this.showAll();
+				  this.isShowmore =true;
 			  }
 			  if(index==1){
 				  this.showDrug();
+				  this.isShowmore =false;
 			  }
 			  if(index==2){
 				  this.showDisease();
+				  this.isShowmore =false;
 			  }
 			  if(index==3){
 				  this.showInteract();
+				  this.isShowmore =false;
 			  }
 	},
 
