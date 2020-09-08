@@ -72,14 +72,15 @@ export default {
 	    informations: 'informations'
 	}),
 	created () {
-	    this.interaction =  this.$route.query.interactName;
+		console.log("detail!!!!!");
+	    this.interaction =  this.$route.query.interactName.split(',');
 		this.getDrugData(this.interaction);
 	},
 	watch: {
 		'$route'(to,from) {
             this.no_inter = false
 			this.example = [];
-			this.interaction = this.$route.query.interactName;
+			this.interaction = this.$route.query.interactName.split(',');
 			if(this.interaction!=null)
 				this.getDrugData(this.interaction);
 		}
