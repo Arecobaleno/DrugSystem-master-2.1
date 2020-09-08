@@ -67,13 +67,6 @@ export default {
   },
   watch: {
 	  '$route' (to, from) { //监听路由是否变化
-		  // if(to.query.drugClass != from.query.drugClass && to.query.drugClass != undefined && Object.prototype.toString.call(to.query.drugClass[0]) != '[object String]'){
-      //   console.log(333);
-      //   console.log(to.query.drugClass);
-      //   console.log(Object.prototype.toString.call(to.query.drugClass[0]))
-      //   this.drugClass = to.query.drugClass;
-			//   // this.init();//重新加载数据
-      // }
       this.getDrugData();
       this.searchData = ""
 	  }
@@ -92,30 +85,25 @@ export default {
 
     },
     search() {
+      console.log('hhh');
 				if(this.searchData!=""){
-					let url = '/api/medicine_query'
+					let url = 'http://127.0.0.1:10088/medicine_query'
 					let data = {
 						'content': this.searchData
 					}
 					axios.post(url, data)
 						.then((response) => {
               this.drug = response.data;
-              console.log(1313)
               console.log(this.drug)
               this.drugClass = response.data;
               this.drugClass1 = response.data;
             })
-          // this.$router.push({
-          //       path: "/drugitems",
-          //       query: {drugItems: this.drugItems, drugList: name}
-          //   });
 				}
 				else{
 					this.drug = [];
 				}
       },
     onCancel() {
-				// this.isShowData=false;
 				this.searchData = "";
 				this.drugClass = this.drugClass1;
 			},
@@ -123,7 +111,7 @@ export default {
       this.searchData = "";
     },
     getDrugData(){
-        let url = '/api/medicine_class'
+        let url = 'http://localhost:10088/medicine_class'
         axios.get(url)
             .then((response)=>{
                 console.log(response);
@@ -134,39 +122,18 @@ export default {
             })
     },
     getDrugChemistry(name){
-        let url = '/api/chemical_by_class'
-        //   console.log(name);
-        // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
-        //   console.log(name);
-        let data = {'content': name}
-        axios.post(url, data)
-            .then((response) => {
-                // console.log(222)
-                // console.log(response.data)
-                this.drugItems = response.data;
-                this.head = this.getChinese(name);
-                this.$router.push({
-                path: "/drugchemistry",
-                query: {drugItems: this.drugItems, drugList: name, title: this.head}
-            });
-            })
-            .catch((error) => {
-                console.log(error);
-            })
+        this.$router.push({
+          path: "/drugchemistry",
+          query: {name:name, title: this.getChinese(name)}
+        });
+        
     },
     getDrugItems(name){
-        let url = '/api/medicine_by_chemical'
-        //   console.log(name);
-        // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
-        //   console.log(name);
+        let url = 'http://localhost:10088/medicine_by_chemical'
         let data = {'content': name}
         axios.post(url, data)
             .then((response) => {
-                // console.log(222)
-                // console.log(response.data)
                 this.drugItems = response.data;
-                console.log(222222)
-                console.log(this.drugItems);
                 this.head = this.getChinese(name);
                 this.$router.push({
                 path: "/drugitems",
@@ -178,15 +145,10 @@ export default {
             })
     },
     getDrugDetail(name){
-        let url = '/api/detail'
-        console.log(name);
-        // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
-        //   console.log(name);
+        let url = 'http://localhost:10088/detail'
         let data = {'category': 'drug', 'content': name}
         axios.post(url, data)
             .then((response) => {
-                // console.log(222)
-                // console.log(response.data)
                 this.drugDetail = response.data;
                 console.log(111)
                 console.log(this.drugDetail);
@@ -232,6 +194,7 @@ export default {
 
   },
   created() {
+    console.log(799);
       this.getDrugData();
       this.searchData = ""
   }

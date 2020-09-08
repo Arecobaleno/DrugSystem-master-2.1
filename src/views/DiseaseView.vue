@@ -1,6 +1,6 @@
 <template>
 	<div class="page-full component-home fx-column">
-		<app-header :title="appHeader.title"></app-header>
+		<app-header :title="appHeader.title" ref="header" :backUrl="appHeader.backUrl"></app-header>
 		<section class="page-content" >
 			<form action="/">
 				<van-search
@@ -74,7 +74,8 @@
 		components: {
 			appNav,
 			appHeader
-		},
+        },
+
 		data() {
 			return {
 				isResetMap: true,
@@ -85,10 +86,11 @@
 				isShowData: true,
 				inputMsg:"",
 				appHeader: {
-     		    	title: "疾病"
+					 title: "疾病",
+					 backUrl: "/home"
 				},
 				historySearch:['心力衰竭'],
-				history:"历史搜索：暂无"
+                history:"历史搜索：暂无",
 			}
 		},
 		computed: mapGetters({
@@ -96,7 +98,6 @@
 		}),
 		methods: {
 			search() {
-				console.log(this.inputMsg)
 				if(this.inputMsg !=''){
 					let storage=window.localStorage
 					{
@@ -105,21 +106,17 @@
 
 							          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
 							          this.historySearch.unshift(this.inputMsg);
-									  console.log(88888)
-									  console.log(this.historySearch)
-									  console.log(88888)
 							 }else{
 									   this.historySearch.unshift(this.inputMsg)
 									}
 
 					        if( this.historySearch.length >= 6){
 					                this.historySearch.pop()
-					            }
-
-					            storage.setItem('searchWord',JSON.stringify(this.historySearch))
+                            }
+                            storage.setItem('searchWord',JSON.stringify(this.historySearch))
 					    }
-                    }
-                    //this.isShowData=true;
+					}
+                    storage.setItem('isShowData',JSON.stringify(false));
                     this.$router.push({
                         name: "disease-search",
                         params: {diseaseName: this.inputMsg, type: "text"},
@@ -140,6 +137,8 @@
                 this.titleText = this.diseaseTitle[index].value;
             },
 			onHistory: function(item) {
+				let storage=window.localStorage;
+				storage.setItem('isShowData',JSON.stringify(false));
 				this.history="历史搜索：";
 				this.$router.push({
 					name: "disease-search",
@@ -147,9 +146,11 @@
 				}) 
             },
             toPage: function(item) {
+				let storage=window.localStorage;
+				storage.setItem('isShowData',JSON.stringify(true));
 				this.$router.push({
-					name: "disease-search",
-					params: {diseaseName: item, type: "title"},
+					name: "disease-detail",
+					params: {diseaseName: item},
 				}) 
             },
             
@@ -161,42 +162,42 @@
 			},
 		},
 		created () {
-        	this.inputMsg = "";
-            this.isShowData=true;
-            this.diseaseTitle = [{value:"标签2"}, {value:"标签2"}, {value:"标签3"}];
-            this.disease = ["标签1","标签2", "内容3","标签2", "内容3"]
-            this.titleText =  this.diseaseTitle[this.activeKey].value;
-
-			var x=document.getElementById("search_history");
-			window.localStorage.removeItem('searchWord')
-			let storage=window.localStorage
-			if(storage.getItem('searchWord')!==null){
-				this.historySearch=JSON.parse(storage.getItem('searchWord'))
-			} 
-		},
-		/*watch: {
-			'$route'(to,from) {
-                if(from.name=="home"){
-                    this.inputMsg = "";
-				    this.isShowData=true;
+            this.diseaseTitle = [{value:"高血压"}, {value:"标签2"}, {value:"标签3"}];
+            this.disease = ["高血压合并心肌梗死","高血压合并症"]
+            this.titleText = this.diseaseTitle[this.activeKey].value;
+        },
+        
+	    beforeRouteEnter(to, from, next) {
+            next(vm => {
+                let storage=window.localStorage;
+                if(from.name == "home"){
+                    storage.setItem('isShowData',JSON.stringify(true));
                 }
-        	}
-    	},*/
-		activated() {
-			this.$store.dispatch('empty_symptom');
-			if (this.ifrmeHwUced && this.isResetMap) {
-				this.isResetMap = false;
-				// this.initMap();
-			}
-		},
+                else{
+                    //storage.setItem('isShowData',JSON.stringify(false));
+                }
+            })
+        },
 		mounted() {
+            this.$nextTick(()=>{
+                let storage=window.localStorage;
+                this.inputMsg = "";
+                this.isShowData = true;
+                if(storage.getItem('isShowData')) {
+                    this.isShowData = JSON.parse(storage.getItem('isShowData'))
+                }
+            })
+            let storage=window.localStorage;
+            var x=document.getElementById("search_history");
+			//window.localStorage.removeItem('searchWord')
+			if(storage.getItem('searchWord')!==null){
+                this.historySearch=JSON.parse(storage.getItem('searchWord'))
+			} 
 			if(this.historySearch.length==0){
 				this.history="历史搜索：暂无";}
 			else{
 				this.history="历史搜索：";
-            }
-            this.inputMsg = "";
-			this.isShowData=true;
+			}
 		}
 	}
 </script>

@@ -4,41 +4,14 @@
         <app-header :title="appHeader.title">
             <i slot="right" class="icon-xiaoxi iconfont ac-o"></i>
         </app-header>
-        <!-- <div class="filter-top fx">
-            <div class="fx-1 fx-c filter-item" :class="{active: showDrug}" @click="showOtc = false, showType = false, showDrug = !showDrug">药品类别<i class="icon-sanjiaoxia iconfont"></i></div>
-            <div class="fx-1 fx-c filter-item" :class="{active: showOtc}" @click="showOtc = !showOtc, showType = false, showDrug = false">OTC/非OTC<i class="icon-sanjiaoxia iconfont"></i></div>
-            <div class="fx-1 fx-c filter-item" :class="{active: showType}" @click="showOtc = false, showType = !showType, showDrug = false">医保类别<i class="icon-sanjiaoxia iconfont"></i></div> -->
-        <!-- </div> --> 
     </div>
     <div class="page-content fx-1">
         <ul class="druglist-content">
             <li v-for="(item, index) in drugs" v-bind:key="index" @click="getDrugDetail(item)" class="drug-item fx-ac ac">
-                <div class="fx-1">{{item}}</div>
+                <div class="fx-1">{{getChinese(item)}}</div>
             </li>
         </ul>
     </div>
-    <!-- <transition name="downup">
-        <div v-show="showDrug" class="filter-content filter-drug">
-        <ul class="fx-column">
-            <li v-for="(item, index) in drugItems" v-bind:key="index" @click="selectItem(item)" :class="{active: item.selected}" class="fx-1 fx-ac ac"><p class="fx-1">{{item.name}}</p><span class="filter-select fx-c" :class="{active: item.selected}"><i class="iconfont" :class="{'icon-gou': item.selected}"></i></span></li>
-        </ul>
-    </div>
-    </transition>
-    <transition name="downup">
-    <div v-show="showOtc" class="filter-content filter-type">
-        <ul class="fx-column">
-            <li v-for="(item, index) in otcItems" v-bind:key="index" @click="selectItem(item)" :class="{active: item.selected}" class="fx-1 fx-ac ac"><p class="fx-1">{{item.name}}</p><span class="filter-select fx-c" :class="{active: item.selected}"><i class="iconfont" :class="{'icon-gou': item.selected}"></i></span></li>
-        </ul>
-    </div>
-    </transition>
-    <transition name="downup">
-    <div v-show="showType" class="filter-content filter-type">
-        <ul class="fx-column">
-            <li v-for="(item, index) in typeItems" v-bind:key="index" @click="selectItem(item)" :class="{active: item.selected}" class="fx-1 fx-ac ac"><p class="fx-1">{{item.name}}</p><span class="filter-select fx-c" :class="{active: item.selected}"><i class="iconfont" :class="{'icon-gou': item.selected}"></i></span></li>
-        </ul>
-    </div>
-    </transition>
-    <div v-show="showOtc || showType || showDrug" @click="showOtc = false, showType = false, showDrug = false" class="mask"></div> -->
     <app-nav></app-nav>
 </div>
 </template>
@@ -55,32 +28,16 @@ export default {
   components: { appHeader, appNav },
   data() {
     return {
-      // drugItems: [
-      //   { name: "西药", selected: false },
-      //   { name: "中成药", selected: false },
-      //   { name: "其它类", selected: false }
-      // ],
-      // otcItems: [
-      //   { name: "处方药", selected: false },
-      //   { name: "OTC甲", selected: false },
-      //   { name: "OTC乙", selected: false },
-      //   { name: "未知类别", selected: false }
-      // ],
-      // typeItems: [
-      //   { name: "医保甲", selected: false },
-      //   { name: "医保乙", selected: false },
-      //   { name: "非医保", selected: false },
-      //   { name: "未知类别", selected: false }
-      // ],
-      drugs: this.$route.query.drugItems,
+      drugs: null,
       showOtc: false,
       showDrug: false,
       showType: false,
       appHeader: {
         title: this.$route.query.title
       },
-      drugList: this.$route.query.drugList,
-      drugDetail: null
+      drugList: this.$route.query.name,
+      drugDetail: null,
+      name: this.$route.query.name,
     };
   },
   methods: {
@@ -91,33 +48,30 @@ export default {
       this.$router.push({ path: "/drugdetail" });
     },
     show(){
-      // console.log(111)
-      // console.log(this.drugs);
     },
     getDrugDetail(name){
-        let url = '/api/detail'
-        console.log(name);
-        // name = name.replace(/\[([^\[\]]*)\]/g, "($1)");
-        //   console.log(name);
-        let data = {'category': 'drug', 'content': name}
+      console.log(1818);
+      console.log(name);
+      this.$router.push({
+        path: "/drugdetail",
+        query: {drugList: name}
+        });
+        
+    },
+    getDrugItemsData (){
+        let url = 'http://localhost:10088/medicine_by_chemical'
+        let data = {'content': this.name}
         axios.post(url, data)
             .then((response) => {
-                // console.log(222)
-                // console.log(response.data)
-                this.drugDetail = response.data;
-                console.log(111)
-                console.log(this.drugDetail);
-                this.$router.push({
-                path: "/drugdetail",
-                query: {drugDetail: this.drugDetail, drugList: name}
-            });
+                this.drugs = response.data;
+                console.log(777888999)
+                console.log(this.drugs);
+                this.appHeader.title = this.getChinese(this.name);
             })
             .catch((error) => {
                 console.log(error);
             })
-        
     },
-
     getChinese: function (name) {
         let isletter = /^[a-zA-Z]+$/.test(name);
         if(isletter){
@@ -130,18 +84,18 @@ export default {
   },
   computed: {},
   created() {
-    this.show();
+    this.getDrugItemsData();
     if(this.$route.query) {
     
-    if(Object.prototype.toString.call(this.$route.query.drugItems) == 'object String'){
+    // if(Object.prototype.toString.call(this.$route.query.drugItems) == 'object String'){
           
-        }
-    else{
-        this.drugs = this.$route.query.drugItems;
-    }
-    this.drugList = this.$route.query.drugList;
+    //     }
+    // else{
+    //     this.drugs = this.$route.query.drugItems;
+    // }
+    this.drugList = this.$route.query.name;
+    this.name = this.$route.query.name;
     this.appHeader.title = this.$route.query.title;
-		// this.init();
 	}
 
   },
@@ -153,19 +107,20 @@ export default {
   },
   watch: {
 	  '$route' (to, from) { //监听路由是否变化
-		  if(to.query.drugItems != from.query.drugItems && to.query.drugItems != undefined){
-        console.log(Object.prototype.toString.call(to.query.drugItems))
-        if(Object.prototype.toString.call(to.query.drugItems) == '[object String]'){
+		  if(to.query.name != from.query.name && to.query.name != undefined){
 
-          this.drugs = []
-          this.drugs.push(to.query.drugItems)
-        }
-        else{
-          this.drugs = to.query.drugItems;
-        }
-        this.drugList = to.query.drugList
+        // if(Object.prototype.toString.call(to.query.drugItems) == '[object String]'){
+
+        //   this.drugs = []
+        //   this.drugs.push(to.query.drugItems)
+        // }
+        // else{
+        //   this.drugs = to.query.drugItems;
+        // }
+        this.drugList = to.query.name;
+        this.name = to.query.name;
         this.appHeader.title = to.query.title;
-			  // this.init();//重新加载数据
+        this.getDrugItemsData();
 		  }
 	  }
 },
