@@ -450,6 +450,7 @@ export default {
 	toDesease: function(item) {
 				// let storage=window.localStorage;
 				// storage.setItem('isShowData',JSON.stringify(true));
+				console.log("item: "+item);
 				this.$router.push({
 					name: "disease-detail",
 					params: {diseaseName: item},
