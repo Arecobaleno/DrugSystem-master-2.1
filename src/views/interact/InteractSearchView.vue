@@ -268,11 +268,12 @@
 			  this.isShowData=false;
 			},
 			toPage: function() {
+			console.log("test router!!!!!");
+			let search=this.searchMsg.toString();
 
-			console.log(this.searchMsg);
 				this.$router.push({
 					path: "interactDetail",
-					query: {interactName: this.searchMsg},
+					query: {interactName: search},
 				})
 				console.log(12321321)
 				console.log(this.inputMsg)
