@@ -107,10 +107,11 @@ import { mapGetters, mapActions } from "vuex";
 import appHeader from "../components/app-header.vue";
 import appNav from "../components/app-nav.vue"
 import axios from 'axios'
-import func from '../../vue-temp/vue-editor-bridge';
+// import func from '../vue-temp/vue-editor-bridge';
 
 export default {
   components: { appHeader , appNav},
+
   data() {
     return {
       appHeader: {
@@ -443,12 +444,12 @@ export default {
 		     query: {interactName: searchMsg},
 		    })
 	},
-	toPage: function(item,label) {
-			this.searchData = item;
-			},
+	toPage(item,label){
+		this.searchData = item;
+	},
 	toDesease: function(item) {
-				let storage=window.localStorage;
-				storage.setItem('isShowData',JSON.stringify(true));
+				// let storage=window.localStorage;
+				// storage.setItem('isShowData',JSON.stringify(true));
 				this.$router.push({
 					name: "disease-detail",
 					params: {diseaseName: item},
