@@ -60,13 +60,13 @@
                     <strong class="fx fx-1">常见疾病</strong><i class="icon-jinru iconfont"></i>
                 </router-link>
                 <div class="fx diseases-group-item">
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">高血压</router-link>
+                    <router-link class="fx-c fx-1 ac" to="/disease/diseaseDetail/高血压病">高血压</router-link>
                     <router-link class="fx-c fx-1 ac" to="/disease/1">冠心病</router-link>
                     <router-link class="fx-c fx-1 ac" to="/disease/1">心力衰竭</router-link>
                 </div>
                 <div class="fx diseases-group-item">
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">高血压并发症</router-link>
-                    <router-link class="fx-c fx-1 ac" to="/disease/1">高血压合并心肌梗死</router-link>
+                    <router-link class="fx-c fx-1 ac" to="/disease/diseaseDetail/%E9%AB%98%E8%A1%80%E5%8E%8B%E5%B9%B6%E5%8F%91%E7%97%871">高血压并发症</router-link>
+                    <router-link class="fx-c fx-1 ac" to="/disease/diseaseDetail/%E9%AB%98%E8%A1%80%E5%8E%8B%E5%90%88%E5%B9%B6%E5%BF%83%E8%82%8C%E6%A2%97%E6%AD%BB">高血压合并心肌梗死</router-link>
                 </div>
             </section>
             <!-- <section class="news-group group-item">

@@ -12,7 +12,7 @@
         <div class="detail-head detail-bg border-b">
             <h2 class="detail-head-title" v-text="search_data"></h2>
         </div>
-        <!-- 跳转模块 -->
+        <!-- 跳转模块
         <div class="detail-relevant border-b">
             <ul class="detail-relevant-box fx">
                 <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-1"></i>辅助疗法</li>
@@ -20,7 +20,7 @@
                 <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-3"></i>附近医院</li>
                 <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-4"></i>相关药品</li>
             </ul>
-        </div>
+        </div> -->
         <!-- 详情内容 -->
         <div class="detail-info">
             <div class="info-group">
@@ -72,7 +72,8 @@ export default {
 	    informations: 'informations'
 	}),
 	created () {
-		console.log("detail!!!!!");
+        console.log("detail!!!!!");
+        console.log(this.$route.query.interactName)
 	    this.interaction =  this.$route.query.interactName.split(',');
 		this.getDrugData(this.interaction);
 	},

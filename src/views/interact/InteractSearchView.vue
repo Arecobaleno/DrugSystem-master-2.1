@@ -149,17 +149,14 @@
 		},
 		methods: {
 			showData(){
-			   console.log(this.searchMsg);
 			},
 			addSearchItem() {
 			  this.searchNum+=1;
-			  console.log(this.searchMsg);
 			  document.getElementById("multi_search").style.display="inline";
 			},
 			delSearchItem(index) {
 			  this.searchNum-=1
 			  this.searchMsg.splice(index,1);
-			  console.log(this.searchMsg);
 			  if( this.searchNum==0){
 				  document.getElementById("multi_search").style.display="none";
 			  }
@@ -187,9 +184,6 @@
 			
 							          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
 							          this.historySearch.unshift(this.inputMsg);
-									  console.log(88888)
-									  console.log(this.historySearch)
-									  console.log(88888)
 							 }else{
 									   this.historySearch.unshift(this.inputMsg)
 									}
@@ -257,34 +251,22 @@
 			  if(type=="page"){
 			  this.searchMsg[index]=item.value;
 			  this.isShowData=false;
-			 console.log(this.searchMsg)
 			     }
 			     else{
 			       this.searchMsg[index]=item;
 			       this.isShowData=false;
-			       console.log(this.searchMsg)
-			       console.log(index)
 			     }
 			  this.search(index)
 			  this.isShowData=false;
 			},
 			toPage: function() {
-			console.log("test router!!!!!");
 			let search=this.searchMsg.toString();
 
 				this.$router.push({
 					path: "interactDetail",
 					query: {interactName: search},
 				})
-				console.log(12321321)
-				console.log(this.inputMsg)
-
-			//this.inputMsg=''
-     // this.isShowData=false
-
 			},
-			
-			
 		},
 		activated() {
 			this.$store.dispatch('empty_symptom');
