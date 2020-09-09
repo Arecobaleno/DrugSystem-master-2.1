@@ -42,6 +42,7 @@ import DrugListView from '../views/aid/DrugListView.vue'
 import DrugsView from '../views/aid/DrugsView.vue'
 import DrugDetailView from '../views/aid/DrugDetailView.vue'
 import DrugChemistry from '../views/drug/DrugChemistry.vue'
+import DrugSearch from '../views/drug/DrugSearch.vue'
 
 import MyView from '../views/MyView.vue'
 import InvitationView from '../views/my/InvitationView.vue'
@@ -380,6 +381,7 @@ export default new Router({
                 meta: { requiresAuth: false }
             }]
         },
+        //药品功能
         { path: '/', redirect: '/home' },
         {
             path: '/yaopin',
@@ -405,12 +407,12 @@ export default new Router({
             component: DrugDetail,
             meta: { requiresAuth: false }
         },
-        // {
-        //     path: '/drugsearch',
-        //     name: 'drug-search',
-        //     component: DrugSearch,
-        //     meta: { requiresAuth: false }
-        // },
+        {
+            path: '/drugsearch',
+            name: 'drug-search',
+            component: DrugSearch,
+            meta: { requiresAuth: false }
+        },
         { // 疾病
             path: '/disease',
             component: Parent,
