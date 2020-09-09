@@ -180,15 +180,14 @@
             this.diseaseTitle = [{value:"高血压"}, {value:"心血管疾病"}, {value:"消化系统疾病"}];
 			this.dataSet = [
 				[
-					{title: "高血压", value: ["高血压合并心肌梗死","高血压并发症"]},
-					{title: "冠心病", value: ["详情1","详情2"]},
-					{title: "xx病", value: ["详情1","详情2"]}
+					{title: "高血压", value: ["高血压合并心肌梗死","高血压并发症","继发性高血压"]}
 				],
 				[
-					{title: "疾病2", value: ["详情1","详情2"]}
+					{title: "冠心病", value: ["冠心病合并症","心肌梗死","稳定型冠心病"]},
+					{title: "心力衰竭", value: ["慢性心衰","急性心衰","心衰合并症"]}
 				],
 				[
-					{title: "疾病3", value: ["详情1","详情2"]}
+					{title: "肝炎", value: ["甲型肝炎","乙型肝炎"]}
 				]
 			]
 			for(var i = 0; i < this.dataSet[0].length; i++){

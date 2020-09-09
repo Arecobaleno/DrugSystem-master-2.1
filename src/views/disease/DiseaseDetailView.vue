@@ -39,7 +39,7 @@
                             <div class="info-sub">
                                 <div class="info-sub-h">适应药物：</div>
                                 <div v-for="(treatment, index) in example" :key="index">
-                                    <p class="info-sub-dd">药品：{{treatment[0]}}</p>
+                                    <p class="info-sub-dd">药品：<a @click="toDrug(treatment[0])">{{treatment[0]}}</a></p>
                                     <p class="info-sub-dd">建议：{{treatment[1]}}</p>
                                     <p class="info-sub-dd">参考文献：{{treatment[2]}}</p>
                                     <p class="info-sub-dd">临床证据：{{treatment[3]}}</p>
@@ -161,6 +161,9 @@
                 this.isShow = isShow;
                 this.detailName = detailName;
                 this.showResult(this.detailName)
+            },
+            toDrug (drug) {
+                  
             },
             showResult (content) {
                 let url = '/api/disease_detail'
