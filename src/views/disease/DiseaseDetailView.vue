@@ -146,10 +146,10 @@
 					axios.post(url, data)
 						.then((response) => {
 							if(response.data.length!=0){
+                                console.log(response.data)
 								this.isresultEmpty=true;
                                 this.dataSet[0]  = response.data.diseaseTree;
                                 this.activeNames = response.data.path;
-                                console.log("res:",response.data)
 							}
 						})
 				}
@@ -170,12 +170,11 @@
                 let data = {'content': content}
                 axios.post(url, data)
                     .then((response) => {
-                        console.log(response.data.indication)
+                        console.log(response.data)
                         let res = response.data.indication
                         for (let index in res) {
                             let treatment = []
                             let sample = res[index]
-                            console.log("sample",sample)
                             treatment.push(sample.drugName, sample.property.建议,
                             sample.property.参考文献, sample.property.临床证据,
                             sample.property.证据级别, sample.banPeople, sample.purpose)
@@ -186,7 +185,6 @@
                         for (let index in resCon) {
                             let treatment = []
                             let sampleCon = resCon[index]
-                            console.log("sampleCon",sampleCon)
                             treatment.push(sampleCon.drugName, sampleCon.property.建议,
                             sampleCon.property.参考文献, sampleCon.property.临床证据,
                             sampleCon.property.证据级别, sampleCon.banPeople, sampleCon.purpose)
