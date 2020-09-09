@@ -143,7 +143,7 @@ export default {
 }
 .download_button{
 width: 100%;
-
+height: 50px;
 }
 .pdf {
 margin-left: 0px;

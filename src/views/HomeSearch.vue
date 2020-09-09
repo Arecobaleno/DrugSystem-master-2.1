@@ -24,7 +24,7 @@
 					<van-col id="search_history" v-model="history" align="left" class="history" span="11">{{history}}</van-col>
 					<van-col id="clear_history" class="clear_history" align="right" @click="clear_history" span="8">清空搜索</van-col>
 				</van-row>
-				<van-button type="default" id="item_history"  class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="toPage(item,'history')">{{item}}</van-button>
+				<van-button round type="default" id="item_history"  class="history_item" align="center" v-for="(item, index) in historySearch" v-bind:key="index" @click="toPage(item,'history')">{{item}}</van-button>
 			</a>
 			
 		</div>	
@@ -43,7 +43,7 @@
 	<section class="drug" v-show="isShowDrug==true" >
     <section class="firstaid-search-box">
       <div class="header-content fx">
-        <span class="act fx fx-1"><h1 class="act">药品分类</h1>/基于ATC编码</span><p @click="changeShowType(1)" v-show="isShowmore==true">更多</p>
+        <span class="act fx fx-1"><h1 class="act">药品</h1></span><p @click="changeShowType(1)" v-show="isShowmore==true">更多</p>
       </div>
     </section>
     <div class="page-content fx-1">
@@ -63,7 +63,7 @@
      <section class="disease" v-show="isShowDisease==true">
     <section class="firstaid-search-box">
       <div class="header-content fx">
-        <span class="act fx fx-1"><h1 class="act">疾病分类</h1></span><p @click="changeShowType(2)"  v-show="isShowmore==true">更多</p>
+        <span class="act fx fx-1"><h1 class="act">疾病</h1></span><p @click="changeShowType(2)"  v-show="isShowmore==true">更多</p>
       </div>
     </section>
     <div class="page-content fx-1">
@@ -701,24 +701,27 @@ padding: 0 0.13rem 0.14rem 0.13rem;
   display: inline;
 }
 
-	.history{
+.history{
 		font-family:"Times New Roman";
-		font-size:12px;
-		margin-top: 10px;
+		font-size:14px;
+		margin-top: 4px;
+		margin-left: 6px;
 		margin-bottom: 5px;
 		//color: #53575b;;
 		color: #1a1b1d;;
 	}
 	.clear_history{
 		font-family:"Times New Roman";
-		font-size:10px;
+		font-size:12px;
 		margin-top: 4px;
+		margin-right: 6px;
 		color: #676b73;;
 	}
 	.history_item{
-		height: 23px;
+		height: 33px;
 		margin-top: 6px;
-		margin-right: 10px;
+		margin-left: 6px;
+		margin-right: 7px;
 		font-size:10px
 	}
 </style>

@@ -420,7 +420,7 @@ export default {
         toPage: function(searchMsg) {
             this.$router.push({
             path: "interactDetail",
-            query: {interactName: searchMsg},
+            query: {interactName: searchMsg[0]},
             })
 
         },
