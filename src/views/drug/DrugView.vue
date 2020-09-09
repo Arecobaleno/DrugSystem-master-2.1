@@ -27,9 +27,7 @@
                 <span class="fx-1" @click="getDrugChemistry(item.value)" v-if="item.value != undefined">
                     {{getChinese(item.value)}}
                 </span>
-                <span class="fx-1" @click="useMethod(item)" v-if="item.name != undefined">
-                    {{getChinese(item.name)}}
-                </span>
+               
                 <i class="iconfont icon-qianjin"></i>
             </li>
         </ul>
@@ -66,43 +64,25 @@ export default {
     }
   },
   watch: {
-	  '$route' (to, from) { //监听路由是否变化
-      this.getDrugData();
-      this.searchData = ""
+    '$route' (to, from) { //监听路由是否变化
+    this.searchData = "";
+    this.getDrugData();
 	  }
   },
   methods: {
-    useMethod(item){
-      if(item.label == '药品商品名'){
-        this.getDrugDetail(item.name);
-      }
-      else if(item.label == '药品分类'){
-        this.getDrugChemistry(item.name);
+    search() {
+      console.log('hhhkkk');
+      console.log(this.searchData);
+      if(this.searchData!=""){
+        this.$router.push({
+        path: "/drugsearch",
+        query: {keywords: this.searchData}
+      });
       }
       else{
-        this.getDrugItems(item.name);
+        this.drug = [];
       }
-
     },
-    search() {
-      console.log('hhh');
-				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/medicine_query'
-					let data = {
-						'content': this.searchData
-					}
-					axios.post(url, data)
-						.then((response) => {
-              this.drug = response.data;
-              console.log(this.drug)
-              this.drugClass = response.data;
-              this.drugClass1 = response.data;
-            })
-				}
-				else{
-					this.drug = [];
-				}
-      },
     onCancel() {
 				this.searchData = "";
 				this.drugClass = this.drugClass1;
@@ -126,40 +106,6 @@ export default {
           path: "/drugchemistry",
           query: {name:name, title: this.getChinese(name)}
         });
-        
-    },
-    getDrugItems(name){
-        let url = 'http://localhost:10088/medicine_by_chemical'
-        let data = {'content': name}
-        axios.post(url, data)
-            .then((response) => {
-                this.drugItems = response.data;
-                this.head = this.getChinese(name);
-                this.$router.push({
-                path: "/drugitems",
-                query: {drugItems: this.drugItems, drugList: name, title: this.head}
-            });
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-    },
-    getDrugDetail(name){
-        let url = 'http://localhost:10088/detail'
-        let data = {'category': 'drug', 'content': name}
-        axios.post(url, data)
-            .then((response) => {
-                this.drugDetail = response.data;
-                console.log(111)
-                console.log(this.drugDetail);
-                this.$router.push({
-                path: "/drugdetail",
-                query: {drugDetail: this.drugDetail, drugList: name}
-            });
-            })
-            .catch((error) => {
-                console.log(error);
-            })
         
     },
     backPage: function() {
@@ -194,9 +140,7 @@ export default {
 
   },
   created() {
-    console.log(799);
-      this.getDrugData();
-      this.searchData = ""
+    this.getDrugData();
   }
 };
 
