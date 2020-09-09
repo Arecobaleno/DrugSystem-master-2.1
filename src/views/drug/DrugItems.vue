@@ -50,8 +50,6 @@ export default {
     show(){
     },
     getDrugDetail(name){
-      console.log(1818);
-      console.log(name);
       this.$router.push({
         path: "/drugdetail",
         query: {drugList: name}
@@ -64,8 +62,6 @@ export default {
         axios.post(url, data)
             .then((response) => {
                 this.drugs = response.data;
-                console.log(777888999)
-                console.log(this.drugs);
                 this.appHeader.title = this.getChinese(this.name);
             })
             .catch((error) => {
@@ -86,13 +82,6 @@ export default {
   created() {
     this.getDrugItemsData();
     if(this.$route.query) {
-    
-    // if(Object.prototype.toString.call(this.$route.query.drugItems) == 'object String'){
-          
-    //     }
-    // else{
-    //     this.drugs = this.$route.query.drugItems;
-    // }
     this.drugList = this.$route.query.name;
     this.name = this.$route.query.name;
     this.appHeader.title = this.$route.query.title;

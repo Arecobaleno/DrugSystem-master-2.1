@@ -80,8 +80,6 @@ export default {
 
     },
     search() {
-      console.log('hhh');
-      console.log('12312313');
 				if(this.searchData!=""){
 					let url = 'http://127.0.0.1:10088/medicine_query'
 					let data = {
@@ -109,9 +107,6 @@ export default {
     },
     getDrugData(){
         let url = 'http://127.0.0.1:10088/medicine_query'
-        console.log(88888888888888888);
-        console.log(this.$route.query.keywords);
-        console.log(this.searchData);
         this.searchData = this.$route.query.keywords;
 					let data = {
 						'content': this.searchData
@@ -155,9 +150,9 @@ export default {
     }
 
 },
-    mounted (){
+  mounted (){
 
-  },
+},
   created() {
     this.getDrugData();
   }

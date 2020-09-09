@@ -27,7 +27,6 @@
                 <span class="fx-1" @click="getDrugChemistry(item.value)" v-if="item.value != undefined">
                     {{getChinese(item.value)}}
                 </span>
-               
                 <i class="iconfont icon-qianjin"></i>
             </li>
         </ul>
@@ -71,8 +70,6 @@ export default {
   },
   methods: {
     search() {
-      console.log('hhhkkk');
-      console.log(this.searchData);
       if(this.searchData!=""){
         this.$router.push({
         path: "/drugsearch",
@@ -108,37 +105,20 @@ export default {
         });
         
     },
-    backPage: function() {
-				this.searchData = "";
-				this.interaction = [];
-				if (this.backUrl) {
-					router.push({
-						path: this.backUrl
-					})
-				} else if (window.history.length > 1) {
-					router.back()
-				} else {
-					router.push({
-						name: 'home'
-					})
-				}
-      },
-      getChinese: function (name) {
-        let isletter = /^[a-zA-Z]+$/.test(name);
-        if(isletter){
-          return name
-        }
-        else{
-          return name = name.replace(/[^\u4e00-\u9fa5]/gi, "");
-        }
-        
-        
-    }
+    getChinese: function (name) {
+      let isletter = /^[a-zA-Z]+$/.test(name);
+      if(isletter){
+        return name
+      }
+      else{
+        return name = name.replace(/[^\u4e00-\u9fa5]/gi, "");
+      } 
+  }
 
 },
-    mounted (){
+  mounted (){
 
-  },
+},
   created() {
     this.getDrugData();
   }

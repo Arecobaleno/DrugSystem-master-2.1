@@ -13,7 +13,7 @@
             <p v-if="item.common_name" class="detail-head-small" v-text="'俗称：'+item.common_name"></p>
             <p v-if="item.advice" class="detail-head-small" v-text="'就诊建议：'+item.advice"></p>
         </div>
-        <!-- 跳转模块
+        <!-- 跳转模块 -->
         <div class="detail-relevant border-b">
             <ul class="detail-relevant-box fx">
                 <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-1"></i>辅助疗法</li>
@@ -21,7 +21,7 @@
                 <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-3"></i>附近医院</li>
                 <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-4"></i>相关药品</li>
             </ul>
-        </div> -->
+        </div>
         <!-- 详情内容 -->
         <div class="detail-info">
             <div class="info-group">
@@ -151,8 +151,6 @@ export default {
     },
     methods: {
         getDrugDetailData (){
-            console.log(81818);
-            console.log(this.drugList)
             let url = 'http://localhost:10088/detail'
             let data = {'category': 'drug', 'content': this.drugList}
             axios.post(url, data)
@@ -167,8 +165,6 @@ export default {
                 })
         },
         getDrugDetail(){
-            console.log(1)
-            console.log(this.drugDetail)
             for (let index in this.drugDetail) {
                 let treatment = []
                 let tag = [0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -424,7 +420,7 @@ export default {
         toPage: function(searchMsg) {
             this.$router.push({
             path: "interactDetail",
-            query: {interactName: searchMsg[0]},
+            query: {interactName: searchMsg},
             })
 
         },
