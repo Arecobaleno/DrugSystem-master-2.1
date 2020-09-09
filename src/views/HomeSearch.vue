@@ -181,6 +181,90 @@ export default {
 		}
 	},
 	
+	// searchDrug(){
+	// 	 this.drugClass = [];
+
+	// 					if(this.searchData!=""){
+	// 						let url = '/api/medicine_query'
+	// 						let data = {
+	// 							'content': this.searchData
+	// 						}
+	// 						axios.post(url, data)
+	// 							.then((response) => {
+	// 	        let drug = response.data
+	// 			let len=3 //默认显示长度
+	// 			if(this.searchAll==1){
+	// 				len=drug.length
+	// 			}
+	// 			for(var i=0; i<len;i++){
+	// 				this.drugClass.push({"value":drug[i].name,"label":drug[i].label})
+	// 			}
+	// 			console.log(666666);
+	// 	        console.log(this.drugClass)
+
+	// 	      })
+	// 					}
+	// 					else{
+	// 						this.drugClass = [];
+	// 					}
+	// },
+	// searchDisease(){
+	// this.diseaseClass = [];
+
+	// 				if(this.searchData!=""){
+	// 					let url = '/api/query'
+	// 					let data = {
+	// 					'category':"disease",
+	// 					'content': this.searchData
+	// 					}
+	// 					axios.post(url, data)
+	// 						.then((response) => {
+	// 	    let disease = response.data
+	// 		let len=3 //默认显示长度
+	// 		if(this.searchAll==1){
+	// 			len=disease.length
+	// 		}
+	// 			for(var i=0; i<len;i++){
+	// 				this.diseaseClass.push({"value":disease[i].value,"label":disease[i].label})
+	// 			}
+	// 		console.log(77777);
+	//         console.log(this.diseaseClass)
+	
+	//       })
+	// 				}
+	// 				else{
+	// 					this.diseaseClass = [];
+	// 				}
+	// },
+	// searchInteraction(){
+	// 		this.interactClass=[];
+	// 			if(this.searchData!=""){
+	// 				let url = '/api/interaction_candidate'
+	// 				let data = {
+	// 					'content': this.searchData
+	// 				}
+	// 				axios.post(url, data)
+	// 					.then((response) => {
+	// 						{
+	// 							let interaction = response.data
+	// 							let len=3 //默认显示长度
+	// 							if(this.searchAll==1){
+	// 								len=interaction.length
+	// 							}
+	// 								for(var i=0; i<len;i++){
+	// 									this.interactClass.push({"value":interaction[i]})
+	// 								}
+	// 							console.log(88888);
+	// 							console.log(this.interactClass);
+	// 						}
+
+	// 					})
+	// 			}
+	// 			else{
+	// 				this.interactClass = []
+	// 			}
+
+	// },
 	searchDrug(){
 		 this.drugClass = [];
 
@@ -193,15 +277,20 @@ export default {
 								.then((response) => {
 		        let drug = response.data
 				let len=3 //默认显示长度
-				if(this.searchAll==1){
+				if(this.searchAll==1 || len>drug.length){
 					len=drug.length
 				}
+				if(drug.length==0){
+					this.isShowDrug=false;
+				}else{
+					this.isShowDrug=true;
 				for(var i=0; i<len;i++){
 					this.drugClass.push({"value":drug[i].name,"label":drug[i].label})
 				}
+				}
 				console.log(666666);
 		        console.log(this.drugClass)
-
+				
 		      })
 						}
 						else{
@@ -221,11 +310,17 @@ export default {
 							.then((response) => {
 		    let disease = response.data
 			let len=3 //默认显示长度
-			if(this.searchAll==1){
+			if(this.searchAll==1 || len>disease.length){
 				len=disease.length
 			}
+			if(disease.length==0){
+				this.isShowDisease=false;
+			}
+			else{
+				this.isShowDisease=true;
 				for(var i=0; i<len;i++){
 					this.diseaseClass.push({"value":disease[i].value,"label":disease[i].label})
+				}
 				}
 			console.log(77777);
 	        console.log(this.diseaseClass)
@@ -238,6 +333,7 @@ export default {
 	},
 	searchInteraction(){
 			this.interactClass=[];
+
 				if(this.searchData!=""){
 					let url = '/api/interaction_candidate'
 					let data = {
@@ -248,11 +344,16 @@ export default {
 							{
 								let interaction = response.data
 								let len=3 //默认显示长度
-								if(this.searchAll==1){
+								if(this.searchAll==1 || len>interaction.length){
 									len=interaction.length
 								}
+									if(interaction.length==0){
+										this.isShowInteract=false;
+									}else{
+									this.isShowInteract=true;
 									for(var i=0; i<len;i++){
 										this.interactClass.push({"value":interaction[i]})
+									}
 									}
 								console.log(88888);
 								console.log(this.interactClass);
@@ -264,37 +365,38 @@ export default {
 					this.interactClass = []
 				}
 
+
 	},
     search() {
 		
 		this.showAll();
+		this.record_history(this.searchData);
+		// this.inputMsg=this.searchData;
+		// if(this.inputMsg !=''){
+		// 	let storage=window.localStorage
+		// 	{//console.log(444)
+		// 	    {//console.log(this.historySearch.indexOf(this.inputMsg))
+		// 		//console.log(444)
+		// 			if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
 		
-		this.inputMsg=this.searchData;
-		if(this.inputMsg !=''){
-			let storage=window.localStorage
-			{//console.log(444)
-			    {//console.log(this.historySearch.indexOf(this.inputMsg))
-				//console.log(444)
-					if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
+		// 			          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
+		// 			          this.historySearch.unshift(this.inputMsg);
+		// 					  console.log(88888)
+		// 					  console.log(this.historySearch)
+		// 					  console.log(88888)
+		// 			 }else{
+		// 					   this.historySearch.unshift(this.inputMsg)
+		// 					}
 		
-					          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
-					          this.historySearch.unshift(this.inputMsg);
-							  console.log(88888)
-							  console.log(this.historySearch)
-							  console.log(88888)
-					 }else{
-							   this.historySearch.unshift(this.inputMsg)
-							}
+		// 	        if( this.historySearch.length >= 6){
+		// 	                this.historySearch.pop()
+		// 	            }
 		
-			        if( this.historySearch.length >= 6){
-			                this.historySearch.pop()
-			            }
-		
-			            storage.setItem('searchWord',JSON.stringify(this.historySearch))
-			    }
-			}
-				//console.log(storage.getItem('searchWord'))
-		}
+		// 	            storage.setItem('searchWord',JSON.stringify(this.historySearch))
+		// 	    }
+		// 	}
+		// 		//console.log(storage.getItem('searchWord'))
+		// }
 		
 		this.isShowSearch=true;
 
@@ -317,6 +419,7 @@ export default {
        
     },
    useMethod(item){
+	   this.record_history(item.value);
      if(item.label == '药品商品名'){
        this.getDrugDetail(item.value);
      }
@@ -401,9 +504,9 @@ export default {
 		  this.searchDisease();
 		  this.searchInteraction();
 		  this.isShowSearch= true;
-		  this.isShowDrug= true;
-		  this.isShowDisease= true;
-		  this.isShowInteract= true;
+		//   this.isShowDrug= true;
+		//   this.isShowDisease= true;
+		//   this.isShowInteract= true;
 		  this.isShowmore = true;
 	  },
 	  showDrug(){
@@ -438,7 +541,7 @@ export default {
 	  },
 	toInteraction: function(searchMsg)
 	{
-
+		this.record_history(searchMsg);
 		this.$router.push({
 		     path: "/interactDetail",
 		     query: {interactName: searchMsg},
@@ -448,6 +551,7 @@ export default {
 		this.searchData = item;
 	},
 	toDesease: function(item) {
+		this.record_history(item);
 				// let storage=window.localStorage;
 				// storage.setItem('isShowData',JSON.stringify(true));
 				console.log("item: "+item);
@@ -476,7 +580,34 @@ export default {
 				  this.isShowmore =false;
 			  }
 	},
-
+	 record_history(str){
+		 this.inputMsg=str;
+		 if(this.inputMsg !=''){
+		 	let storage=window.localStorage
+		 	{//console.log(444)
+		 	    {//console.log(this.historySearch.indexOf(this.inputMsg))
+		 		//console.log(444)
+		 			if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
+		 
+		 			          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
+		 			          this.historySearch.unshift(this.inputMsg);
+		 					  console.log(88888)
+		 					  console.log(this.historySearch)
+		 					  console.log(88888)
+		 			 }else{
+		 					   this.historySearch.unshift(this.inputMsg)
+		 					}
+		 
+		 	        if( this.historySearch.length >= 6){
+		 	                this.historySearch.pop()
+		 	            }
+		 
+		 	            storage.setItem('searchWord',JSON.stringify(this.historySearch))
+		 	    }
+		 	}
+		 		//console.log(storage.getItem('searchWord'))
+		 }
+	 },
 },
     mounted (){
 
@@ -488,6 +619,12 @@ export default {
 	}else{
 		this.history="历史搜索："
 	}
+
+	 let storage=window.localStorage
+ 
+ if(storage.getItem('searchWord')!==null){
+  this.historySearch=JSON.parse(storage.getItem('searchWord'))
+ } 
   }
 };
 

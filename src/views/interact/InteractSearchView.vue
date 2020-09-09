@@ -125,12 +125,13 @@
 			var x=document.getElementById("search_history");
 
 
-			window.localStorage.removeItem('searchWord')
+			//window.localStorage.removeItem('searchWord')
 			let storage=window.localStorage
 
 			if(storage.getItem('searchWord')!==null){
 				this.historySearch=JSON.parse(storage.getItem('searchWord'))
 			} 
+			
 		},
 		watch: {
 			'$route'(to,from) {
@@ -268,11 +269,12 @@
 			  this.isShowData=false;
 			},
 			toPage: function() {
+			console.log("test router!!!!!");
+			let search=this.searchMsg.toString();
 
-			console.log(this.searchMsg);
 				this.$router.push({
 					path: "interactDetail",
-					query: {interactName: this.searchMsg},
+					query: {interactName: search},
 				})
 				console.log(12321321)
 				console.log(this.inputMsg)
