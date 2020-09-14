@@ -40,7 +40,7 @@
       <van-tab title="相互作用" name="fourth"></van-tab>
     </van-tabs>
 
-	<section class="drug" v-show="isShowDrug==true" >
+	<section class="drug" id="drugContent"  style="display:none" >
     <section class="firstaid-search-box">
       <div class="header-content fx">
         <span class="act fx fx-1"><h1 class="act">药品</h1></span><p @click="changeShowType(1)" v-show="isShowmore==true">更多</p>
@@ -60,7 +60,7 @@
 
 
 
-     <section class="disease" v-show="isShowDisease==true">
+     <section class="disease" id="diseaseContent" style="display:none">
     <section class="firstaid-search-box">
       <div class="header-content fx">
         <span class="act fx fx-1"><h1 class="act">疾病</h1></span><p @click="changeShowType(2)"  v-show="isShowmore==true">更多</p>
@@ -78,7 +78,7 @@
     </div>
     </section>
 
-    <section class="interact" v-show="isShowInteract==true" >
+    <section class="interact" id="interactContent"  style="display:none" >
     <section class="firstaid-search-box">
       <div class="header-content fx">
         <span class="act fx fx-1"><h1 class="act">相互作用</h1></span><p @click="changeShowType(3)"  v-show="isShowmore==true">更多</p>
@@ -98,7 +98,7 @@
 
   </div>
 
-    <app-nav style="position: fixed;bottom: 0px;"></app-nav>
+    <!-- <app-nav style="position: fixed;bottom: 0px;"></app-nav> -->
 </div>
 </template>
 
@@ -181,95 +181,12 @@ export default {
 		}
 	},
 	
-	// searchDrug(){
-	// 	 this.drugClass = [];
-
-	// 					if(this.searchData!=""){
-	// 						let url = '/api/medicine_query'
-	// 						let data = {
-	// 							'content': this.searchData
-	// 						}
-	// 						axios.post(url, data)
-	// 							.then((response) => {
-	// 	        let drug = response.data
-	// 			let len=3 //默认显示长度
-	// 			if(this.searchAll==1){
-	// 				len=drug.length
-	// 			}
-	// 			for(var i=0; i<len;i++){
-	// 				this.drugClass.push({"value":drug[i].name,"label":drug[i].label})
-	// 			}
-	// 			console.log(666666);
-	// 	        console.log(this.drugClass)
-
-	// 	      })
-	// 					}
-	// 					else{
-	// 						this.drugClass = [];
-	// 					}
-	// },
-	// searchDisease(){
-	// this.diseaseClass = [];
-
-	// 				if(this.searchData!=""){
-	// 					let url = '/api/query'
-	// 					let data = {
-	// 					'category':"disease",
-	// 					'content': this.searchData
-	// 					}
-	// 					axios.post(url, data)
-	// 						.then((response) => {
-	// 	    let disease = response.data
-	// 		let len=3 //默认显示长度
-	// 		if(this.searchAll==1){
-	// 			len=disease.length
-	// 		}
-	// 			for(var i=0; i<len;i++){
-	// 				this.diseaseClass.push({"value":disease[i].value,"label":disease[i].label})
-	// 			}
-	// 		console.log(77777);
-	//         console.log(this.diseaseClass)
-	
-	//       })
-	// 				}
-	// 				else{
-	// 					this.diseaseClass = [];
-	// 				}
-	// },
-	// searchInteraction(){
-	// 		this.interactClass=[];
-	// 			if(this.searchData!=""){
-	// 				let url = '/api/interaction_candidate'
-	// 				let data = {
-	// 					'content': this.searchData
-	// 				}
-	// 				axios.post(url, data)
-	// 					.then((response) => {
-	// 						{
-	// 							let interaction = response.data
-	// 							let len=3 //默认显示长度
-	// 							if(this.searchAll==1){
-	// 								len=interaction.length
-	// 							}
-	// 								for(var i=0; i<len;i++){
-	// 									this.interactClass.push({"value":interaction[i]})
-	// 								}
-	// 							console.log(88888);
-	// 							console.log(this.interactClass);
-	// 						}
-
-	// 					})
-	// 			}
-	// 			else{
-	// 				this.interactClass = []
-	// 			}
-
-	// },
 	searchDrug(){
 		 this.drugClass = [];
 
 						if(this.searchData!=""){
-							let url = '/api/medicine_query'
+							// let url = '/api/medicine_query'
+							let url = '/api/overall_drug'
 							let data = {
 								'content': this.searchData
 							}
@@ -301,7 +218,8 @@ export default {
 	this.diseaseClass = [];
 
 					if(this.searchData!=""){
-						let url = '/api/query'
+						// let url = '/api/query'
+						let url = '/api/overall_disease'
 						let data = {
 						'category':"disease",
 						'content': this.searchData
@@ -370,34 +288,7 @@ export default {
     search() {
 		
 		this.showAll();
-		this.record_history(this.searchData);
-		// this.inputMsg=this.searchData;
-		// if(this.inputMsg !=''){
-		// 	let storage=window.localStorage
-		// 	{//console.log(444)
-		// 	    {//console.log(this.historySearch.indexOf(this.inputMsg))
-		// 		//console.log(444)
-		// 			if (this.historySearch.indexOf(this.inputMsg) != -1) { // 有相同的，先删除 再添加
-		
-		// 			          this.historySearch.splice(this.historySearch.indexOf(this.inputMsg), 1);
-		// 			          this.historySearch.unshift(this.inputMsg);
-		// 					  console.log(88888)
-		// 					  console.log(this.historySearch)
-		// 					  console.log(88888)
-		// 			 }else{
-		// 					   this.historySearch.unshift(this.inputMsg)
-		// 					}
-		
-		// 	        if( this.historySearch.length >= 6){
-		// 	                this.historySearch.pop()
-		// 	            }
-		
-		// 	            storage.setItem('searchWord',JSON.stringify(this.historySearch))
-		// 	    }
-		// 	}
-		// 		//console.log(storage.getItem('searchWord'))
-		// }
-		
+		this.record_history(this.searchData);		
 		this.isShowSearch=true;
 
       },
@@ -510,33 +401,51 @@ export default {
 		  this.isShowmore = true;
 	  },
 	  showDrug(){
+		  document.getElementById("interactContent").style.display="none";
+		   document.getElementById("diseaseContent").style.display="none";
+		   document.getElementById("drugContent").style.display="inline";
 		   this.searchAll=1;
 		   this.searchDrug();
 	
 		   this.isShowSearch= true;
+
 		   this.isShowDrug= true;
+			// this.isShowDrug= false;
+
 		   this.isShowDisease= false;
 		   this.isShowInteract= false;
 		   this.isShowmore = false;
 	  },
 	  showDisease(){
+		  document.getElementById("diseaseContent").style.display="inline";
+		   document.getElementById("interactContent").style.display="none";
+		   document.getElementById("drugContent").style.display="none";
 		   this.searchAll=1;
 		   this.searchDisease();
 		   
 		   this.isShowSearch= true;
 		   this.isShowDrug= false;
+
 		   this.isShowDisease= true;
+			// this.isShowDisease= false;
+
 		   this.isShowInteract= false;
 		   this.isShowmore = false;
 	  },
 	  showInteract(){
+		  document.getElementById("interactContent").style.display="inline";
+		   document.getElementById("diseaseContent").style.display="none";
+		   document.getElementById("drugContent").style.display="none";
 		   this.searchAll=1;
 		   this.searchInteraction();
 		   
 		   this.isShowSearch= true;
 		   this.isShowDrug= false;
 		   this.isShowDisease= false;
+
 		   this.isShowInteract= true;
+		// this.isShowInteract= false;
+
 		   this.isShowmore = false;
 	  },
 	toInteraction: function(searchMsg)
