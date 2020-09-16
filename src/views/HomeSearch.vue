@@ -38,6 +38,8 @@
       <van-tab title="药品" name="second"></van-tab>
       <van-tab title="疾病" name="third"></van-tab>
       <van-tab title="相互作用" name="fourth"></van-tab>
+	   <van-tab title="临床指南" name="fifth"></van-tab>
+	    <van-tab title="相关文献" name="sixth"></van-tab>
     </van-tabs>
 
 	<section class="drug" id="drugContent"  style="display:none" >
@@ -96,6 +98,42 @@
     </div>
     </section>
 
+	 <section class="guide" id="guideContent"  style="display:none" >
+    <section class="firstaid-search-box">
+      <div class="header-content fx">
+        <span class="act fx fx-1"><h1 class="act">临床指南</h1></span><p @click="changeShowType(4)"  v-show="isShowmore==true">更多</p>
+      </div>
+    </section>
+    <div class="page-content fx-1">
+        <ul class="firstaid-content">
+            <li class="fx-ac" v-for="(item, index) in guideContent" v-bind:key="index">
+                 <span class="fx-1" @click="toGuide(item.title)" v-if="item.title != undefined">
+                     {{item.title}}
+                </span>
+                <i class="iconfont icon-qianjin"></i>
+            </li>
+        </ul>
+    </div>
+    </section>
+
+<section class="find" id="findContent"  style="display:none" >
+    <section class="firstaid-search-box">
+      <div class="header-content fx">
+        <span class="act fx fx-1"><h1 class="act">相关文献</h1></span><p @click="changeShowType(5)"  v-show="isShowmore==true">更多</p>
+      </div>
+    </section>
+    <div class="page-content fx-1">
+        <ul class="firstaid-content">
+            <li class="fx-ac" v-for="(item, index) in findClass" v-bind:key="index">
+                 <span class="fx-1" @click="toFind(item.value)" v-if="item.value != undefined">
+                     {{item.value}}
+                </span>
+                <i class="iconfont icon-qianjin"></i>
+            </li>
+        </ul>
+    </div>
+    </section>	
+
   </div>
 
     <!-- <app-nav style="position: fixed;bottom: 0px;"></app-nav> -->
@@ -119,7 +157,10 @@ export default {
       },
 	  searchAll: 0, //0 代表只显示部分，1代表全部显示
       searchData: '',
-      drugClass: [],
+	  guideClass: null,
+	  drugClass: [],
+	  findClass:[],
+	  guideClass:[],
       diseaseClass: [],
       interactClass: [],
 	  active:"",
@@ -133,8 +174,8 @@ export default {
 	  isShowInteract:false,
 	  inputMsg:"",
 	  historySearch:['心力衰竭'],
-	  history:"历史搜索："
-	  
+	  history:"历史搜索：",
+	  guideContent:[] 
     };
   },
   watch: {
@@ -178,6 +219,12 @@ export default {
 		};
 		if(title=="相互作用"){
 			this.showInteract()
+		};
+		if(title=="临床指南"){
+			this.showGuide()
+		};
+		if(title=="相关文献"){
+			this.showFind()
 		}
 	},
 	
@@ -198,7 +245,7 @@ export default {
 					len=drug.length
 				}
 				if(drug.length==0){
-					this.isShowDrug=false;
+					 document.getElementById("drugContent").style.display="none";
 				}else{
 					this.isShowDrug=true;
 				for(var i=0; i<len;i++){
@@ -232,7 +279,7 @@ export default {
 				len=disease.length
 			}
 			if(disease.length==0){
-				this.isShowDisease=false;
+				document.getElementById("diseaseContent").style.display="none"
 			}
 			else{
 				this.isShowDisease=true;
@@ -266,7 +313,7 @@ export default {
 									len=interaction.length
 								}
 									if(interaction.length==0){
-										this.isShowInteract=false;
+										 document.getElementById("interactContent").style.display="none";
 									}else{
 									this.isShowInteract=true;
 									for(var i=0; i<len;i++){
@@ -285,11 +332,36 @@ export default {
 
 
 	},
+	searchGuide(){
+        if(this.searchData!="")
+        {
+					let url = '/api/guide/get'
+          let data = 
+          {
+            'category': 'search',
+						'content': this.searchData
+					}
+					  axios.post(url, data)
+            .then((response) => 
+            {
+              console.log("6666");
+              console.log(response.data);
+              this.guideContent = null;
+              this.guideContent = response.data;
+							// this.disease = response.data;
+						})
+				}
+        else
+        {
+					
+        }
+	},
     search() {
-		
-		this.showAll();
-		this.record_history(this.searchData);		
-		this.isShowSearch=true;
+		this.record_history(this.searchData);
+		this.$router.push({
+		     path: "/homedetail",
+		     query: {msg: this.searchData},
+		    })
 
       },
     onCancel() {
@@ -300,7 +372,8 @@ export default {
      this.drugClass = [];
 	 this.diseaseClass =[];
 	 this.interactClass = [];
-	 
+	 this.guideClass = [];
+	 this.findClass = [];
 	 this.isShowData=true;
 	 this.isShowSearch=false;
 
@@ -385,15 +458,24 @@ export default {
 				storage.setItem('searchWord',JSON.stringify(this.historySearch))
 			},
 	  showAll(){
+		  document.getElementById("interactContent").style.display="inline";
+		   document.getElementById("diseaseContent").style.display="inline";
+		   document.getElementById("drugContent").style.display="inline";
+			document.getElementById("guideContent").style.display="inline";
+			 document.getElementById("findContent").style.display="inline";
 		  this.isShowData=false;
 		  this.isShowSearch=true;
 		  this.searchAll=0;
 		  this.drugClass = [];
 		  this.diseaseClass =[];
 		  this.interactClass = [];
+		  this.guideClass = [];
+		  this.findClass = [];
 		  this.searchDrug();
 		  this.searchDisease();
 		  this.searchInteraction();
+		  //this.searchGuide();
+		  //this.searchFind();
 		  this.isShowSearch= true;
 		//   this.isShowDrug= true;
 		//   this.isShowDisease= true;
@@ -404,46 +486,88 @@ export default {
 		  document.getElementById("interactContent").style.display="none";
 		   document.getElementById("diseaseContent").style.display="none";
 		   document.getElementById("drugContent").style.display="inline";
+		   document.getElementById("guideContent").style.display="none";
+			 document.getElementById("findContent").style.display="none";
 		   this.searchAll=1;
 		   this.searchDrug();
 	
 		   this.isShowSearch= true;
 
-		   this.isShowDrug= true;
-			// this.isShowDrug= false;
+		//    this.isShowDrug= true;
+		// 	// this.isShowDrug= false;
 
-		   this.isShowDisease= false;
-		   this.isShowInteract= false;
+		//    this.isShowDisease= false;
+		//    this.isShowInteract= false;
 		   this.isShowmore = false;
 	  },
 	  showDisease(){
 		  document.getElementById("diseaseContent").style.display="inline";
 		   document.getElementById("interactContent").style.display="none";
 		   document.getElementById("drugContent").style.display="none";
+		     document.getElementById("guideContent").style.display="none";
+			 document.getElementById("findContent").style.display="none";
 		   this.searchAll=1;
 		   this.searchDisease();
 		   
 		   this.isShowSearch= true;
-		   this.isShowDrug= false;
+		//    this.isShowDrug= false;
 
-		   this.isShowDisease= true;
-			// this.isShowDisease= false;
+		//    this.isShowDisease= true;
+		// 	// this.isShowDisease= false;
 
-		   this.isShowInteract= false;
+		//    this.isShowInteract= false;
 		   this.isShowmore = false;
 	  },
 	  showInteract(){
 		  document.getElementById("interactContent").style.display="inline";
 		   document.getElementById("diseaseContent").style.display="none";
 		   document.getElementById("drugContent").style.display="none";
+		     document.getElementById("guideContent").style.display="none";
+			 document.getElementById("findContent").style.display="none";
 		   this.searchAll=1;
 		   this.searchInteraction();
 		   
 		   this.isShowSearch= true;
-		   this.isShowDrug= false;
-		   this.isShowDisease= false;
+		//    this.isShowDrug= false;
+		//    this.isShowDisease= false;
 
-		   this.isShowInteract= true;
+		//    this.isShowInteract= true;
+		// this.isShowInteract= false;
+
+		   this.isShowmore = false;
+	  },
+	  showGuide(){
+ 		   document.getElementById("interactContent").style.display="none";
+		   document.getElementById("diseaseContent").style.display="none";
+		   document.getElementById("drugContent").style.display="none";
+		     document.getElementById("guideContent").style.display="inline";
+			 document.getElementById("findContent").style.display="none";
+		   this.searchAll=1;
+		   this.searchInteraction();
+		   
+		   this.isShowSearch= true;
+		//    this.isShowDrug= false;
+		//    this.isShowDisease= false;
+
+		//    this.isShowInteract= true;
+		// this.isShowInteract= false;
+
+		   this.isShowmore = false;
+	  },
+	  showFInd(){
+ 		   document.getElementById("interactContent").style.display="none";
+		   document.getElementById("diseaseContent").style.display="none";
+		   document.getElementById("drugContent").style.display="none";
+		     document.getElementById("guideContent").style.display="none";
+			 document.getElementById("findContent").style.display="inline";
+		   this.searchAll=1;
+		   this.searchInteraction();
+		   
+		   this.isShowSearch= true;
+		//    this.isShowDrug= false;
+		//    this.isShowDisease= false;
+
+		//    this.isShowInteract= true;
 		// this.isShowInteract= false;
 
 		   this.isShowmore = false;
@@ -468,9 +592,20 @@ export default {
 					name: "disease-detail",
 					params: {diseaseName: item},
 				}) 
-            },
+			},
+	toGuide(searchMsg){
+			this.record_history(searchMsg);
+			  this.$router.push({
+		    name: "GuideDetail",
+		    query: {guideItems: searchMsg}
+		})
+			},
+	toFind(searchMsg){
+			
+			
+			},
 	changeShowType(index){
-			  let types=["first","second","third","fourth"];
+			  let types=["first","second","third","fourth","fifth","sixth"];
 			  this.active=types[index];
 			  if(index==0){
 				  this.showAll();
@@ -486,6 +621,14 @@ export default {
 			  }
 			  if(index==3){
 				  this.showInteract();
+				  this.isShowmore =false;
+			  }
+			  if(index==4){
+				  this.showGuide();
+				  this.isShowmore =false;
+			  }
+			  if(index==5){
+				  this.showFind();
 				  this.isShowmore =false;
 			  }
 	},
