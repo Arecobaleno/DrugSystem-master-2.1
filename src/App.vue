@@ -18,9 +18,10 @@ export default {
         }
     },
     created () {
-        setTimeout(() => {
-            this.started = true;
-        }, 1400);
+        this.started = true;
+        // setTimeout(() => {
+        //     this.started = true;
+        // }, 1400);
         this.$store.dispatch('get_nav');
     }
 }
