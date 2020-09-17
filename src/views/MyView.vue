@@ -6,7 +6,7 @@
                     <div class="user-pic">
                         <router-link to="/userinfo"><img src="../assets/images/my/user-head.png" alt="我的头像"></router-link>
                     </div>
-                    <p class="user-name">微微一笑微微一笑微微一笑微微一笑微微一笑微微一笑微微一笑微微一笑微微一笑微微一笑微微一笑</p>
+                    <p class="user-name">{{username}}</p>
                 </div>
                 <div class="user-header tc none" id="logout">
                     <div class="user-login"><a href="">立即登录</a></div>
@@ -18,54 +18,117 @@
             </header>
 
             <section>
-                <div class="mine-tab">
-                    <ul class="fx mine-tabs">
-                        <li class="fx fx-1">
-                            <a href="javascript:;" class="tab-item fx-c ac">
-                                <div class="tc"><i class="i-coin"></i>
-                                    <p class="tab-title">金币任务</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="fx fx-1">
-                            <a href="javascript:;" class="tab-item fx-c ac">
-                                <div class="tc"><i class="i-mall"></i>
-                                    <p class="tab-title">金币商城</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="fx fx-1">
-                            <a href="javascript:;" class="tab-item fx-c ac">
-                                <div class="tc"><i class="i-order"></i>
-                                    <p class="tab-title">我的订单</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="fx fx-1">
-                            <router-link to="/patient" class="tab-item fx-c ac">
-                                <div class="tc"><i class="i-record"></i>
-                                    <p class="tab-title">就诊档案</p>
-                                </div>
-                            </router-link>
-                        </li>
-                    </ul>
-                </div>
-                <div class="mine-list">
-                    <div class="mine-list-items ac">
-                        <div class="mine-list-item"><i class="iconfont icon-list-item icon-shoucang1"></i>我的收集<i class="icon-jinru iconfont"></i></div>
+                <div class="mine-bar">
+                    <div class="data-list-head list-line">基本信息</div>
+                    <div @click="hasNamePop = true" class="data-list-item ac list-line clearfix">
+                        <span class="item-name fl">昵称</span>
+                        <a href="javascript:;" class="item-data fr"><span v-show="name">{{name}}</span></a>
                     </div>
-                    <router-link tag="div" to="/invite" class="mine-list-items ac">
-                        <div class="mine-list-item"><i class="iconfont icon-list-item icon-yaoqing"></i>邀请好友得金币<i class="icon-jinru iconfont"></i></div>
+                    <div @click="hasSexPop = true" class="data-list-item ac list-line clearfix">
+                        <span class="item-name fl">性别</span>
+                        <a href="javascript:;" class="item-data fr"><span v-show="sex">{{sex}}</span></a>
+                    </div>
+                </div>
+                <div class="mine-bar">
+                    <div class="data-list-head list-line">联系信息</div>
+                    <div @click="hasPhonePop = true" class="data-list-item ac list-line clearfix">
+                        <span class="item-name fl"><i class="icon-pic i-phone"></i>手机号</span>
+                        <a href="javascript:;" class="item-data fr"><span v-show="phone">{{phone}}</span></a>
+                    </div>
+                    <div @click="hasEmailPop = true" class="data-list-item ac list-line clearfix">
+                        <span class="item-name fl"><i class="icon-pic i-email"></i>邮箱</span>
+                        <a href="javascript:;" class="item-data fr"><span v-show="email">{{email}}</span></a>
+                    </div>
+                </div>
+                <div class="mine-bar">
+                    <div @click="hasPassWordPop = true" class="data-list-item ac list-line clearfix">
+                        <span class="item-name fl">修改密码</span>
+                        <a href="javascript:;" class="item-data fr"></a>
+                    </div>
+                    <router-link tag="div" to="/feedback" class="data-list-item ac list-line clearfix">
+                        <span class="item-name fl">意见反馈</span>
                     </router-link>
-                    <router-link tag="div" to="/inputcode" class="mine-list-items ac">
-                        <div class="mine-list-item"><i class="iconfont icon-list-item icon-saoma"></i>输入邀请码<i class="icon-jinru iconfont"></i></div>
+                    <router-link tag="div" to="/set" class="data-list-item ac list-line clearfix">
+                        <span class="item-name fl">设置</span>
                     </router-link>
-                    <router-link tag="div" to="/feedback" class="mine-list-items ac">
-                        <div class="mine-list-item"><i class="iconfont icon-list-item icon-yijian"></i>意见反馈<i class="icon-jinru iconfont"></i></div>
-                    </router-link>
-                    <router-link tag="div" to="/set" class="mine-list-items ac">
-                        <div class="mine-list-item"><i class="iconfont icon-list-item icon-shezhi"></i>设置<i class="icon-jinru iconfont"></i></div>
-                    </router-link>
+                    <div class="data-list-item ac list-line clearfix" @click="output()">
+                        <span class="item-name fl">退出</span>
+                    </div>
+                </div>
+                <div class="pop-bar">
+                    <!-- 性别 -->
+                    <div v-show="hasSexPop" @click="closePop($event, 'hasSexPop')" class="info-pop tc">
+                        <div class="info-box">
+                            <div class="info-tip">您的性别</div>
+                            <div class="info-text">
+                                <p class="info-check cf">
+                                    <span class="set-gender fl cf">
+                                        <span @click="sex = '男'; hasSexPop = false" class="fl gender-man" :class="{cur: sex == '男'}"><i class="iconfont person-item-icon"></i>男</span>
+                                        <span @click="sex = '女'; hasSexPop = false" class="fr gender-woman" :class="{cur: sex == '女'}"><i class="iconfont person-item-icon"></i>女</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 昵称 -->
+                    <div v-show="hasNamePop" @click="closePop($event, 'hasNamePop')" class="info-pop tc">
+                        <div class="info-box">
+                            <div class="info-tip">编辑昵称</div>
+                            <div class="info-text">
+                                <p class="info-edit cf">
+                                    <span class="info-edit-item"><input v-model="name" type="text" class="edit-bar tc"></span>
+                                </p>
+                            </div>
+                            <div @click="name = new_name; hasNamePop = false" class="info-btn-box cf">确定
+                                <a href="javascript:;" class="info-btn"><i class="iconfont icon-gou"></i></a></div>
+                        </div>
+                    </div>
+                    <!-- 邮箱 -->
+                    <div v-show="hasEmailPop" @click="closePop($event, 'hasEmailPop')" class="info-pop tc">
+                        <div class="info-box">
+                            <div class="info-tip">您的邮箱</div>
+                            <div class="info-text">
+                                <p class="info-edit cf">
+                                    <span class="info-edit-item"><input v-model="new_email" type="text" class="edit-bar tc"></span>
+                                </p>
+                            </div>
+                            <div @click="email = new_email; hasEmailPop = false" class="info-btn-box cf">确定
+                                <a href="javascript:;" class="info-btn"><i class="iconfont icon-gou"></i></a></div>
+                        </div>
+                    </div>
+                    <!-- 修改密码 -->
+                    <div v-show="hasPassWordPop" @click="closePop($event, 'hasPassWordPop')" class="info-pop tc">
+                        <div class="info-box">
+                            <div class="info-tip">修改密码</div>
+                            <div class="info-text">
+                                <p class="info-edit cf">
+                                    <span class="info-edit-item"><input type="text" class="edit-bar" placeholder="请输入旧密码"></span>
+                                    <span class="info-edit-item"><input type="text" class="edit-bar" placeholder="请输入新密码(6-12位)"></span>
+                                    <span class="info-edit-item"><input type="text" class="edit-bar" placeholder="请再次输入新密码"></span>
+                                </p>
+                            </div>
+                            <div @click="hasPassWordPop = false" class="info-btn-box cf">确定
+                                <a href="javascript:;" class="info-btn"><i class="iconfont icon-gou"></i></a></div>
+                        </div>
+                    </div>
+                    <!-- 绑定手机号 -->
+                    <div v-show="hasPhonePop" @click="closePop($event, 'hasPhonePop')" class="info-pop tc">
+                        <div class="info-box">
+                            <div class="info-tip">您的手机号</div>
+                            <div class="info-text">
+                                <p class="info-edit cf">
+                                    <span class="info-edit-item"><input type="text" v-model="phone" class="edit-bar" placeholder=""></span>
+                                    <span class="info-edit-item get-code clearfix">
+                                        <input type="text" class="edit-bar edit-code fl" placeholder="验证码" value="">
+                                        <span v-show="isShowCode" @click="getCode" class="code-btn edit-code fr">获取验证码</span>
+                                        <span v-show="!isShowCode" class="code-btn edit-code fr active">{{seconds}}秒后重新发送</span>
+                                    </span>
+                                </p>
+                            </div>
+                            <div @click="phone = new_phone; hasPhonePop = false" class="info-btn-box cf">确定
+                                <a href="javascript:;" class="info-btn"><i class="iconfont icon-gou"></i></a></div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -81,10 +144,55 @@ export default {
     return {
         bannerHeight: 0,
         opacity: 0,
-        timer: null
+        timer: null,
+        date: '',
+        sex: '男', 
+        name: '雲溪谷',
+        new_name: '雲溪谷',
+        phone: '15999988888',
+        new_phone: '15999988888',
+        email: '15999988888@163.com',
+        new_email: '15999988888@163.com',
+        idNumber: '431122199112206677',
+        new_idNumber: '431122199112206677',
+        username: window.sessionStorage.getItem("username"),
+        hasNamePop: false,
+        hasSexPop: false,
+        hasPhonePop: false,
+        hasEmailPop: false,
+        hasIdNumberPop: false,
+        hasPassWordPop: false,
+        seconds: 60,
+        isShowCode: true
     }
   },
   methods: {
+      output(){
+          window.sessionStorage.clear();
+          this.$router.push({
+            path: "/login"
+        });
+      },
+      closePop: function(event, value) {
+            if (event.target.className.indexOf('info-pop') > -1) {
+                this[value] = false;
+            }
+        },
+        countDown: function(){
+            this.seconds --;
+            if (this.seconds > 0) {
+                setTimeout(() => {
+                    this.countDown();
+                }, 1000)
+            } else {
+                this.seconds = 60;
+                this.isShowCode = true;
+            }
+        },
+        getCode: function(){
+            this.isShowCode = false;
+            this.countDown();
+        },
   }
 }
 </script>
@@ -176,7 +284,7 @@ export default {
             vertical-align: middle;
             margin-right: .1rem;
         }
-}
+    }
 }
 .mine-coin{
     left: .2rem;
@@ -277,5 +385,161 @@ export default {
         left: 0;
         top: 0.26rem;
     }
+}
+.mine-bar{
+	background-color: @color_f;
+	margin-top: .2rem;
+	& .mine-data-head{
+		display: block;
+		height: 1.6rem;
+		line-height: 1.6rem;
+		color: @color_l;
+		font-size: .3rem;
+		padding-left: 0.2rem;
+	}
+	& .data-list-head{
+		height: 0.7rem;
+		line-height: .7rem;
+		color: @color_m;
+		font-size: .26rem;
+	}
+	& .list-line{
+		border-bottom: 1px solid @bg_bd;
+		padding: 0 0.2rem;
+	}
+	& .list-line:last-child{
+		border-bottom: none;
+	}
+	& .data-list-item{
+		height: .88rem;
+		line-height: .88rem;
+		font-size: .3rem;
+		color: @color_l;
+	}
+	& .item-data{
+		color: @color_m;
+	}
+	& .num-mark{
+		font-size: .4rem;
+		color: #ff8177;
+		position: absolute;
+		right: 1.56rem;
+		width: 1rem;
+		overflow: hidden;
+	}
+	& .tips-m{
+		color: @color_m;
+		font-size: .22rem;
+		margin: 0 0.41rem 0 0.2rem;
+	}
+}
+
+.info-pop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 9;
+    & .info-box{
+    	background-color: @color_f;
+    	overflow: hidden;
+        margin: 1.6rem auto 0 auto;
+        width: 80%;
+        man-width: 7rem;
+        border-radius: 0.09rem;
+        font-size: 0.32rem;
+        z-index: 10;
+    }
+    & .info-tip {
+        padding: 0.5rem 0 0.5rem 0;
+        font-size: 0.38rem;
+        line-height: 1.25;
+        color: @color_l;
+        font-weight: normal;
+        text-align: center;
+    }
+
+    & .info-tips{
+    	line-height: 0.4rem;
+    }
+    
+    & .info-text {
+        margin: 0 auto;
+        max-width: 6rem;
+        & .info-check{
+        	height: .56rem;
+        	line-height: .56rem;
+        	margin-bottom: .5rem;
+        }
+        & .set-gender{
+	        height: .56rem;
+	        width: 100%;
+	        color: @color_m;
+	        font-size: 0.32rem;
+    	}
+	    & .gender-woman, .gender-man{
+	        width: 50%;
+	        padding: 0 0.4rem;
+	    }
+	    & .info-edit{
+			margin: 0 0.3rem 0.5rem;
+			& .info-edit-item{
+				display: block;
+				margin-bottom: 0.2rem;
+		    	height: 0.8rem;
+				line-height: 0.8rem;
+			}
+			& .edit-bar{
+				border: 1px solid #f2f3f5;
+				border-radius: 0.03rem;
+				background-color: #fafafa;
+				width: 100%;
+				height: 100%;
+				font-size: 0.26rem;
+				color: #646f7f;
+				padding: 0 0.24rem;
+			}
+	    }
+	    .get-code{
+	    	& .edit-code{
+	    		width: 47.6%;
+	    	}
+	    	& .code-btn{
+	    		background-color: #6ee0e1;
+	    		color: @color_f;
+	    		font-size: .26rem;
+	    		border-radius: 0.03rem;
+	    		&.active{
+	    			background-color: #c5c7ce;
+	    		}
+	    	}
+	    }
+    }
+    & .info-btn-box{
+		background-color: #39b7ff;
+		color: @color_f;
+		height: 1rem;
+		line-height: 1rem;
+		& .info-btn{
+			color: @color_f;
+			display: block;
+			width: 100%;
+		}
+	}
+	& .coin-get-img{
+		width: 100%;
+	}
+	& .btn-know{
+		width: 3.2rem;
+		height: 0.65rem;
+		line-height: 0.65rem;
+		border-radius: 0.5rem;
+		display: inline-block;
+		margin-bottom: 0.5rem;
+	}
 }
 </style>

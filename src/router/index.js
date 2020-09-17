@@ -7,6 +7,7 @@ Vue.use(Vant);
 
 Vue.use(Router)
 
+import Login from '../views/LoginView.vue'
 import HomeView from '../views/HomeView.vue'
 
 import NewsView from '../views/NewsView.vue'
@@ -104,7 +105,15 @@ const Parent = {
 export default new Router({
     mode: 'hash',
     scrollBehavior: () => ({ y: 0 }),
-    routes: [{ // 首页
+    routes: [
+        { path: '/', redirect: '/login' },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login,
+            meta: { requiresAuth: false }
+        },
+        { // 首页
             path: '/home',
             component: Parent,
             children: [{
@@ -389,7 +398,6 @@ export default new Router({
             }]
         },
         //药品功能
-        { path: '/', redirect: '/home' },
         {
             path: '/yaopin',
             name: 'drug-view',
