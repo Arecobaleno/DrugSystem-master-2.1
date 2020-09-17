@@ -2,7 +2,7 @@
 	<div class="page-full component-home fx-column">
 		<app-header :title="appHeader.title"></app-header>
 		<section class="page-content fx-1" >
-			<van-collapse v-model="activeNames">
+			<van-collapse v-model="activeNames" @change="onChange">
 				<collapse @event="change" v-for="(item, index) in dataSet" :key="index" :searchItem="item" :isTreeRoot="true"></collapse>
 			</van-collapse>
             <van-popup
@@ -125,6 +125,7 @@
                 dataSet: [],
                 isShow: false,
                 detailName: '',
+                ischange: false,
                 example: [],
                 exampleCon: []
 			}
@@ -156,8 +157,22 @@
 				else{
 					this.disease  = [];
 				}
-			},
-			change(isShow,detailName) {
+            },
+            onChange(name) {
+                this.activeNames = name
+                if(this.isChange){
+                    if(this.activeNames.indexOf(this.detailName)!=-1){
+                        var index = this.activeNames.indexOf(this.detailName)
+                        this.activeNames.splice(index,1);
+                    }
+                    else{
+                        this.activeNames.push(this.detailName)
+                    }
+                }
+                this.isChange = false;
+            },
+			change(isShow,detailName,isChange) {
+                this.isChange = isChange;
                 this.isShow = isShow;
                 this.detailName = detailName;
                 this.showResult(this.detailName)
@@ -166,6 +181,8 @@
                   
             },
             showResult (content) {
+                this.example.length = 0;
+                this.exampleCon.length = 0;
                 let url = '/api/disease_detail'
                 let data = {'content': content}
                 axios.post(url, data)
@@ -178,7 +195,6 @@
                             treatment.push(sample.drugName, sample.property.建议,
                             sample.property.参考文献, sample.property.临床证据,
                             sample.property.证据级别, sample.banPeople, sample.purpose)
-                            this.example.length = 0;
                             this.example.push(treatment)
                         }
                         let resCon = response.data.contraindication
@@ -188,7 +204,6 @@
                             treatment.push(sampleCon.drugName, sampleCon.property.建议,
                             sampleCon.property.参考文献, sampleCon.property.临床证据,
                             sampleCon.property.证据级别, sampleCon.banPeople, sampleCon.purpose)
-                            this.exampleCon.length = 0;
                             this.exampleCon.push(treatment)
                         }
                     })

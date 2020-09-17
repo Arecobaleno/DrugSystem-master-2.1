@@ -3,10 +3,11 @@
         <van-collapse-item 
             :title="searchItem.name"
             :name="searchItem.name">
-            <div v-if="hasChild">    
+            <div slot="title"><div @click="toPage(searchItem.name,true)">{{searchItem.name}}</div></div> 
+            <div v-if="hasChild">
                 <collapse v-for="(item, index) in searchItem.subTitle" :key="index" :searchItem="item" :isTreeRoot="false"></collapse>
             </div>
-            <div v-else class="text" @click="toPage(item)" v-for="(item, index) in searchItem.leafTitle" :key="index">{{item}}</div>
+            <div v-else class="text" @click="toPage(item,false)" v-for="(item, index) in searchItem.leafTitle" :key="index">{{item}}</div>
         </van-collapse-item>
     </div>
 </template>
@@ -38,17 +39,23 @@ export default {
         }
     },
     created() {
-        let parent = this.$parent
-        while(parent && !parent.isTreeRoot) {
-            parent = parent.$parent
+        if(!this.isTreeRoot){
+            let parent = this.$parent
+            while(parent && !parent.isTreeRoot) {
+                parent = parent.$parent
+            }
+            this.tree = parent
         }
-        this.tree = parent
+        else{
+            this.tree = this
+        }
+        
         
     },
     methods: {
-        toPage: function(item) {
+        toPage: function(item,ischange) {
             this.isShow = true;
-            this.tree.$emit('event',this.isShow,item)
+            this.tree.$emit('event',this.isShow,item,ischange)
         },
     },
 }
