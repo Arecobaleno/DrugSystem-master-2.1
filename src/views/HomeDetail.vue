@@ -165,7 +165,7 @@ export default {
       diseaseClass: [],
       interactClass: [],
 	  active:"",
-
+	  returnData:null,
 	  isShowData: true,
 	  isresultEmpty: false,
 	  isShowSearch: false,
