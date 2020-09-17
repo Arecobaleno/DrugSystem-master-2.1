@@ -122,11 +122,12 @@
         <span class="act fx fx-1"><h1 class="act">相关文献</h1></span><p @click="changeShowType(5)"  v-show="isShowmore==true">更多</p>
       </div>
     </section>
-    <div class="page-content fx-1">
+	
+    <div >
         <ul class="firstaid-content">
-            <li class="fx-ac" v-for="(item, index) in findClass" v-bind:key="index">
-                 <span class="fx-1" @click="toFind(item.value)" v-if="item.value != undefined">
-                     {{item.value}}
+            <li class="fx-ac" v-for="(item, index) in returnData" v-bind:key="index">
+                 <span class="fx-1" @click="toFind(item.title)" v-if="item.title != undefined">
+                     {{item.title}}
                 </span>
                 <i class="iconfont icon-qianjin"></i>
             </li>
@@ -175,6 +176,7 @@ export default {
 	  inputMsg:"",
 	  historySearch:['心力衰竭'],
 	  history:"历史搜索：",
+	  referenceDetail: null,
 	  guideContent:[] 
     };
   },
@@ -344,10 +346,15 @@ export default {
 					  axios.post(url, data)
             .then((response) => 
             {
-              console.log("6666");
-              console.log(response.data);
+
               this.guideContent = null;
               this.guideContent = response.data;
+			   console.log("YES!!!!!!!!!!!!")
+			    console.log(this.guideContent)
+			  if(this.guideContent.length==0){
+				 
+			  	 document.getElementById("guideContent").style.display="none";
+			  }
 							// this.disease = response.data;
 						})
 				}
@@ -356,12 +363,31 @@ export default {
 					
         }
 	},
+	searchFind(){
+		if(this.searchData!=""){
+
+            let url = '/api/reference/get'
+            let data = {
+                'category': 'search',
+                'content': this.searchData
+            }        
+            axios.post(url, data).then((response) => {
+                this.returnData = response.data;
+				console.log("show find");
+				console.log(this.returnData);
+				
+                if(this.returnData.length==0){
+                	 document.getElementById("findContent").style.display="none";
+                }
+
+            });
+			}
+	},
     search() {
-		this.record_history(this.searchData);
-		this.$router.push({
-		     path: "/homedetail",
-		     query: {msg: this.searchData},
-		    })
+		
+		this.showAll();
+		this.record_history(this.searchData);		
+		this.isShowSearch=true;
 
       },
     onCancel() {
@@ -474,8 +500,8 @@ export default {
 		  this.searchDrug();
 		  this.searchDisease();
 		  this.searchInteraction();
-		  //this.searchGuide();
-		  //this.searchFind();
+		  this.searchGuide();
+		  this.searchFind();
 		  this.isShowSearch= true;
 		//   this.isShowDrug= true;
 		//   this.isShowDisease= true;
@@ -528,11 +554,7 @@ export default {
 		   this.searchInteraction();
 		   
 		   this.isShowSearch= true;
-		//    this.isShowDrug= false;
-		//    this.isShowDisease= false;
 
-		//    this.isShowInteract= true;
-		// this.isShowInteract= false;
 
 		   this.isShowmore = false;
 	  },
@@ -543,7 +565,7 @@ export default {
 		     document.getElementById("guideContent").style.display="inline";
 			 document.getElementById("findContent").style.display="none";
 		   this.searchAll=1;
-		   this.searchInteraction();
+		   this.searchGuide();
 		   
 		   this.isShowSearch= true;
 		//    this.isShowDrug= false;
@@ -554,14 +576,14 @@ export default {
 
 		   this.isShowmore = false;
 	  },
-	  showFInd(){
+	  showFind(){
  		   document.getElementById("interactContent").style.display="none";
 		   document.getElementById("diseaseContent").style.display="none";
 		   document.getElementById("drugContent").style.display="none";
 		     document.getElementById("guideContent").style.display="none";
 			 document.getElementById("findContent").style.display="inline";
 		   this.searchAll=1;
-		   this.searchInteraction();
+		   this.searchFind();
 		   
 		   this.isShowSearch= true;
 		//    this.isShowDrug= false;
@@ -600,8 +622,27 @@ export default {
 		    query: {guideItems: searchMsg}
 		})
 			},
-	toFind(searchMsg){
-			
+	toFind(title){
+		
+            let url = '/api/reference/detail'
+            console.log("title");
+            console.log(title);
+            let data = {'content': title}
+            axios.post(url, data)
+            .then((response) => {
+                // console.log(222)
+                // console.log(response.data)
+                this.referenceDetail = response.data;
+                // console.log("this.referenceDetail")
+                // console.log(this.referenceDetail);
+                this.$router.push({
+                    path: "/referencedetail",
+                    query: {referenceDetail: this.referenceDetail[0],url: this.referenceDetail[0].url, title: title, author: this.referenceDetail[0].author, summary: this.referenceDetail[0].summary, journal: this.referenceDetail[0].journal, keywords: this.referenceDetail[0].keywords,}
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
 			
 			},
 	changeShowType(index){
@@ -662,7 +703,7 @@ export default {
 	 },
 },
     mounted (){
-
+	this.search();
   },
   created() {
     if(this.historySearch.length==0)
@@ -677,6 +718,11 @@ export default {
  if(storage.getItem('searchWord')!==null){
   this.historySearch=JSON.parse(storage.getItem('searchWord'))
  } 
+ this.searchData =  this.$route.query.msg;
+ console.log("00000");
+ console.log(this.searchData);
+// this.search();
+ 
   }
 };
 

@@ -54,7 +54,7 @@ export default {
 }
 .child-view {
     background-color: #fff;
-    box-shadow: 0 0 0.4rem rgba(0, 0, 0, .1);
+    // box-shadow: 0 0 0.4rem rgba(0, 0, 0, .1);
 }
 .slide-left-enter-active,
 .slide-left-leave-active,

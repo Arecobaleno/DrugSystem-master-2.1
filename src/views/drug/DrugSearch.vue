@@ -15,11 +15,11 @@
           />
       </form>
     </section>
-    <section class="firstaid-search-box">
+    <!-- <section class="firstaid-search-box">
       <div class="header-content fx">
         <span class="act"><h1 class="act">药品分类</h1>/基于ATC编码</span>
       </div>
-    </section>
+    </section> -->
     <div class="page-content fx-1">
         <ul class="firstaid-content">
             <li class="fx-ac" v-for="(item, index) in drugClass" v-bind:key="index">
@@ -108,16 +108,17 @@ export default {
     getDrugData(){
         let url = 'http://127.0.0.1:10088/medicine_query'
         this.searchData = this.$route.query.keywords;
-					let data = {
-						'content': this.searchData
-					}
-					axios.post(url, data)
-						.then((response) => {
-              this.drug = response.data;
-              console.log(this.drug);
-              this.drugClass = response.data;
-              this.drugClass1 = response.data;
-            })
+        console.log("searchpage:"+this.searchData)
+        let data = {
+          'content': this.searchData
+        }
+        axios.post(url, data)
+          .then((response) => {
+            this.drug = response.data;
+            console.log(this.drug);
+            this.drugClass = response.data;
+            this.drugClass1 = response.data;
+          })
     },
     getDrugChemistry(name){
         this.$router.push({

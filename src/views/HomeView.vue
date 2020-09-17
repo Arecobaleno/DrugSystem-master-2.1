@@ -36,15 +36,15 @@
                         </router-link>
                     </li>
                 </ul>
-                <ul class="modules-content fx">
-                    <li class="modules-item fx fx-1">
+                <!-- <ul class="modules-content fx"> -->
+                    <!-- <li class="modules-item fx fx-1">
                         <a class="fx-c fx-1 ac" href="javascript:;">
                             <div class="fx">
                                 <img src="../assets/images/index/melancholy@2x.png">
                                 <p class="fx-1"><strong>寻医</strong>自查症状&nbsp;了解疾病</p>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="modules-item fx fx-1">
                         <router-link class="fx-c fx-1 ac" to="/interaction">
                             <div class="fx">
@@ -53,7 +53,7 @@
                             </div>
                         </router-link>
                     </li>
-                </ul>
+                <!-- </ul> -->
             </section>
             <section class="diseases-group group-item">
                 <router-link class="group-more fx-ac ac" to="/disease">

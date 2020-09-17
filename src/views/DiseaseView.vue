@@ -41,7 +41,7 @@
             </div>
 		</div>
 
-		<div v-show="isShowData==false" class="page-content fx-1">	
+		<div v-show="isShowData==false" class="fx-1">	
 			<a>
 				<van-row type="flex" justify="space-between">
 					<van-col id="search_history" v-model="history" align="left" class="history" span="11">{{history}}</van-col>
@@ -93,7 +93,7 @@
 					 backUrl: "/home"
 				},
 				historySearch:['心力衰竭'],
-                history:"历史搜索：暂无",
+                history:"历史搜索：",
 			}
 		},
 		computed: mapGetters({
@@ -244,24 +244,27 @@
 
 	.history{
 		font-family:"Times New Roman";
-		font-size:12px;
-		margin-top: 10px;
+		font-size:14px;
+		margin-top: 4px;
+		margin-left: 6px;
 		margin-bottom: 5px;
-		color: #1a1b1d;
+		//color: #53575b;;
+		color: #1a1b1d;;
 	}
 	.clear_history{
 		font-family:"Times New Roman";
-		font-size:10px; 
+		font-size:12px;
 		margin-top: 4px;
+		margin-right: 6px;
 		color: #676b73;;
 	}
 	.history_item{
-		height: 23px;
+		height: 33px;
 		margin-top: 6px;
-		margin-right: 10px;
-        font-size:10px;
-        color: "black";
-    }
+		margin-left: 6px;
+		margin-right: 7px;
+		font-size:10px
+	}
     .blankW{
         width: 10px;
         background-color: #fff;

@@ -72,6 +72,7 @@ import MakerSearch from '../views/guide/MakerSearch.vue'
 import GuideMakerDetail from '../views/guide/GuideMakerDetail.vue'
 
 import HomeSearch from '../views/HomeSearch.vue'
+import HomeDetail from '../views/HomeDetail.vue'
 // const HomeView = resolve => require(['../views/HomeView.vue'], resolve)
 
 const Parent = {
@@ -117,6 +118,12 @@ export default new Router({
             path: '/homesearch',
             name: 'homesearch',
             component: HomeSearch,
+            meta: { requiresAuth: false }
+        },
+        { //全局搜索
+            path: '/homedetail',
+            name: 'HomeDetail',
+            component: HomeDetail,
             meta: { requiresAuth: false }
         },
         { // 症状自诊
