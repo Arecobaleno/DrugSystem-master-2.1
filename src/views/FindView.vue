@@ -1,40 +1,6 @@
 <template>
     <div class="page-full component-find fx-column">
         <div class="page-content fx-1">
-            <!-- <section class="banner-box">
-                <a class="banner-item ac" href="javascript:;"><img src="../assets/images/find/find_banner.jpg"></a>
-            </section>
-            <section class="modules">
-                <h3 class="modules-title fx-c"><i class="iconfont icon-xiaoaixin"></i><span>优质服务</span><i class="iconfont icon-xiaoaixin"></i></h3>
-                <ul class="modules-content fx">
-                    <li class="modules-item fx fx-1">
-                        <router-link class="fx-c fx-1 ac" to="/aid">
-                            <div class="fx">
-                                <img src="../assets/images/disease/drug@2x.png">
-                                <p class="fx-1"><strong>用药助手</strong>自查症状&nbsp;了解疾病</p>
-                            </div>
-                        </router-link>
-                    </li>
-                    <li class="modules-item fx fx-1">
-                        <router-link class="fx-c fx-1 ac" to="/firstaid">
-                            <div class="fx">
-                                <img src="../assets/images/find/find_jjcs.png">
-                                <p class="fx-1"><strong>急救常识</strong>解析疾病&nbsp;加强诊疗</p>
-                            </div>
-                        </router-link>
-                    </li>
-                </ul>
-            </section>
-            <section class="modules">
-                <h3 class="modules-title fx-c"><i class="iconfont icon-xiaoaixin"></i><span>健康测评</span><i class="iconfont icon-xiaoaixin"></i></h3>
-                <div class="scroll-evaluations">
-                    <ul class="clearfix">
-                        <li @click="toPage(0)"><img src="../assets/images/find/evaluation1.jpg"></li>
-                        <li @click="toPage(1)"><img src="../assets/images/find/evaluation2.jpg"></li>
-                        <li @click="toPage(2)"><img src="../assets/images/find/evaluation1.jpg"></li>
-                    </ul>
-                </div>
-            </section> -->
             <app-header title="相关文献">
                 
                 <div slot="right">
@@ -56,17 +22,13 @@
 
             <van-dropdown-menu>
                 <van-dropdown-item v-model="value1" :options="option1"  @change="searchYear"/>
-                <van-dropdown-item v-model="value2" :options="option2"  @change="searchYear"/>
+                <van-dropdown-item v-model="value2" :options="option2"  @change="getOrder"/>
             </van-dropdown-menu>
 
 
       <!-- <van-cell is-link v-for="item in station" :key="item.Id" :id="item.Id" :title="item.Name" @click="onClick"/> -->
             <van-cell-group >
                 <van-cell v-for="data in returnData" :key='data.title' :title = "data.title" size="large" :label="data.summary|ellipsis" @click="getReferenceDetail(data.title)"/>
-                <!-- is-link :url="data.url" -->
-                <!-- <van-cell v-for="book in books" :key='book.title' :title = "book.title" :value="book.value" size="large" :label="book.label" is-link url="/vant/mobile.html"/> -->
-                <!-- <van-cell title="单元格" value="内容" size="large" label="描述信息" is-link url="/vant/mobile.html"/>
-                <van-cell title="单元格" value="内容" size="large" label="描述信息" is-link to="/"/> -->
             </van-cell-group>
 
         </div>
@@ -122,7 +84,6 @@ export default {
                 { text: '按时间排序', value: 1 },
                 { text: '按热度排序', value: 2 },
             ],
-            example: [],
         }
     },
     filters: {
@@ -134,7 +95,6 @@ export default {
         return value
         }
     },
-
     methods: {
         ask(){
             let url = '/api/reference/get'
@@ -145,9 +105,6 @@ export default {
             const _this = this;
             axios.post(url, data).then((response) => {
                 _this.returnData = response.data;
-                
-                console.log("_this.returnData");
-                console.log(_this.returnData);
             });
         },
         onSearch(val) {
@@ -175,11 +132,7 @@ export default {
             let data = {'content': title}
             axios.post(url, data)
             .then((response) => {
-                // console.log(222)
-                // console.log(response.data)
                 this.referenceDetail = response.data;
-                // console.log("this.referenceDetail")
-                // console.log(this.referenceDetail);
                 this.$router.push({
                     path: "/referencedetail",
                     query: {referenceDetail: this.referenceDetail[0],url: this.referenceDetail[0].url, title: title, author: this.referenceDetail[0].author, summary: this.referenceDetail[0].summary, journal: this.referenceDetail[0].journal, keywords: this.referenceDetail[0].keywords,}
@@ -195,75 +148,41 @@ export default {
                 title: '健康测评'
             });
             this.$router.push({ path: 'evaluation'});
-            }
         },
         searchYear() {
-
-                this.example=[]
-
-                let url = '/api/reference/get'
-                let data = {
-                    'category': 'search',
-                    'content': ''
-                }        
-
-                // let url = '/api/guide/get'
-                // let data = {'category': 'search','content':''}
-
-           			//let details="";
-           			axios.post(url, data)
-           			.then((response)=>{
-           				let res = response.data
-           				//console.log(res);
-           				for (let index in res) {
-
-           					let treatment = []
-           					let sample = res[index]
-                    var year=sample.time.split('-')
-                    //时间比较
-                    if(this.value1==1 || year[0]==this.value1){
-           					treatment.push(sample)
-
-           				//	this.example.push(treatment)
-                  this.example.push({index:index, year:sample.time, title:sample.title, count:sample.count,maker:sample.maker})
-                  console.log(this.example)
-                     }
-           				}
-                 // alert(JSON.stringify(this.example));
-                 function getSortFun(order, sortBy) {
-                     var ordAlpah = (order == 'asc') ? '>' : '<';
-                     var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '?1:-1');
-                     return sortFun;
-                 }
-                 if(this.value2==1){
-                  this.example.sort(getSortFun('desc', 'year'));
-                  }else
-                  {
-                    this.example.sort(getSortFun('desc', 'count'));
-                  }
-
-
-           			})
-           			.catch((error) => {
-           				console.log(error);
-           			})
-
-         },
-        mounted () {
-            // this.$nextTick(() => {
-            //     myScroll = new IScroll('.scroll-evaluations', { scrollX: true, scrollY: false, mouseWheel: false, click: Utils.iScrollClick() });
-            // })
+            this.returnData=[]
+            let url = '/api/reference/get'
+            let data = {'category': 'year','content': this.value1}
+            axios.post(url, data)
+            .then((response)=>{
+                this.returnData=response.data              
+            })
+            .catch((error) => {
+                    console.log(error)
+            })
         },
-        created() {
-            this.ask();
+        getSortFun(order, sortBy) {
+            var ordAlpah = (order == 'asc') ? '>' : '<';
+            var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '?1:-1');
+            return sortFun;
         },
+        getOrder () {
+            if(this.value2==1){
+                this.example.sort(getSortFun('desc', 'year'));
+            } else {
+                this.example.sort(getSortFun('desc', 'count'));
+            }
+        }
+    },
+    created() {
+        this.ask()
+    },
     computed: mapGetters({
         backPath: 'backPath',
         item: 'diseaseItem',
         hasInformations: 'hasInformations',
         informations: 'informations'
     })
-
 }
 </script>
 

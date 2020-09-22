@@ -429,7 +429,7 @@ export default {
             let data = {'content': this.name}
             axios.post(url, data)
                 .then((response) => {
-                    this.name = response.data;
+                    this.name = response.data.data;
                 })
                 .catch((error) => {
                     console.log(error);

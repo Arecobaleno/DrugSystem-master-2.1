@@ -55,7 +55,7 @@ export default {
         let data = {'content': this.name}
         axios.post(url, data)
             .then((response) => {
-                this.drugs = response.data;
+                this.drugs = response.data.data;
                 this.appHeader.title = this.getChinese(this.name);
             })
             .catch((error) => {
