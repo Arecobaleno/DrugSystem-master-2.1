@@ -88,7 +88,7 @@ export default {
       this.searchData = "";
     },
     getDrugData(){
-        let url = 'http://localhost:10088/medicine_class'
+        let url = '/api/medicine_class'
         axios.get(url)
             .then((response)=>{
                 console.log(response);

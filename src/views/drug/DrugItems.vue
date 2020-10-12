@@ -57,7 +57,7 @@ export default {
         
     },
     getDrugItemsData (){
-        let url = 'http://localhost:10088/medicine_by_chemical'
+        let url = '/api/medicine_by_chemical'
         let data = {'content': this.name}
         axios.post(url, data)
             .then((response) => {

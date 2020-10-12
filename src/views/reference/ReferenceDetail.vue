@@ -154,56 +154,13 @@ export default {
         // this.test1();
     },
     methods: {
-        // showResult (content) {
-        //     let url = '/api/detail'
-        //     let data = {'category': 'disease', 'content': '心力衰竭'}
-        //     axios.post(url, data)
-        //         .then((response) => {
-        //             console.log(response.data)
-        //             let res = response.data
-        //             for (let index in res) {
-        //                 let treatment = []
-        //                 let sample = res[index]
-        //                 treatment.push(sample.properties.ATC编码,sample.properties.FDA妊娠分级,
-        //                 )
-        //                 console.log(treatment)
-        //                 this.example.push(treatment)
-        //             }
-        //         })
-        // },
         getReferenceDetail(){
             this.detailList.push("标题".concat(' : ', this.title));
             this.detailList.push("摘要".concat(' : ', this.summary));
             this.detailList.push("关键词".concat(' : ', this.keywords));
             this.detailList.push("作者".concat(' : ', this.author));
             this.detailList.push("期刊".concat(' : ', this.journal));
-
             this.bigtitle = "《".concat(this.title,'》');
-
-            console.log("getReferenceDetail()\nthis.referenceDetail");
-            console.log(this.referenceDetail);
-            console.log("this.detailList");
-            console.log(this.detailList);
-
-        //   for (let index in this.drugDetail) {
-        //       let treatment = []
-        //       let arr = []
-        //       let sample = this.drugDetail[index]
-        //       treatment.push(sample.properties)
-        //       let arr1 = Object.values(treatment[0])
-        //       let arr2 = Object.keys(treatment[0])
-        //       for(let i in arr1){
-        //           let s1 = arr1[i]
-        //           let s2 = arr2[i]
-        //           console.log(s2)
-        //           s2 = s2.concat(':', s1)
-        //           this.example.push(s2)
-        //       }
-        //       console.log(666)
-        //       console.log(treatment[0])
-        //       this.example.push(treatment)
-        //   }
-
         },
       
         },

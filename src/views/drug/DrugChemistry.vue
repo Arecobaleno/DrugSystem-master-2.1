@@ -51,7 +51,7 @@ export default {
     show(){
     },
     getChemistryData(){
-      let url = 'http://localhost:10088/chemical_by_class'
+      let url = '/api/chemical_by_class'
         let data = {'content': this.name}
         axios.post(url, data)
             .then((response) => {

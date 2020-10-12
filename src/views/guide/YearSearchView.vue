@@ -13,7 +13,7 @@
         <van-cell size="small" class="guide-item">
         <div class="guide-item-1" >{{(treatment.title)}}</div>
         <div class="guide-item-2" >{{treatment.maker}}</div>
-        <div class="guide-item-3" >{{treatment.year}}</div>
+        <div class="guide-item-3" >{{treatment.time}}</div>
 
         <van-divider :style="{ color: '#000000', borderColor: '#000000', padding: '0 1px' } " class="splitline">
         </van-divider>
@@ -72,7 +72,8 @@
 		}),
 		created(){
 		    //获取localstorage
-			this.searchYear();
+			this.searchYear()
+			this.getOrder()
 		},
 		methods: {
         	searchYear() {
@@ -82,15 +83,7 @@
            		axios.post(url, data)
            		.then((response)=>{
            			let res = response.data
-           			//console.log(res);
-           			for (let index in res) {
-           				let treatment = []
-           				let sample = res[index]
-           				treatment.push(sample)
-                  		this.example.push({index:index, year:sample.time, title:sample.title, count:sample.count,maker:sample.maker})
-       				}
-                 // alert(JSON.stringify(this.example));
-                 
+           			this.example = res
            			})
            			.catch((error) => {
            				console.log(error);
@@ -102,16 +95,12 @@
                 query: {guideItems: name}
             	})
 			},
-			getSortFun(order, sortBy) {
-                var ordAlpah = (order == 'asc') ? '>' : '<';
-                var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '?1:-1');
-                return sortFun;
-			},
 			getOrder () {
 				if(this.value2==1){
-                 	this.example.sort(getSortFun('desc', 'year'));
+                 	this.example.sort(function(a,b){return b.time-a.time});
                 } else {
-                    this.example.sort(getSortFun('desc', 'count'));
+					this.example.sort(function(a,b){return b.count-a.count});
+					
                 }
 			}
 		},

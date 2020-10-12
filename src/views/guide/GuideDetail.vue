@@ -76,17 +76,16 @@ export default {
         this.currentPage = 1 // 加载的时候先加载第一页
       }
     },
-    async created () {
+    created () {
         let title = this.$route.query.guideItems
-        
         this.src = pdf.createLoadingTask({url:'/api/guide/download?filename=' + title, cMapUrl: '../../../static/js/', cMapPacked: true})
         console.log(this.src)
         this.guideDetail.title = title
     },
     destroyed(){
-        
-        delete this.src
-        // localStorage.clear()
+        let url = '/api/guide/detail'
+        let data = {'content': title}
+    	axios.post(url, data)
     },
     computed: mapGetters({
         backPath: 'backPath',

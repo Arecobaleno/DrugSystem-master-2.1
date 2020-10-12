@@ -11,23 +11,12 @@
                 position="bottom"
                 :style="{ height: '90%' }">
                 <div class="page-content fx-1">
-                    <!-- 详情标题 -->
                     <div class="detail-head detail-bg border-b">
                         <h2 class="detail-head-title" v-text="detailName"></h2>
                         <p v-if="item.alias" class="detail-head-small" v-text="'别名：'+item.alias"></p>
                         <p v-if="item.common_name" class="detail-head-small" v-text="'俗称：'+item.common_name"></p>
                         <p v-if="item.advice" class="detail-head-small" v-text="'就诊建议：'+item.advice"></p>
                     </div>
-                    <!-- 跳转模块
-                    <div class="detail-relevant border-b">
-                        <ul class="detail-relevant-box fx">
-                            <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-1"></i>辅助疗法</li>
-                            <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-2"></i>热门医生</li>
-                            <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-3"></i>附近医院</li>
-                            <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-4"></i>相关药品</li>
-                        </ul>
-                    </div> -->
-                    <!-- 详情内容 -->
                     <div class="detail-info">
                         <div class="info-group">
                             <!-- 分点内容 -->
@@ -85,9 +74,6 @@
                     </ul>
                 </div>
             </van-popup>
-
-
-
 		</section>
         
 		<app-nav></app-nav>
@@ -145,14 +131,15 @@
 						'content': this.disease
 					}
 					axios.post(url, data)
-						.then((response) => {
-							if(response.data.length!=0){
-                                console.log(response.data)
-								this.isresultEmpty=true;
-                                this.dataSet[0]  = response.data.diseaseTree;
-                                this.activeNames = response.data.path;
-							}
-						})
+                    .then((response) => {
+                        if(response.data.length!=0){
+                            this.isresultEmpty=true;
+                            this.dataSet[0]  = response.data.diseaseTree;
+                            console.log(response.data.diseaseTree)
+                            this.activeNames = response.data.path;
+                        }
+                    })
+                    
 				}
 				else{
 					this.disease  = [];
@@ -187,7 +174,6 @@
                 let data = {'content': content}
                 axios.post(url, data)
                     .then((response) => {
-                        console.log(response.data)
                         let res = response.data.indication
                         for (let index in res) {
                             let treatment = []

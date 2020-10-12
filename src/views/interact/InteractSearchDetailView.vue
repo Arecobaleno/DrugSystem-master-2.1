@@ -12,17 +12,8 @@
         <div class="detail-head detail-bg border-b">
             <h2 class="detail-head-title" v-text="search_data"></h2>
         </div>
-        <!-- 跳转模块
-        <div class="detail-relevant border-b">
-            <ul class="detail-relevant-box fx">
-                <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-1"></i>辅助疗法</li>
-                <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-2"></i>热门医生</li>
-                <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-3"></i>附近医院</li>
-                <li class="relevant-item fx-1 fx-c fx-column"><i class="flex-icon icon-4"></i>相关药品</li>
-            </ul>
-        </div> -->
         <!-- 详情内容 -->
-        <div class="detail-info">
+        <div>
             <div class="info-group">
                 <!-- 分点内容 -->
                 <div class="info-sub">
@@ -30,14 +21,13 @@
                         <h2>无此成份相互作用数据</h2>
                     </div>
                     <div v-else class="info-sub-h">相互作用：</div>
-                    <div v-for="(treatment,index) in example" :key="index">
+                    <div class="border-b inters" v-for="(treatment,index) in example" :key="index">
                        <p class="info-sub-d2">{{treatment[0]}}</p>
                         <font class="info-sub-d2">临床建议：</font><font  class="info-sub-dd">{{treatment[1]}}</font><br />
                         <font class="info-sub-d2">临床证据：</font><font  class="info-sub-dd">{{treatment[2]}}</font><br />
                         <font class="info-sub-d2">作用机制：</font><font  class="info-sub-dd">{{treatment[3]}}</font><br />
                         <font class="info-sub-d2">证据级别：</font><font  class="info-sub-dd">{{treatment[4]}}</font><br />
                         <font class="info-sub-d2">参考文献：</font><font  class="info-sub-dd">{{treatment[5]}}</font>
-                        <p class="info-sub-dd">___________________________________________</p>
                         <p></p>
                     </div>
                 </div>
@@ -177,8 +167,7 @@ export default {
     background-color: #fff;
 }
 
-// .detail-relevant{
-// }
+
 .relevant-item{
     height: 1.9rem;
     color: @color_l;
@@ -216,7 +205,9 @@ export default {
     vertical-align: middle;
 }
 
-
+.inters {
+    margin-top: 10px;
+}
 /*图标">"*/
 
 .s-icon-next:after {

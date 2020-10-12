@@ -170,7 +170,7 @@ export default {
   methods: {
     onSubmitLogin(values) {
         console.log('submit', values);
-        let url = 'http://localhost:10088/my/login'
+        let url = '/api/my/login'
             let data = {
                 'nickname': this.nickname,
                 'password': this.password
@@ -193,11 +193,13 @@ export default {
                     Toast.fail('用户名或密码错误，请重试');
                 }
 
+            }, err => {
+                Toast.fail(err);
             });
     },
     onSubmitNew(values) {
         console.log('submit', values);
-        let url = 'http://localhost:10088/my/register'
+        let url = '/api/my/register'
             let data = {
                 'mail': this.mail,
                 'nickname': this.new_nickname,

@@ -142,13 +142,6 @@ export default {
                 console.log(error);
             })
         },
-        toPage: function(index){
-            this.$store.dispatch('set_iframe_info', {
-                url: this.evaluations[index],
-                title: '健康测评'
-            });
-            this.$router.push({ path: 'evaluation'});
-        },
         searchYear() {
             this.returnData=[]
             let url = '/api/reference/get'
@@ -161,21 +154,17 @@ export default {
                     console.log(error)
             })
         },
-        getSortFun(order, sortBy) {
-            var ordAlpah = (order == 'asc') ? '>' : '<';
-            var sortFun = new Function('a', 'b', 'return a.' + sortBy + ordAlpah + 'b.' + sortBy + '?1:-1');
-            return sortFun;
-        },
         getOrder () {
             if(this.value2==1){
-                this.example.sort(getSortFun('desc', 'year'));
+                this.returnData.sort(function(a,b){return b.year-a.year})
             } else {
-                this.example.sort(getSortFun('desc', 'count'));
+                this.returnData.sort(function(a,b){return b.count-a.count})
             }
         }
     },
     created() {
         this.ask()
+        this.getOrder()
     },
     computed: mapGetters({
         backPath: 'backPath',

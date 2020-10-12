@@ -151,7 +151,7 @@ export default {
     },
     methods: {
         getDrugDetailData (){
-            let url = 'http://localhost:10088/detail'
+            let url = '/api/detail'
             let data = {'category': 'drug', 'content': this.drugList}
             axios.post(url, data)
                 .then((response) => {
@@ -425,7 +425,7 @@ export default {
 
         },
         getChemistry(){
-            let url = 'http://localhost:10088/return_chemical'
+            let url = '/api/return_chemical'
             let data = {'content': this.name}
             axios.post(url, data)
                 .then((response) => {
