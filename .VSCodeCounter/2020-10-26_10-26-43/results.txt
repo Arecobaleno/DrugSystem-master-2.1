@@ -1,0 +1,187 @@
+Date : 2020-10-26 10:26:43
+Directory : d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1
+Total : 122 files,  30531 codes, 534 comments, 1404 blanks, all 32469 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| Vue        |         70 |     15,010 |        254 |        907 |     16,171 |
+| JSON       |          5 |     10,705 |          0 |          2 |     10,707 |
+| JavaScript |         26 |      2,496 |         33 |        104 |      2,633 |
+| Less       |          8 |      1,937 |        233 |        304 |      2,474 |
+| SCSS       |          4 |        264 |          6 |          6 |        276 |
+| XML        |          2 |         57 |          6 |         43 |        106 |
+| Markdown   |          1 |         26 |          0 |         26 |         52 |
+| CSS        |          5 |         21 |          0 |          9 |         30 |
+| HTML       |          1 |         15 |          2 |          3 |         20 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                       | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                          |        122 |     30,531 |        534 |      1,404 |     32,469 |
+| src                                                                                                        |        114 |     19,678 |        529 |      1,370 |     21,577 |
+| src\assets                                                                                                 |         21 |      2,719 |        245 |        365 |      3,329 |
+| src\assets\css                                                                                             |          8 |      1,937 |        233 |        304 |      2,474 |
+| src\assets\css\page                                                                                        |          3 |        438 |         23 |         31 |        492 |
+| src\assets\font                                                                                            |          1 |         31 |          3 |         29 |         63 |
+| src\assets\js                                                                                              |          2 |        440 |          0 |          3 |        443 |
+| src\assets\styles                                                                                          |         10 |        311 |          9 |         29 |        349 |
+| src\assets\styles\iconfont                                                                                 |          1 |         26 |          3 |         14 |         43 |
+| src\components                                                                                             |         11 |        482 |          0 |         41 |        523 |
+| src\components\disease                                                                                     |          1 |         75 |          0 |          9 |         84 |
+| src\components\symptom                                                                                     |          6 |        243 |          0 |         18 |        261 |
+| src\router                                                                                                 |          1 |        448 |          2 |         22 |        472 |
+| src\store                                                                                                  |         14 |        564 |         15 |         44 |        623 |
+| src\store\actions                                                                                          |          6 |        139 |          1 |         19 |        159 |
+| src\store\modules                                                                                          |          5 |        340 |          4 |         15 |        359 |
+| src\utils                                                                                                  |          5 |        473 |         13 |         23 |        509 |
+| src\views                                                                                                  |         60 |     14,874 |        250 |        864 |     15,988 |
+| src\views\accompany                                                                                        |          4 |        827 |          0 |         27 |        854 |
+| src\views\aid                                                                                              |          3 |        759 |          0 |         18 |        777 |
+| src\views\disease                                                                                          |          2 |        433 |          4 |         48 |        485 |
+| src\views\drug                                                                                             |          5 |      1,329 |         13 |         83 |      1,425 |
+| src\views\firstaid                                                                                         |          1 |        266 |          0 |          7 |        273 |
+| src\views\guide                                                                                            |         12 |      2,023 |         40 |         97 |      2,160 |
+| src\views\guide\components                                                                                 |          4 |        354 |          9 |         17 |        380 |
+| src\views\interact                                                                                         |          3 |        889 |         34 |         72 |        995 |
+| src\views\my                                                                                               |          4 |      1,201 |          8 |         24 |      1,233 |
+| src\views\news                                                                                             |          3 |        799 |          0 |         50 |        849 |
+| src\views\patient                                                                                          |          2 |        273 |          0 |         13 |        286 |
+| src\views\reference                                                                                        |          1 |        273 |         18 |         42 |        333 |
+| src\views\set                                                                                              |          1 |        210 |          0 |          5 |        215 |
+| src\views\symptom                                                                                          |          3 |        341 |          0 |         24 |        365 |
+| static                                                                                                     |          3 |         23 |          0 |          0 |         23 |
+| static\mock                                                                                                |          3 |         23 |          0 |          0 |         23 |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                   | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\README.md                                        | Markdown   |         26 |          0 |         26 |         52 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\index.html                                       | HTML       |         15 |          2 |          3 |         20 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\package-lock.json                                | JSON       |     10,630 |          0 |          1 |     10,631 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\package.json                                     | JSON       |         52 |          0 |          1 |         53 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\App.vue                                      | Vue        |         94 |          4 |          5 |        103 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\css\common.less                       | Less       |         55 |         65 |         55 |        175 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\css\iconfont.less                     | Less       |         87 |          8 |         59 |        154 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\css\page\home.less                    | Less       |        147 |         21 |          6 |        174 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\css\page\news-detail.less             | Less       |        190 |          0 |         21 |        211 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\css\page\news.less                    | Less       |        101 |          2 |          4 |        107 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\css\picker.less                       | Less       |        260 |         17 |         42 |        319 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\css\reset.less                        | Less       |        573 |         69 |        117 |        759 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\css\swiper.less                       | Less       |        524 |         51 |          0 |        575 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\font\iconfont.svg                     | XML        |         31 |          3 |         29 |         63 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\js\pyconst.js                         | JavaScript |        403 |          0 |          2 |        405 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\js\vue-py.js                          | JavaScript |         37 |          0 |          1 |         38 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\border.css                     | CSS        |          1 |          0 |          1 |          2 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\border.scss                    | SCSS       |        176 |          6 |          1 |        183 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\iconfont.css                   | CSS        |         17 |          0 |          7 |         24 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\iconfont\iconfont.svg          | XML        |         26 |          3 |         14 |         43 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\layout.css                     | CSS        |          1 |          0 |          0 |          1 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\layout.scss                    | SCSS       |         19 |          0 |          3 |         22 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\reset.css                      | CSS        |          1 |          0 |          1 |          2 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\reset.scss                     | SCSS       |         59 |          0 |          1 |         60 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\varibles.css                   | CSS        |          1 |          0 |          0 |          1 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\assets\styles\varibles.scss                  | SCSS       |         10 |          0 |          1 |         11 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\app-header.vue                    | Vue        |         47 |          0 |          4 |         51 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\app-nav.vue                       | Vue        |         20 |          0 |          3 |         23 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\disease\collapse.vue              | Vue        |         75 |          0 |          9 |         84 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\goods-header.vue                  | Vue        |         76 |          0 |          4 |         80 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\info-pop.vue                      | Vue        |         21 |          0 |          3 |         24 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\symptom\info-component.vue        | Vue        |        100 |          0 |          3 |        103 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\symptom\man-back-component.vue    | Vue        |         19 |          0 |          3 |         22 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\symptom\man-front-component.vue   | Vue        |         30 |          0 |          3 |         33 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\symptom\person-component.vue      | Vue        |         45 |          0 |          3 |         48 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\symptom\woman-back-component.vue  | Vue        |         19 |          0 |          3 |         22 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\components\symptom\woman-front-component.vue | Vue        |         30 |          0 |          3 |         33 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\main.js                                      | JavaScript |         24 |          0 |          6 |         30 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\router\index.js                              | JavaScript |        448 |          2 |         22 |        472 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\actions\accompany.js                   | JavaScript |         21 |          0 |          1 |         22 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\actions\disease.js                     | JavaScript |         13 |          0 |          2 |         15 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\actions\global.js                      | JavaScript |         19 |          0 |          5 |         24 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\actions\index.js                       | JavaScript |          7 |          0 |          0 |          7 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\actions\patient.js                     | JavaScript |         18 |          0 |          3 |         21 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\actions\symptom.js                     | JavaScript |         61 |          1 |          8 |         70 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\getters.js                             | JavaScript |         41 |          5 |          4 |         50 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\index.js                               | JavaScript |         22 |          0 |          2 |         24 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\modules\accompany.js                   | JavaScript |        191 |          0 |          3 |        194 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\modules\disease.js                     | JavaScript |         20 |          0 |          3 |         23 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\modules\global.js                      | JavaScript |         45 |          0 |          3 |         48 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\modules\patient.js                     | JavaScript |         28 |          4 |          3 |         35 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\modules\symptom.js                     | JavaScript |         56 |          0 |          3 |         59 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\store\mutation-types.js                      | JavaScript |         22 |          5 |          4 |         31 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\utils\api.js                                 | JavaScript |         15 |          1 |          3 |         19 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\utils\filters.js                             | JavaScript |         14 |          0 |          1 |         15 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\utils\index.js                               | JavaScript |         99 |          1 |         10 |        110 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\utils\picker.js                              | JavaScript |        293 |         11 |          2 |        306 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\utils\storage.js                             | JavaScript |         52 |          0 |          7 |         59 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\AccompanyView.vue                      | Vue        |        345 |          1 |          9 |        355 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\AidView.vue                            | Vue        |         78 |          0 |          6 |         84 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\DiseaseView.vue                        | Vue        |        258 |         11 |         11 |        280 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\FindView.vue                           | Vue        |        238 |          4 |         21 |        263 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\FirstaidView.vue                       | Vue        |         98 |          0 |          4 |        102 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\GoodsView.vue                          | Vue        |         59 |          0 |          4 |         63 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\HomeDetail.vue                         | Vue        |        716 |         37 |         73 |        826 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\HomeSearch.vue                         | Vue        |        675 |         38 |         67 |        780 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\HomeView.vue                           | Vue        |        360 |         23 |         15 |        398 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\Iframe.vue                             | Vue        |         53 |          1 |          3 |         57 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\LoginView.vue                          | Vue        |        525 |         17 |         25 |        567 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\MyView.vue                             | Vue        |        537 |          0 |          9 |        546 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\NewsView.vue                           | Vue        |        318 |          1 |          6 |        325 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\PatientView.vue                        | Vue        |        132 |          0 |          5 |        137 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\SetView.vue                            | Vue        |        120 |          0 |          5 |        125 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\SymptomView.vue                        | Vue        |        739 |          0 |         91 |        830 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\accompany\AppointmentView.vue          | Vue        |        332 |          0 |         10 |        342 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\accompany\HospitalView.vue             | Vue        |        219 |          0 |          5 |        224 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\accompany\PaylView.vue                 | Vue        |        112 |          0 |          5 |        117 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\accompany\SelectcityView.vue           | Vue        |        164 |          0 |          7 |        171 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\aid\DrugDetailView.vue                 | Vue        |        278 |          0 |          9 |        287 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\aid\DrugListView.vue                   | Vue        |        247 |          0 |          4 |        251 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\aid\DrugsView.vue                      | Vue        |        234 |          0 |          5 |        239 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\disease\DiseaseDetailView.vue          | Vue        |        312 |          4 |         37 |        353 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\disease\DiseaseSearch.vue              | Vue        |        121 |          0 |         11 |        132 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\drug\DrugChemistry.vue                 | Vue        |        195 |          0 |          5 |        200 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\drug\DrugDetail.vue                    | Vue        |        592 |          6 |         47 |        645 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\drug\DrugItems.vue                     | Vue        |        195 |          7 |          9 |        211 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\drug\DrugSearch.vue                    | Vue        |        190 |          0 |         12 |        202 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\drug\DrugView.vue                      | Vue        |        157 |          0 |         10 |        167 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\firstaid\FirstaidDetailView.vue        | Vue        |        266 |          0 |          7 |        273 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\GuideDetail.vue                  | Vue        |        147 |          4 |         13 |        164 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\GuideMakerDetail.vue             | Vue        |        160 |          0 |          5 |        165 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\GuideSearch.vue                  | Vue        |        201 |          4 |         12 |        217 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\GuideView.vue                    | Vue        |        272 |          8 |         18 |        298 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\MakerSearch.vue                  | Vue        |        160 |          4 |         10 |        174 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\YearSearchView.vue               | Vue        |        289 |         11 |         19 |        319 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\components\Alphabet.vue          | Vue        |         82 |          8 |          3 |         93 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\components\Header.vue            | Vue        |         46 |          0 |          5 |         51 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\components\List.vue              | Vue        |        115 |          0 |          5 |        120 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\components\Search.vue            | Vue        |        111 |          1 |          4 |        116 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\const.js                         | JavaScript |        403 |          0 |          2 |        405 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\guide\vue-py.js                        | JavaScript |         37 |          0 |          1 |         38 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\interact\Interact.vue                  | Vue        |        279 |         23 |         16 |        318 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\interact\InteractSearchDetailView.vue  | Vue        |        271 |          5 |         33 |        309 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\interact\InteractSearchView.vue        | Vue        |        339 |          6 |         23 |        368 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\my\FeedbackView.vue                    | Vue        |        216 |          8 |          5 |        229 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\my\InputcodeView.vue                   | Vue        |         73 |          0 |          4 |         77 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\my\InvitationView.vue                  | Vue        |         76 |          0 |          4 |         80 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\my\UserinfoView.vue                    | Vue        |        836 |          0 |         11 |        847 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\news\CommentView.vue                   | Vue        |         72 |          0 |          4 |         76 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\news\CommentsView.vue                  | Vue        |        425 |          0 |         21 |        446 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\news\NewsDetailView.vue                | Vue        |        302 |          0 |         25 |        327 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\patient\AddPatientView.vue             | Vue        |        130 |          0 |          7 |        137 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\patient\EditPatientView.vue            | Vue        |        143 |          0 |          6 |        149 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\reference\ReferenceDetail.vue          | Vue        |        273 |         18 |         42 |        333 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\set\AgreementView.vue                  | Vue        |        210 |          0 |          5 |        215 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\symptom\MySymptomView.vue              | Vue        |        117 |          0 |          5 |        122 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\symptom\SymptomResultView.vue          | Vue        |        148 |          0 |         12 |        160 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\src\views\symptom\SymptomSelectView.vue          | Vue        |         76 |          0 |          7 |         83 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\static\mock\disease-subjects.json                | JSON       |          1 |          0 |          0 |          1 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\static\mock\disease.json                         | JSON       |          1 |          0 |          0 |          1 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\static\mock\menu.json                            | JSON       |         21 |          0 |          0 |         21 |
+| d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1\webpack.config.js                                | JavaScript |        107 |          3 |          3 |        113 |
+| Total                                                                                                      |            |     30,531 |        534 |      1,404 |     32,469 |
++------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

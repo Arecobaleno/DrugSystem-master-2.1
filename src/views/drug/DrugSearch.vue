@@ -81,7 +81,7 @@ export default {
     },
     search() {
 				if(this.searchData!=""){
-					let url = 'http://127.0.0.1:10088/medicine_query'
+					let url = '/api/medicine_query'
 					let data = {
 						'content': this.searchData
 					}
@@ -106,7 +106,7 @@ export default {
       this.searchData = "";
     },
     getDrugData(){
-        let url = 'http://127.0.0.1:10088/medicine_query'
+        let url = '/api/medicine_query'
         this.searchData = this.$route.query.keywords;
         console.log("searchpage:"+this.searchData)
         let data = {

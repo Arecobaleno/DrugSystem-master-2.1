@@ -1,0 +1,137 @@
+# Details
+
+Date : 2020-10-26 15:51:32
+
+Directory d:\vs project\DrugSystem-master-2.1\DrugSystem-master-2.1
+
+Total : 122 files,  30531 codes, 534 comments, 1404 blanks, all 32469 lines
+
+[summary](results.md)
+
+## Files
+| filename | language | code | comment | blank | total |
+| :--- | :--- | ---: | ---: | ---: | ---: |
+| [README.md](/README.md) | Markdown | 26 | 0 | 26 | 52 |
+| [index.html](/index.html) | HTML | 15 | 2 | 3 | 20 |
+| [package-lock.json](/package-lock.json) | JSON | 10,630 | 0 | 1 | 10,631 |
+| [package.json](/package.json) | JSON | 52 | 0 | 1 | 53 |
+| [src/App.vue](/src/App.vue) | Vue | 94 | 4 | 5 | 103 |
+| [src/assets/css/common.less](/src/assets/css/common.less) | Less | 55 | 65 | 55 | 175 |
+| [src/assets/css/iconfont.less](/src/assets/css/iconfont.less) | Less | 87 | 8 | 59 | 154 |
+| [src/assets/css/page/home.less](/src/assets/css/page/home.less) | Less | 147 | 21 | 6 | 174 |
+| [src/assets/css/page/news-detail.less](/src/assets/css/page/news-detail.less) | Less | 190 | 0 | 21 | 211 |
+| [src/assets/css/page/news.less](/src/assets/css/page/news.less) | Less | 101 | 2 | 4 | 107 |
+| [src/assets/css/picker.less](/src/assets/css/picker.less) | Less | 260 | 17 | 42 | 319 |
+| [src/assets/css/reset.less](/src/assets/css/reset.less) | Less | 573 | 69 | 117 | 759 |
+| [src/assets/css/swiper.less](/src/assets/css/swiper.less) | Less | 524 | 51 | 0 | 575 |
+| [src/assets/font/iconfont.svg](/src/assets/font/iconfont.svg) | XML | 31 | 3 | 29 | 63 |
+| [src/assets/js/pyconst.js](/src/assets/js/pyconst.js) | JavaScript | 403 | 0 | 2 | 405 |
+| [src/assets/js/vue-py.js](/src/assets/js/vue-py.js) | JavaScript | 37 | 0 | 1 | 38 |
+| [src/assets/styles/border.css](/src/assets/styles/border.css) | CSS | 1 | 0 | 1 | 2 |
+| [src/assets/styles/border.scss](/src/assets/styles/border.scss) | SCSS | 176 | 6 | 1 | 183 |
+| [src/assets/styles/iconfont.css](/src/assets/styles/iconfont.css) | CSS | 17 | 0 | 7 | 24 |
+| [src/assets/styles/iconfont/iconfont.svg](/src/assets/styles/iconfont/iconfont.svg) | XML | 26 | 3 | 14 | 43 |
+| [src/assets/styles/layout.css](/src/assets/styles/layout.css) | CSS | 1 | 0 | 0 | 1 |
+| [src/assets/styles/layout.scss](/src/assets/styles/layout.scss) | SCSS | 19 | 0 | 3 | 22 |
+| [src/assets/styles/reset.css](/src/assets/styles/reset.css) | CSS | 1 | 0 | 1 | 2 |
+| [src/assets/styles/reset.scss](/src/assets/styles/reset.scss) | SCSS | 59 | 0 | 1 | 60 |
+| [src/assets/styles/varibles.css](/src/assets/styles/varibles.css) | CSS | 1 | 0 | 0 | 1 |
+| [src/assets/styles/varibles.scss](/src/assets/styles/varibles.scss) | SCSS | 10 | 0 | 1 | 11 |
+| [src/components/app-header.vue](/src/components/app-header.vue) | Vue | 47 | 0 | 4 | 51 |
+| [src/components/app-nav.vue](/src/components/app-nav.vue) | Vue | 20 | 0 | 3 | 23 |
+| [src/components/disease/collapse.vue](/src/components/disease/collapse.vue) | Vue | 75 | 0 | 9 | 84 |
+| [src/components/goods-header.vue](/src/components/goods-header.vue) | Vue | 76 | 0 | 4 | 80 |
+| [src/components/info-pop.vue](/src/components/info-pop.vue) | Vue | 21 | 0 | 3 | 24 |
+| [src/components/symptom/info-component.vue](/src/components/symptom/info-component.vue) | Vue | 100 | 0 | 3 | 103 |
+| [src/components/symptom/man-back-component.vue](/src/components/symptom/man-back-component.vue) | Vue | 19 | 0 | 3 | 22 |
+| [src/components/symptom/man-front-component.vue](/src/components/symptom/man-front-component.vue) | Vue | 30 | 0 | 3 | 33 |
+| [src/components/symptom/person-component.vue](/src/components/symptom/person-component.vue) | Vue | 45 | 0 | 3 | 48 |
+| [src/components/symptom/woman-back-component.vue](/src/components/symptom/woman-back-component.vue) | Vue | 19 | 0 | 3 | 22 |
+| [src/components/symptom/woman-front-component.vue](/src/components/symptom/woman-front-component.vue) | Vue | 30 | 0 | 3 | 33 |
+| [src/main.js](/src/main.js) | JavaScript | 24 | 0 | 6 | 30 |
+| [src/router/index.js](/src/router/index.js) | JavaScript | 448 | 2 | 22 | 472 |
+| [src/store/actions/accompany.js](/src/store/actions/accompany.js) | JavaScript | 21 | 0 | 1 | 22 |
+| [src/store/actions/disease.js](/src/store/actions/disease.js) | JavaScript | 13 | 0 | 2 | 15 |
+| [src/store/actions/global.js](/src/store/actions/global.js) | JavaScript | 19 | 0 | 5 | 24 |
+| [src/store/actions/index.js](/src/store/actions/index.js) | JavaScript | 7 | 0 | 0 | 7 |
+| [src/store/actions/patient.js](/src/store/actions/patient.js) | JavaScript | 18 | 0 | 3 | 21 |
+| [src/store/actions/symptom.js](/src/store/actions/symptom.js) | JavaScript | 61 | 1 | 8 | 70 |
+| [src/store/getters.js](/src/store/getters.js) | JavaScript | 41 | 5 | 4 | 50 |
+| [src/store/index.js](/src/store/index.js) | JavaScript | 22 | 0 | 2 | 24 |
+| [src/store/modules/accompany.js](/src/store/modules/accompany.js) | JavaScript | 191 | 0 | 3 | 194 |
+| [src/store/modules/disease.js](/src/store/modules/disease.js) | JavaScript | 20 | 0 | 3 | 23 |
+| [src/store/modules/global.js](/src/store/modules/global.js) | JavaScript | 45 | 0 | 3 | 48 |
+| [src/store/modules/patient.js](/src/store/modules/patient.js) | JavaScript | 28 | 4 | 3 | 35 |
+| [src/store/modules/symptom.js](/src/store/modules/symptom.js) | JavaScript | 56 | 0 | 3 | 59 |
+| [src/store/mutation-types.js](/src/store/mutation-types.js) | JavaScript | 22 | 5 | 4 | 31 |
+| [src/utils/api.js](/src/utils/api.js) | JavaScript | 15 | 1 | 3 | 19 |
+| [src/utils/filters.js](/src/utils/filters.js) | JavaScript | 14 | 0 | 1 | 15 |
+| [src/utils/index.js](/src/utils/index.js) | JavaScript | 99 | 1 | 10 | 110 |
+| [src/utils/picker.js](/src/utils/picker.js) | JavaScript | 293 | 11 | 2 | 306 |
+| [src/utils/storage.js](/src/utils/storage.js) | JavaScript | 52 | 0 | 7 | 59 |
+| [src/views/AccompanyView.vue](/src/views/AccompanyView.vue) | Vue | 345 | 1 | 9 | 355 |
+| [src/views/AidView.vue](/src/views/AidView.vue) | Vue | 78 | 0 | 6 | 84 |
+| [src/views/DiseaseView.vue](/src/views/DiseaseView.vue) | Vue | 258 | 11 | 11 | 280 |
+| [src/views/FindView.vue](/src/views/FindView.vue) | Vue | 238 | 4 | 21 | 263 |
+| [src/views/FirstaidView.vue](/src/views/FirstaidView.vue) | Vue | 98 | 0 | 4 | 102 |
+| [src/views/GoodsView.vue](/src/views/GoodsView.vue) | Vue | 59 | 0 | 4 | 63 |
+| [src/views/HomeDetail.vue](/src/views/HomeDetail.vue) | Vue | 716 | 37 | 73 | 826 |
+| [src/views/HomeSearch.vue](/src/views/HomeSearch.vue) | Vue | 675 | 38 | 67 | 780 |
+| [src/views/HomeView.vue](/src/views/HomeView.vue) | Vue | 360 | 23 | 15 | 398 |
+| [src/views/Iframe.vue](/src/views/Iframe.vue) | Vue | 53 | 1 | 3 | 57 |
+| [src/views/LoginView.vue](/src/views/LoginView.vue) | Vue | 525 | 17 | 25 | 567 |
+| [src/views/MyView.vue](/src/views/MyView.vue) | Vue | 537 | 0 | 9 | 546 |
+| [src/views/NewsView.vue](/src/views/NewsView.vue) | Vue | 318 | 1 | 6 | 325 |
+| [src/views/PatientView.vue](/src/views/PatientView.vue) | Vue | 132 | 0 | 5 | 137 |
+| [src/views/SetView.vue](/src/views/SetView.vue) | Vue | 120 | 0 | 5 | 125 |
+| [src/views/SymptomView.vue](/src/views/SymptomView.vue) | Vue | 739 | 0 | 91 | 830 |
+| [src/views/accompany/AppointmentView.vue](/src/views/accompany/AppointmentView.vue) | Vue | 332 | 0 | 10 | 342 |
+| [src/views/accompany/HospitalView.vue](/src/views/accompany/HospitalView.vue) | Vue | 219 | 0 | 5 | 224 |
+| [src/views/accompany/PaylView.vue](/src/views/accompany/PaylView.vue) | Vue | 112 | 0 | 5 | 117 |
+| [src/views/accompany/SelectcityView.vue](/src/views/accompany/SelectcityView.vue) | Vue | 164 | 0 | 7 | 171 |
+| [src/views/aid/DrugDetailView.vue](/src/views/aid/DrugDetailView.vue) | Vue | 278 | 0 | 9 | 287 |
+| [src/views/aid/DrugListView.vue](/src/views/aid/DrugListView.vue) | Vue | 247 | 0 | 4 | 251 |
+| [src/views/aid/DrugsView.vue](/src/views/aid/DrugsView.vue) | Vue | 234 | 0 | 5 | 239 |
+| [src/views/disease/DiseaseDetailView.vue](/src/views/disease/DiseaseDetailView.vue) | Vue | 312 | 4 | 37 | 353 |
+| [src/views/disease/DiseaseSearch.vue](/src/views/disease/DiseaseSearch.vue) | Vue | 121 | 0 | 11 | 132 |
+| [src/views/drug/DrugChemistry.vue](/src/views/drug/DrugChemistry.vue) | Vue | 195 | 0 | 5 | 200 |
+| [src/views/drug/DrugDetail.vue](/src/views/drug/DrugDetail.vue) | Vue | 592 | 6 | 47 | 645 |
+| [src/views/drug/DrugItems.vue](/src/views/drug/DrugItems.vue) | Vue | 195 | 7 | 9 | 211 |
+| [src/views/drug/DrugSearch.vue](/src/views/drug/DrugSearch.vue) | Vue | 190 | 0 | 12 | 202 |
+| [src/views/drug/DrugView.vue](/src/views/drug/DrugView.vue) | Vue | 157 | 0 | 10 | 167 |
+| [src/views/firstaid/FirstaidDetailView.vue](/src/views/firstaid/FirstaidDetailView.vue) | Vue | 266 | 0 | 7 | 273 |
+| [src/views/guide/GuideDetail.vue](/src/views/guide/GuideDetail.vue) | Vue | 147 | 4 | 13 | 164 |
+| [src/views/guide/GuideMakerDetail.vue](/src/views/guide/GuideMakerDetail.vue) | Vue | 160 | 0 | 5 | 165 |
+| [src/views/guide/GuideSearch.vue](/src/views/guide/GuideSearch.vue) | Vue | 201 | 4 | 12 | 217 |
+| [src/views/guide/GuideView.vue](/src/views/guide/GuideView.vue) | Vue | 272 | 8 | 18 | 298 |
+| [src/views/guide/MakerSearch.vue](/src/views/guide/MakerSearch.vue) | Vue | 160 | 4 | 10 | 174 |
+| [src/views/guide/YearSearchView.vue](/src/views/guide/YearSearchView.vue) | Vue | 289 | 11 | 19 | 319 |
+| [src/views/guide/components/Alphabet.vue](/src/views/guide/components/Alphabet.vue) | Vue | 82 | 8 | 3 | 93 |
+| [src/views/guide/components/Header.vue](/src/views/guide/components/Header.vue) | Vue | 46 | 0 | 5 | 51 |
+| [src/views/guide/components/List.vue](/src/views/guide/components/List.vue) | Vue | 115 | 0 | 5 | 120 |
+| [src/views/guide/components/Search.vue](/src/views/guide/components/Search.vue) | Vue | 111 | 1 | 4 | 116 |
+| [src/views/guide/const.js](/src/views/guide/const.js) | JavaScript | 403 | 0 | 2 | 405 |
+| [src/views/guide/vue-py.js](/src/views/guide/vue-py.js) | JavaScript | 37 | 0 | 1 | 38 |
+| [src/views/interact/Interact.vue](/src/views/interact/Interact.vue) | Vue | 279 | 23 | 16 | 318 |
+| [src/views/interact/InteractSearchDetailView.vue](/src/views/interact/InteractSearchDetailView.vue) | Vue | 271 | 5 | 33 | 309 |
+| [src/views/interact/InteractSearchView.vue](/src/views/interact/InteractSearchView.vue) | Vue | 339 | 6 | 23 | 368 |
+| [src/views/my/FeedbackView.vue](/src/views/my/FeedbackView.vue) | Vue | 216 | 8 | 5 | 229 |
+| [src/views/my/InputcodeView.vue](/src/views/my/InputcodeView.vue) | Vue | 73 | 0 | 4 | 77 |
+| [src/views/my/InvitationView.vue](/src/views/my/InvitationView.vue) | Vue | 76 | 0 | 4 | 80 |
+| [src/views/my/UserinfoView.vue](/src/views/my/UserinfoView.vue) | Vue | 836 | 0 | 11 | 847 |
+| [src/views/news/CommentView.vue](/src/views/news/CommentView.vue) | Vue | 72 | 0 | 4 | 76 |
+| [src/views/news/CommentsView.vue](/src/views/news/CommentsView.vue) | Vue | 425 | 0 | 21 | 446 |
+| [src/views/news/NewsDetailView.vue](/src/views/news/NewsDetailView.vue) | Vue | 302 | 0 | 25 | 327 |
+| [src/views/patient/AddPatientView.vue](/src/views/patient/AddPatientView.vue) | Vue | 130 | 0 | 7 | 137 |
+| [src/views/patient/EditPatientView.vue](/src/views/patient/EditPatientView.vue) | Vue | 143 | 0 | 6 | 149 |
+| [src/views/reference/ReferenceDetail.vue](/src/views/reference/ReferenceDetail.vue) | Vue | 273 | 18 | 42 | 333 |
+| [src/views/set/AgreementView.vue](/src/views/set/AgreementView.vue) | Vue | 210 | 0 | 5 | 215 |
+| [src/views/symptom/MySymptomView.vue](/src/views/symptom/MySymptomView.vue) | Vue | 117 | 0 | 5 | 122 |
+| [src/views/symptom/SymptomResultView.vue](/src/views/symptom/SymptomResultView.vue) | Vue | 148 | 0 | 12 | 160 |
+| [src/views/symptom/SymptomSelectView.vue](/src/views/symptom/SymptomSelectView.vue) | Vue | 76 | 0 | 7 | 83 |
+| [static/mock/disease-subjects.json](/static/mock/disease-subjects.json) | JSON | 1 | 0 | 0 | 1 |
+| [static/mock/disease.json](/static/mock/disease.json) | JSON | 1 | 0 | 0 | 1 |
+| [static/mock/menu.json](/static/mock/menu.json) | JSON | 21 | 0 | 0 | 21 |
+| [webpack.config.js](/webpack.config.js) | JavaScript | 107 | 3 | 3 | 113 |
+
+[summary](results.md)
